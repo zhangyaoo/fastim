@@ -1,0 +1,21 @@
+syntax = "proto3";
+package com.qiqiim.server.model.proto;
+option java_outer_classname="MessageProto";
+message Packt {
+     string version = 1;//接口版本号
+     string deviceId = 2;//设备uuid
+     uint32 cmd = 3;//请求接口命令字  1绑定  2心跳   3上线   4下线 
+     string sender = 4;//发送人
+     string receiver = 5;//接收人
+     string groupId =6;//用户组编号
+     uint32 msgtype = 7;//请求1，应答2，通知3，响应4  format
+     uint32 flag = 8;//1 rsa加密 2aes加密
+     string platform = 9;//mobile-ios mobile-android pc-windows pc-mac
+     string platformVersion = 10;//客户端版本号
+     string token = 11;//客户端凭证
+     string appKey = 12;//客户端key
+     string timeStamp = 13;//时间戳
+     string sign = 14;//签名 
+     bytes content = 15;//请求数据
+}
+ 
