@@ -1,21 +1,25 @@
 package com.zyblue.fastim.server.handler;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sun.xml.internal.ws.api.message.Packet;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.charset.Charset;
 
-public class FastImServerHandler extends SimpleChannelInboundHandler {
+public class FastImServerHandler extends ChannelInboundHandlerAdapter {
 
     private final static Logger logger = LoggerFactory.getLogger(FastImServerHandler.class);
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        logger.info("ImServer channel active");
+    }
+
+    @Override
+    public void channelRead(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
         logger.info("ImServer recieve msg");
         ByteBuf data = (ByteBuf) o;
 
@@ -25,6 +29,12 @@ public class FastImServerHandler extends SimpleChannelInboundHandler {
         ByteBuf buffer = channelHandlerContext.alloc().buffer();
         buffer.writeBytes(bytes);
         channelHandlerContext.channel().writeAndFlush(buffer);
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        logger.info("===>exceptionCaught");
+        logger.error(cause.getMessage(), cause);
     }
 
     private JSONObject decode(ByteBuf byteBuf){

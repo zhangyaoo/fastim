@@ -24,7 +24,6 @@ public class FastImClientHandler extends ChannelInboundHandlerAdapter {
         logger.info("buffer ref count:{}", buffer.refCnt());
         buffer.writeBytes(bytes);
         channelHandlerContext.channel().writeAndFlush(buffer);
-        buffer.release();
         print(buffer);
         logger.info("buffer ref count:{}", buffer.refCnt());
     }
@@ -35,6 +34,13 @@ public class FastImClientHandler extends ChannelInboundHandlerAdapter {
         ByteBuf data = (ByteBuf) o;
 
         logger.info("ImServer recieve msg:{}", data.toString(Charset.forName("utf-8")));
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        //异常时断开连接
+        logger.info("exceptionCaught:{}", cause.toString());
+        ctx.close() ;
     }
 
     private void print(ByteBuf buffer){

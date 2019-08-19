@@ -1,8 +1,7 @@
-package com.zyblue.fastim.leaf.config;
+package com.zyblue.fastim.leaf.cache;
 
 /**
- *  zookeeper下本机的workerId
+ *  zookeeper常量
  */
 public class LeafConstant {
-    public static Integer workerId = 0;
 }

@@ -12,9 +12,9 @@
     </appender>
 
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/opt/logs/fastim/fastim-gate/fastim-gate.log</file>
+        <file>/opt/logs/fastim/fastim-leaf/fastim-leaf.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>/opt/logs/fastim/fastim-gate/fastim-gate.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>/opt/logs/fastim/fastim-leaf/fastim-leaf.%d{yyyy-MM-dd}.log</FileNamePattern>
         </rollingPolicy>
         <encoder>
             <pattern>%-20(%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]) %-5level [%X{hydraTraceId}] %logger{80}.%M:%line-%msg%n
@@ -23,9 +23,9 @@
     </appender>
 
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/opt/logs/fastim/fastim-gate/error.log</file>
+        <file>/opt/logs/fastim/fastim-leaf/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>/opt/logs/fastim/fastim-gate//error.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>/opt/logs/fastim/fastim-leaf//error.%d{yyyy-MM-dd}.log</FileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -39,7 +39,7 @@
         </filter>
     </appender>
 
-    <logger name="com.zyblue.fastim.gate" level="INFO">
+    <logger name="com.zyblue.fastim.leaf" level="INFO">
         <appender-ref ref="error"/>
     </logger>
     <root level="info">

@@ -19,6 +19,7 @@
         <module>fastim-client</module>
         <module>fastim-gate</module>
         <module>fastim-common</module>
+        <module>fastim-leaf</module>
     </modules>
 
     <properties>
@@ -26,15 +27,21 @@
         <java.encoding>UTF-8</java.encoding>
         <junit.version>4.12</junit.version>
         <netty.version>4.1.21.Final</netty.version>
+<!--
         <logback.version>1.0.13</logback.version>
+-->
+<!--
+        <slf4j-log4j12.version>1.7.5</slf4j-log4j12.version>
+-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>1.5.14.RELEASE</spring-boot.version>
         <dubbo-spring-boot-starter.version>2.7.0</dubbo-spring-boot-starter.version>
         <dubbo.version>2.7.0</dubbo.version>
         <spring.version>4.3.14.RELEASE</spring.version>
-        <slf4j-log4j12.version>1.7.5</slf4j-log4j12.version>
+<!--
         <commons.logging.version>1.1.1</commons.logging.version>
+-->
         <retrofit.version>2.4.0</retrofit.version>
         <logging-interceptor.version>3.8.0</logging-interceptor.version>
 
@@ -98,11 +105,11 @@
                 <scope>test</scope>
             </dependency>
 
-            <dependency>
+            <!--<dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-logging</artifactId>
                 <version>${spring-boot.version}</version>
-            </dependency>
+            </dependency>-->
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -159,11 +166,11 @@
                 <version>22.0</version>
             </dependency>
 
-            <dependency>
+            <!--<dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
                 <version>${commons.logging.version}</version>
-            </dependency>
+            </dependency>-->
         </dependencies>
     </dependencyManagement>
     <build>

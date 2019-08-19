@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Appconfig {
+public class ZKConfig {
     @Value("${app.zk.addr}")
     private String zkAddr;
 

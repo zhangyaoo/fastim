@@ -1,7 +1,7 @@
 syntax = "proto3";
 package com.qiqiim.server.model.proto;
-option java_outer_classname="MessageProto";
-message Packt {
+option java_outer_classname="MessagePacket";
+message Packet {
      string version = 1;//接口版本号
      string deviceId = 2;//设备uuid
      uint32 cmd = 3;//请求接口命令字  1绑定  2心跳   3上线   4下线 

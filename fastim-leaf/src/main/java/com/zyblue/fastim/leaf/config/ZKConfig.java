@@ -1,4 +1,4 @@
-package com.zyblue.fastim.gate.config;
+package com.zyblue.fastim.leaf.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,6 +13,16 @@ public class ZKConfig {
 
     @Value("${app.zk.root}")
     private String zkRoot;
+
+    private Integer workerId;
+
+    public Integer getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(Integer workerId) {
+        this.workerId = workerId;
+    }
 
     public String getZkAddr() {
         return zkAddr;

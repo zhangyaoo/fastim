@@ -19,6 +19,6 @@ public class FastimServerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //Thread thread = new Thread();
+        logger.info("CommandLineRunner start");
     }
 }
