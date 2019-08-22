@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>fastim-server</module>
+        <module>fastim-logic</module>
         <module>fastim-client</module>
         <module>fastim-gate</module>
         <module>fastim-common</module>
@@ -39,6 +39,9 @@
         <dubbo-spring-boot-starter.version>2.7.0</dubbo-spring-boot-starter.version>
         <dubbo.version>2.7.0</dubbo.version>
         <spring.version>4.3.14.RELEASE</spring.version>
+        <dubbo-spring-boot-starter.version>2.7.0</dubbo-spring-boot-starter.version>
+        <dubbo.version>2.7.0</dubbo.version>
+
 <!--
         <commons.logging.version>1.1.1</commons.logging.version>
 -->
@@ -122,6 +125,40 @@
                 <artifactId>spring-boot-configuration-processor</artifactId>
                 <version>${spring-boot.version}</version>
                 <optional>true</optional>
+            </dependency>
+
+            <!--dubbo-->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-bom</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>servlet-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
