@@ -18,6 +18,7 @@
         <module>fastim-logic</module>
         <module>fastim-client</module>
         <module>fastim-gate</module>
+        <module>fastim-gate-springcloud</module>
         <module>fastim-common</module>
         <module>fastim-leaf</module>
     </modules>
