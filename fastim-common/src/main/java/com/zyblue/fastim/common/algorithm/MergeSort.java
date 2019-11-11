@@ -10,6 +10,11 @@ import java.util.Arrays;
  * 2、判断终止条件：head >= tail
  * 3、分治递归
  * 4、排序后，合并两个有序数组
+ *
+ * 总结：
+ * 1、总结时间复杂度为O(nlogn)
+ * 2、是稳定的算法
+ * 3、是空间复杂度是O(n)，不是原地排序算法。它会开辟新的内存空间所以用的比较少
  */
 public class MergeSort {
     public static void main(String[] args) {
@@ -25,8 +30,8 @@ public class MergeSort {
         arr[7] = 2;
         arr[8] = 8;
 
-        mergeSortMethod(arr, capacity);
-        //System.out.println(Arrays.toString(arr));
+        mergeSortMethod(arr,capacity);
+        System.out.println("==>final arr:"+Arrays.toString(arr));
     }
 
     public static void mergeSortMethod(Integer[] arr, int capacity){
@@ -44,18 +49,8 @@ public class MergeSort {
         sort(arr, head, center);
         sort(arr, center + 1 ,tail);
 
-        // 赋新的数组
-        Integer[] arrHead = new Integer[center - head + 1];
-        for(int i = 0; i < center - head + 1; i++){
-            arrHead[i] = arr[head + i];
-        }
-        Integer[] arrTail = new Integer[tail - center];
-        for(int i = 0; i < tail - center; i++){
-            arrTail[i] = arr[center + i +1];
-        }
-
         // 将arrHead和arrTail合并到arr中
-        merge(arr, arrHead, head, arrTail, tail);
+        merge(arr, head, center, tail);
     }
 
     /**
@@ -66,22 +61,38 @@ public class MergeSort {
      * arrTail：右边数组
      * tail：右边数组右指针
      */
-    public static void merge(Integer[] arr, Integer[] arrHead, int head, Integer[] arrTail, int tail){
-        System.out.println(Arrays.toString(arr));
-        System.out.println(Arrays.toString(arrHead));
-        System.out.println(Arrays.toString(arrTail));
+    public static void merge(Integer[] arr, int head, int center, int tail){
+        System.out.println("==>init arr:"+Arrays.toString(arr));
+        System.out.println("==>init head:"+head);
+        System.out.println("==>init center:"+center);
+        System.out.println("==>init tail:"+tail);
+
+        // 赋新的数组
+        final Integer[] arrHead = new Integer[center - head + 1 + 1];
+        for(int i = 0; i < center - head + 1; i++){
+            arrHead[i] = arr[head + i];
+        }
+        final Integer[] arrTail = new Integer[tail - center + 1];
+        for(int i = 0; i < tail - center; i++){
+            arrTail[i] = arr[center + i +1];
+        }
+
+        // 设置标志位 避免下面赋值数组越界
+        Integer flag = Integer.MAX_VALUE;
+        arrHead[center - head + 1] = flag;
+        arrTail[tail - center ] = flag;
+
         int i = 0;
         int j = 0;
-        for(int k = head;k < tail; k++){
-            System.out.println("==>"+arrHead[i]);
-            System.out.println("==>"+arrTail[j]);
+        for(int k = head;k <= tail; k++){
             if(arrHead[i] <= arrTail[j]){
                 arr[k] = arrHead[i];
-                i++;
+                i = i+1;
             }else {
                 arr[k] = arrTail[j];
-                j++;
+                j = j+1;
             }
         }
+        System.out.println("==>赋值后的数组:"+Arrays.toString(arr));
     }
 }
