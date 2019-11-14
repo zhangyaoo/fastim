@@ -11,7 +11,7 @@
 #### 已完成的功能
 1. 单聊
 2. Google Protocol Buffer 当作底层通信编码
-3. 分布式ID
+3. 分布式ID生成
 
 ## 架构图
 ![image](/IM.png)
