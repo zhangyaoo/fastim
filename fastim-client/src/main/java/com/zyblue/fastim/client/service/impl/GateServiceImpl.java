@@ -37,7 +37,7 @@ public class GateServiceImpl implements GateService {
         logger.info("login|request:{}", request);
         Response response = null;
         try {
-            response = HttpUtil.doPost(baseUrl + UrlConstant.GET_SERVERINFO, request);
+            response = HttpUtil.doPost(baseUrl + UrlConstant.Gate.GET_SERVERINFO, request);
         }catch (Exception e){
             logger.info("e:{}", e);
         }

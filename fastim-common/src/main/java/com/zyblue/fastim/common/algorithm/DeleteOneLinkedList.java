@@ -43,7 +43,7 @@ public class DeleteOneLinkedList {
         return head;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Node node1 = new Node();
         Node node2 = new Node();
         Node node3 = new Node();
@@ -74,7 +74,7 @@ public class DeleteOneLinkedList {
             System.out.println("node:" + nodeHead.getData());
             nodeHead = nodeHead.getNext();
         }
-    }
+    }*/
 
     public static class Node {
         private Integer data;

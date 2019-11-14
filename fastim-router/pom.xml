@@ -7,14 +7,13 @@
         <artifactId>fastim</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>fastim-gate-springcloud</artifactId>
+    <artifactId>fastim-router</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>fastim-gate-springcloud</name>
+    <name>fastim-router</name>
     <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.M3</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -55,11 +54,18 @@
 
     <build>
         <plugins>
+            <!-- spring-boot-maven-plugin (提供了直接运行项目的插件：如果是通过parent方式继承spring-boot-starter-parent则不用此插件) -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>

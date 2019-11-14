@@ -15,7 +15,7 @@ package com.zyblue.fastim.common.algorithm;
  * 4、重复2、3步骤
  */
 public class TwoLinkListMerge {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Node node1 = new Node();
         Node node2 = new Node();
         Node node3 = new Node();
@@ -53,7 +53,7 @@ public class TwoLinkListMerge {
             System.out.println("node:" + mergeNode.getData());
             mergeNode = mergeNode.getNext();
         }
-    }
+    }*/
 
     public static Node merge(Node head1, Node head2){
         Node newNode;

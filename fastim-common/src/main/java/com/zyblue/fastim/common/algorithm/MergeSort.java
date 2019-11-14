@@ -17,7 +17,7 @@ import java.util.Arrays;
  * 3、是空间复杂度是O(n)，不是原地排序算法。它会开辟新的内存空间所以用的比较少
  */
 public class MergeSort {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int capacity = 9;
         Integer[] arr = new Integer[capacity];
         arr[0] = 4;
@@ -32,7 +32,7 @@ public class MergeSort {
 
         mergeSortMethod(arr,capacity);
         System.out.println("==>final arr:"+Arrays.toString(arr));
-    }
+    }*/
 
     public static void mergeSortMethod(Integer[] arr, int capacity){
         sort(arr, 0, capacity-1);

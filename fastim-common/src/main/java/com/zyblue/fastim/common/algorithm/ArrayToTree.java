@@ -13,7 +13,7 @@ public class ArrayToTree {
         }
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int[] ints = new int[5];
         ints[0] = 0;
         ints[1] = 1;
@@ -21,7 +21,7 @@ public class ArrayToTree {
         ints[3] = 3;
 
         TreeNode tree = change(ints);
-    }
+    }*/
 
     public static TreeNode change(int[] ints){
         return getTree(ints, 0 , ints.length - 1);

@@ -37,7 +37,7 @@ public class RingLinkedList {
         return flag;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Node node1 = new Node();
         Node node2 = new Node();
         Node node3 = new Node();
@@ -64,7 +64,7 @@ public class RingLinkedList {
         System.out.println("start");
         Boolean res = hasRing(node1);
         System.out.println("res:" + res);
-    }
+    }*/
 
     public static class Node {
         private Integer data;

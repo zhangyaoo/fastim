@@ -13,7 +13,7 @@ public class ArrayQueueMain {
 
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         ArrayQueue arrayQueue = new ArrayQueue(6);
         Boolean flag1 = arrayQueue.addV2("1");
         Boolean flag2 = arrayQueue.addV2("2");
@@ -34,7 +34,7 @@ public class ArrayQueueMain {
         Boolean flag9 = arrayQueue.addV2("9");
         Boolean flag10 = arrayQueue.addV2("10");
         System.out.println("add res:" +flag6 +","  +flag7 +","+flag8 +","+flag9 +","+flag10  +";");
-    }
+    }*/
 
     public static class ArrayQueue{
         /**

@@ -1,10 +1,11 @@
 package com.zyblue.fastim.logic.util;
 
 
+/*import com.zyblue.fastim.common.constant;
 import com.zyblue.fastim.common.constant.ChannelAttr;
 import io.netty.channel.Channel;
 import io.netty.util.Attribute;
-import io.netty.util.AttributeKey;
+import io.netty.util.AttributeKey;*/
 
 /**
  * 是否登录
@@ -14,9 +15,9 @@ public class LoginUtil {
         channel.attr(AttributeKey.newInstance(ChannelAttr.TOKEN.getVal())).set(true);
     }*/
 
-    public static boolean hasLogin(Channel channel) {
+    /*public static boolean hasLogin(Channel channel) {
         Attribute<String> loginAttr = channel.attr(AttributeKey.newInstance(ChannelAttr.TOKEN.getVal()));
 
         return loginAttr.get() != null;
-    }
+    }*/
 }

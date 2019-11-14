@@ -14,7 +14,7 @@ import java.util.Arrays;
  *  6、使用原地排序算法在插入数组数据时候，可以使用交换swap操作，而不是迁移数组。降低插入的时间复杂度。
  */
 public class QuickSort {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int capacity = 8;
         Integer[] arr = new Integer[capacity];
         arr[0] = 4;
@@ -28,7 +28,7 @@ public class QuickSort {
 
         mergeSortMethod(arr,capacity);
         System.out.println("==>final arr:"+ Arrays.toString(arr));
-    }
+    }*/
 
     public static void mergeSortMethod(Integer[] arr, int capacity){
         sort(arr, 0, capacity-1);
