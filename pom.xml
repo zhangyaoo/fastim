@@ -40,7 +40,7 @@
         <spring-boot.version>1.5.14.RELEASE</spring-boot.version>
         <dubbo-spring-boot-starter.version>2.7.0</dubbo-spring-boot-starter.version>
         <dubbo.version>2.7.0</dubbo.version>
-        <spring.version>4.3.14.RELEASE</spring.version>
+        <spring.version>5.2.1.RELEASE</spring.version>
         <dubbo-spring-boot-starter.version>2.7.0</dubbo-spring-boot-starter.version>
         <dubbo.version>2.7.0</dubbo.version>
 
