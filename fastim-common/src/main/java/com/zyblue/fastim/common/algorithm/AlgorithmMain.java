@@ -1,5 +1,7 @@
 package com.zyblue.fastim.common.algorithm;
 
+import java.util.HashMap;
+
 public class AlgorithmMain {
     public static void main(String[] args) {
         LayerTree.TreeNode treeNode7 = new LayerTree.TreeNode();
