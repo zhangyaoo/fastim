@@ -37,9 +37,9 @@ public class NettyWork {
                 try {
                     //阻塞状态排除问题
                     wakenUp.set(false);
-                    //阻塞
+                    //阻塞，直到NettyBoss.process的方法执行wakeup()方法，此时wakenUp状态 false->true
                     selector.select();
-                    //处理work任务
+                    //处理work任务,此时boss线程已经将任务加入处理队列
                     while (true) {
                         final Runnable task = taskQueue.poll();
                         if (task == null) {

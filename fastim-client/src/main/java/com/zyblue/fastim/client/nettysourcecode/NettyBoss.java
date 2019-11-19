@@ -37,9 +37,9 @@ public class NettyBoss {
         executor.execute(() -> {
             while (true) {
                 try {
-                    //这里的目前就是排除其他线程同事执行，false因为这里处于阻塞状态，不用开启
+                    //这里的目前就是排除其他线同时执行，false因为这里处于阻塞状态，不用开启
                     wakenUp.set(false);
-                    //选择器阻塞
+                    //选择器阻塞，直到ThreadHandle.bind的方法执行wakeup()方法，此时wakenUp状态 false->true
                     selector.select();
                     //运行队列中的任务
                     while (true) {
