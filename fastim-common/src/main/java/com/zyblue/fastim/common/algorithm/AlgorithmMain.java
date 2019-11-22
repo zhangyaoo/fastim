@@ -28,5 +28,8 @@ public class AlgorithmMain {
 
         LayerTree layerTree = new LayerTree();
         layerTree.foreach(treeNode4);
+
+        String a = "aaa";
+
     }
 }
