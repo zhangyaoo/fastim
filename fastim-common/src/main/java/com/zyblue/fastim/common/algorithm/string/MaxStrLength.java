@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.string;
 
 import java.util.HashMap;
 import java.util.Map;

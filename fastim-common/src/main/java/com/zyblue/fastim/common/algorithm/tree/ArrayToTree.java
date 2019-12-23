@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.tree;
 
 /**
  * 有序数组转二叉搜索树

@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.tree;
 
 /**
  * 判断是否是对称二叉树

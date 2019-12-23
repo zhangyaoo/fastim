@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.array;
 
 /**
  * 找出数组中唯一的一个出现一次数字的

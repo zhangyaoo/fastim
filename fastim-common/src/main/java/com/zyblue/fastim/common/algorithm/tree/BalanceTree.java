@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.tree;
 
 /**
  * 判断是否是平衡二叉树
@@ -43,7 +43,8 @@ public class BalanceTree {
         }
 
         // 树的高度计算通式
-        return lengthL > lengthR ? lengthL + 1:lengthR + 1;
+        return Math.max(lengthL, lengthR) + 1;
+        //return lengthL > lengthR ? lengthL + 1:lengthR + 1;
     }
 
     public static class TreeNode {
