@@ -1,10 +1,13 @@
 package com.zyblue.fastim.common.algorithm.tree;
 
 
-import com.zyblue.fastim.common.algorithm.TreeNode;
+        import com.alibaba.fastjson.JSONObject;
+        import com.google.common.collect.Lists;
+        import com.zyblue.fastim.common.algorithm.TreeNode;
 
-import java.util.LinkedList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.LinkedList;
+        import java.util.List;
 
 /**
  * 树的左视图
@@ -25,16 +28,32 @@ import java.util.List;
  */
 public class LeftViewTree {
 
-    public void foreach(TreeNode node){
-        List<TreeNode> linkedList = new LinkedList();
-        linkedList.add(node);
+    public void foreach(TreeNode treeNode){
+
+        LinkedList<TreeNode> linkedList = new LinkedList<TreeNode>();
+        linkedList.add(treeNode);
+        List<Integer> res = Lists.newArrayList();
         while (!linkedList.isEmpty()){
-            if(node.getLeft() != null){
 
-            }
-            if(node.getRight() != null){
+            // 获取这一层所有大小
+            int size = linkedList.size();
+            System.out.println("size:"+size);
 
+            // 第一个节点就是有效节点
+            res.add(linkedList.peekFirst().getVal());
+
+            // 遍历这一层节点
+            for(int i = 0;i<size;i++){
+                TreeNode node = linkedList.poll();
+                if(node.getLeft() != null){
+                    linkedList.add(node.getLeft());
+                }
+                if(node.getRight() != null){
+                    linkedList.add(node.getRight());
+                }
             }
         }
+
+        System.out.println("res:"+ JSONObject.toJSONString(res));
     }
 }

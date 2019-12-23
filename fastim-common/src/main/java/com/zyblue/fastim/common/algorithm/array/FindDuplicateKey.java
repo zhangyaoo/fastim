@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.array;
 
 /**
  * 数据中寻找重复数

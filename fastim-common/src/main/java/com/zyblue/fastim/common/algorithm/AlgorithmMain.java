@@ -2,6 +2,7 @@ package com.zyblue.fastim.common.algorithm;
 
 import com.zyblue.fastim.common.algorithm.tree.LayerTree;
 import com.zyblue.fastim.common.algorithm.tree.LayerTreeV2;
+import com.zyblue.fastim.common.algorithm.tree.LeftViewTree;
 
 import java.util.concurrent.Executors;
 
@@ -25,7 +26,7 @@ public class AlgorithmMain {
         treeNode1.setVal(1);
         TreeNode treeNode0 = new TreeNode();
         treeNode0.setVal(0);
-        treeNode1.setLeft(treeNode0);
+        //treeNode1.setLeft(treeNode0);
         treeNode4.setLeft(treeNode2);
         treeNode2.setLeft(treeNode1);
         treeNode2.setRight(treeNode3);
@@ -44,8 +45,11 @@ public class AlgorithmMain {
         //LayerTree layerTree = new LayerTree();
         //layerTree.foreach(treeNode4);
 
-        LayerTreeV2 layerTreeV2 = new LayerTreeV2();
-        layerTreeV2.foreachV1(treeNode4);
+        //LayerTreeV2 layerTreeV2 = new LayerTreeV2();
+        //layerTreeV2.foreachV1(treeNode4);
+
+        LeftViewTree leftViewTree = new LeftViewTree();
+        leftViewTree.foreach(treeNode4);
     }
 
 }
