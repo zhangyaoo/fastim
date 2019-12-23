@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.sort;
 
 /**
  * 插入排序

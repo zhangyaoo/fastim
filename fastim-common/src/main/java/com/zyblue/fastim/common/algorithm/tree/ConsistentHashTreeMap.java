@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.tree;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

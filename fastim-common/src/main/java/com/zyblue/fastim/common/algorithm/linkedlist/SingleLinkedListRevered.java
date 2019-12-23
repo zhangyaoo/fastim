@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.linkedlist;
 
 /**
  * 单链表反转

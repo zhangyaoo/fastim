@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.linkedlist;
 
 /**
  * 两个有序链表合并

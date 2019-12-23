@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.linkedlist;
 
 /**
  * 删除链表的倒数第 N 个节点

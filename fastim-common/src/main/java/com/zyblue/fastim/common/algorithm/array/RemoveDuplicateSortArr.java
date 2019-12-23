@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm;
+package com.zyblue.fastim.common.algorithm.array;
 
 /**
  * 移除排序数组中重复的值，返回移除后的大小
