@@ -42,14 +42,27 @@ public class AlgorithmMain {
          */
 
 
+
         //LayerTree layerTree = new LayerTree();
         //layerTree.foreach(treeNode4);
 
         //LayerTreeV2 layerTreeV2 = new LayerTreeV2();
         //layerTreeV2.foreachV1(treeNode4);
 
-        LeftViewTree leftViewTree = new LeftViewTree();
-        leftViewTree.foreach(treeNode4);
+        //LeftViewTree leftViewTree = new LeftViewTree();
+        //leftViewTree.foreach(treeNode4);
+
+
+        recursion(treeNode4);
+    }
+
+    public static void recursion(TreeNode node){
+        if(node == null){
+            return;
+        }
+        recursion(node.getLeft());
+        System.out.println("node val:" + node.getVal());
+        recursion(node.getRight());
     }
 
 }
