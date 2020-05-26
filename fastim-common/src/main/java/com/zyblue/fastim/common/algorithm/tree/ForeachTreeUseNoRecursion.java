@@ -35,7 +35,7 @@ public class ForeachTreeUseNoRecursion {
                 curNode = curNode.getLeft();
             }
 
-            while(!stack.empty()){
+            if(!stack.empty()){
                 TreeNode node = stack.pop();
                 zhongxuNumList.add(node.val);
                 curNode = node.getRight();

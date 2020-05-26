@@ -18,6 +18,18 @@ public class BinaryTimesFor2 {
     }
 
     public static void main(String[] args) {
-        System.out.println("i:" + times(255));
+        //System.out.println("i:" + times(255));
+
+        int h = "key".hashCode();
+        System.out.println("h:" + h);
+
+        int i = h ^ (h >>> 16);
+        System.out.println("i:" + i);
+
+        /**
+         * h:106079
+         * i:106078
+         */
+
     }
 }

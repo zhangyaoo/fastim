@@ -11,7 +11,7 @@ import java.util.LinkedList;
  */
 public class LayerTree {
 
-    public void foreach(TreeNode node){
+    public static void foreach(TreeNode node){
 
         LinkedList<TreeNode> linkedList = new LinkedList();
         linkedList.add(node);
