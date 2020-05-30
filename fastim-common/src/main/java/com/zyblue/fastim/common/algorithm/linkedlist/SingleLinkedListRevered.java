@@ -10,7 +10,25 @@ package com.zyblue.fastim.common.algorithm.linkedlist;
  */
 public class SingleLinkedListRevered {
 
-    /*public static void main(String[] args) {
+    public static Node reversed1(Node head) {
+        if(head == null || head.getNext() == null){
+            return null;
+        }
+
+        Node pre = null;
+        Node cur = head;
+        while (cur != null){
+            Node next = cur.getNext();
+            cur.setNext(pre);
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
+
+
+    public static void main(String[] args) {
         Node node1 = new Node();
         Node node2 = new Node();
         Node node3 = new Node();
@@ -32,12 +50,12 @@ public class SingleLinkedListRevered {
         node5.setNext(null);
         node5.setData(5);
 
-        Node reversed = reversed(node1);
+        Node reversed = reversed1(node1);
         System.out.println("node:" + reversed.getData());
         System.out.println("node next:" + reversed.getNext().getData());
         System.out.println("node next next:" + reversed.getNext().getNext().getData());
 
-    }*/
+    }
 
     public static Node reversed(Node head) {
         // 头为空返回空

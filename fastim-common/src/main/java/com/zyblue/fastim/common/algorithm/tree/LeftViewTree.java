@@ -1,13 +1,12 @@
 package com.zyblue.fastim.common.algorithm.tree;
 
 
-        import com.alibaba.fastjson.JSONObject;
-        import com.google.common.collect.Lists;
-        import com.zyblue.fastim.common.algorithm.TreeNode;
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
+import com.zyblue.fastim.common.algorithm.TreeNode;
 
-        import java.util.ArrayList;
-        import java.util.LinkedList;
-        import java.util.List;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 树的左视图
@@ -28,7 +27,7 @@ package com.zyblue.fastim.common.algorithm.tree;
  */
 public class LeftViewTree {
 
-    public void foreach(TreeNode treeNode){
+    public static void foreach(TreeNode treeNode){
 
         LinkedList<TreeNode> linkedList = new LinkedList<TreeNode>();
         linkedList.add(treeNode);

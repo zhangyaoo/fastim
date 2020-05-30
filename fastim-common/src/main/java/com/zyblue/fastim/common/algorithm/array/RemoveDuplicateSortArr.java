@@ -1,5 +1,9 @@
 package com.zyblue.fastim.common.algorithm.array;
 
+import com.alibaba.fastjson.JSONObject;
+
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * 移除排序数组中重复的值，返回移除后的大小
  * Author : BlueSky 2019.11.05
@@ -10,7 +14,7 @@ package com.zyblue.fastim.common.algorithm.array;
  * 思路：利用双指针
  */
 public class RemoveDuplicateSortArr {
-    public int remove(int[] arr){
+    public static int remove(int[] arr){
         if (arr.length == 0){
             return 0;
         }
@@ -23,5 +27,26 @@ public class RemoveDuplicateSortArr {
             cur++;
         }
         return pre + 1;
+    }
+
+    public static void main(String[] args) {
+        int[] ints = new int[10];
+        ints[0] = 0;
+        ints[1] = 0;
+        ints[2] = 1;
+        ints[3] = 1;
+        ints[4] = 1;
+        ints[5] = 2;
+        ints[6] = 2;
+        ints[7] = 3;
+        ints[8] = 3;
+        ints[9] = 4;
+
+        int remove = remove(ints);
+
+        System.out.println(remove);
+        System.out.println(JSONObject.toJSONString(ints));
+
+        //-new ReentrantLock()
     }
 }

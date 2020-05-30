@@ -6,7 +6,7 @@ package com.zyblue.fastim.common.algorithm.string;
  */
 public class Xiaoxiaole {
 
-    public void String(){
+    public static void xiao(){
         String s = "accbbbddeeedc";
         //String s = "aaccca";
         for (int i=0; i<s.length()&&s.length()>2; i++){
@@ -16,5 +16,9 @@ public class Xiaoxiaole {
             }
         }
         System.out.println(s);
+    }
+
+    public static void main(String[] args) {
+        xiao();
     }
 }

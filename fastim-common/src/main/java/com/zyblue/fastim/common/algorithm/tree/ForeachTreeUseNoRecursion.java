@@ -51,7 +51,7 @@ public class ForeachTreeUseNoRecursion {
                 curNode = curNode.getLeft();
             }
 
-            while(!stack.empty()){
+            if(!stack.empty()){
                 TreeNode node = stack.pop();
                 System.out.println(node.getVal());
                 curNode = node.getRight();
