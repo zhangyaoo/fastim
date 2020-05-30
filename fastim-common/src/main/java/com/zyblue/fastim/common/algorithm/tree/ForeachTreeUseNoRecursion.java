@@ -1,6 +1,7 @@
 package com.zyblue.fastim.common.algorithm.tree;
 
 import com.google.common.collect.Lists;
+import com.zyblue.fastim.common.algorithm.TreeNode;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -25,9 +26,24 @@ public class ForeachTreeUseNoRecursion {
         TreeNode curNode = root;
 
         // 中序遍历打印结果
-        ArrayList<Object> zhongxuNumList = Lists.newArrayList();
+        //ArrayList<Object> zhongxuNumList = Lists.newArrayList();
 
-        while (curNode != null || !stack.empty()){
+        while(curNode != null || !stack.empty())
+        {
+            while (curNode != null)
+            {
+                stack.push(curNode);
+                curNode = curNode.getLeft();
+            }
+            if(!stack.empty())
+            {
+                curNode = stack.pop();
+                System.out.print(curNode.getVal());
+                curNode = curNode.getRight();
+            }
+        }
+
+        /*while (curNode != null || !stack.empty()){
             while (curNode != null){
                 // 前序遍历打印结果
                 // zhongxuNumList.add(node.val);
@@ -37,14 +53,18 @@ public class ForeachTreeUseNoRecursion {
 
             while(!stack.empty()){
                 TreeNode node = stack.pop();
-                zhongxuNumList.add(node.val);
+                System.out.println(node.getVal());
                 curNode = node.getRight();
             }
-        }
+        }*/
     }
 
 
+    public static void noRecursionV1(TreeNode root){
+        Stack<TreeNode> stack = new Stack<TreeNode>();
 
+
+    }
 
 
     public static void main(String[] args) {
@@ -62,38 +82,4 @@ public class ForeachTreeUseNoRecursion {
         System.out.println("node val:" + node.getVal());
         recursion(node.getRight());
     }
-
-
-    public static class TreeNode {
-        private int val;
-
-        private TreeNode left;
-
-        private TreeNode right;
-
-        public int getVal() {
-            return val;
-        }
-
-        public void setVal(int val) {
-            this.val = val;
-        }
-
-        public TreeNode getLeft() {
-            return left;
-        }
-
-        public void setLeft(TreeNode left) {
-            this.left = left;
-        }
-
-        public TreeNode getRight() {
-            return right;
-        }
-
-        public void setRight(TreeNode right) {
-            this.right = right;
-        }
-    }
-
 }

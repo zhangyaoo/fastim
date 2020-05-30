@@ -35,11 +35,15 @@ public class QuickSort {
     }
 
     public static void sort(Integer[] arr, int head, int tail){
-        int partitionPoint = tail;
-        int length = tail - head;
+        if(tail <= head){
+            return;
+        }
+        int par = par(arr, head, tail);
+        sort(arr, head, par-1);
+        sort(arr, par, par + 1);
+    }
 
-        /*for(){
-
-        }*/
+    public static int par(Integer[] arr, int head, int tail){
+        return 0;
     }
 }

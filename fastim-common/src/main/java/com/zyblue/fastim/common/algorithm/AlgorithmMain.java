@@ -1,5 +1,6 @@
 package com.zyblue.fastim.common.algorithm;
 
+import com.zyblue.fastim.common.algorithm.tree.ForeachTreeUseNoRecursion;
 import com.zyblue.fastim.common.algorithm.tree.LayerTree;
 import com.zyblue.fastim.common.algorithm.tree.LayerTreeV2;
 import com.zyblue.fastim.common.algorithm.tree.LeftViewTree;
@@ -26,7 +27,7 @@ public class AlgorithmMain {
         treeNode1.setVal(1);
         TreeNode treeNode0 = new TreeNode();
         treeNode0.setVal(0);
-        //treeNode1.setLeft(treeNode0);
+        treeNode1.setLeft(treeNode0);
         treeNode4.setLeft(treeNode2);
         treeNode2.setLeft(treeNode1);
         treeNode2.setRight(treeNode3);
@@ -53,16 +54,10 @@ public class AlgorithmMain {
         //leftViewTree.foreach(treeNode4);
 
 
-        recursion(treeNode4);
-    }
+       ForeachTreeUseNoRecursion.noRecursion(treeNode4);
 
-    public static void recursion(TreeNode node){
-        if(node == null){
-            return;
-        }
-        recursion(node.getLeft());
-        System.out.println("node val:" + node.getVal());
-        recursion(node.getRight());
+        /*MultiThread multiThread = new MultiThread();
+        multiThread.test1();
+        multiThread.test2();*/
     }
-
 }
