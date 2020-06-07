@@ -1,5 +1,7 @@
 package com.zyblue.fastim.common.algorithm.enterprise;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author will.zhang
  * @date 2020/6/5 11:38
@@ -10,7 +12,25 @@ package com.zyblue.fastim.common.algorithm.enterprise;
  * 示例：输入：AkleBiCeilD 输出：kleieilABCD
  */
 public class Ques5 {
-    public String transfer(String text){
+    public static String transfer(String text){
+        if(StringUtils.isBlank(text)){
+            return "";
+        }
+        int length = text.length();
+        int tail = 0;
+        int head = 0;
+
+        boolean upperCase = isUpperCase(text.charAt(tail));
+        //while ()
+
         return null;
+    }
+
+    public static boolean isUpperCase(char c) {
+        return c >=65 && c <= 90;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(transfer("AkleBiCeilD"));
     }
 }

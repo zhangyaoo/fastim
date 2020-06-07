@@ -9,11 +9,17 @@ package com.zyblue.fastim.common.algorithm.enterprise;
  * return 964176192（二进制 00111001011110000010100101000000）
  * 要求时间复杂度做到 O(log(n))
  * 实现程序前请尽可能的描述清楚思路
+ *
  */
-public class Ques3 {
+public class BitReverse {
 
     public int reverse(int n) {
-        //  TODO
+        int i1 = (n >> 16) | (n << 16);
+
         return 0;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(0x55555555);
     }
 }

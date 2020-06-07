@@ -1,5 +1,7 @@
 package com.zyblue.fastim.common.algorithm.enterprise;
 
+import java.util.Stack;
+
 /**
  * @author will.zhang
  * @date 2020/6/5 11:25
@@ -9,7 +11,12 @@ package com.zyblue.fastim.common.algorithm.enterprise;
  * 要求自己实现数据结构，要求所有 function 请求的时间复杂度是 O(1)，整体空间复杂度是 O(n)
  * 实现程序前请尽可能的描述清楚思路
  */
-public class Ques4 {
+public class StackMaxMinValue {
+
+    private Stack<Integer> stack;
+
+    private Stack<Integer> maxStack;
+
     public void push(int value) {
     }
     public int pop() {
