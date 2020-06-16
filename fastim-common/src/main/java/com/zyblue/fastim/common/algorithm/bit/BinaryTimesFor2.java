@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.algorithm.other;
+package com.zyblue.fastim.common.algorithm.bit;
 
 /**
  * 二进制中1的个数

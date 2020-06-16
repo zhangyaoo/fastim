@@ -17,16 +17,33 @@ public class StackMaxMinValue {
 
     private Stack<Integer> maxStack;
 
-    public void push(int value) {
-    }
-    public int pop() {
-        return 0;
+    public void push(Integer value) {
+        if(value == null){
+            return;
+        }
+        Integer peek = maxStack.peek();
+        if(peek == null || peek <= value){
+            maxStack.push(value);
+        }
+        stack.push(value);
     }
 
-    public int getMaxValue() {
-        return 0;
+    public Integer pop() {
+        Integer pop = stack.pop();
+        if(pop == null){
+            return null;
+        }
+        Integer peek = maxStack.peek();
+        if(peek.equals(pop)){
+            maxStack.pop();
+        }
+        return pop;
     }
-    public int getMinValue() {
+
+    public Integer getMaxValue() {
+        return maxStack.peek();
+    }
+    public Integer getMinValue() {
         return 0;
     }
 
