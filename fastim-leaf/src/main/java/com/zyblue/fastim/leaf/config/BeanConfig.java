@@ -16,11 +16,11 @@ import java.util.concurrent.ThreadFactory;
 public class BeanConfig {
 
     @Autowired
-    private ZKConfig zKConfig;
+    private ZKConfig config;
 
     @Bean
     public ZkClient buildZKClient(){
-        return new ZkClient(zKConfig.getZkAddr(), zKConfig.getTimeout().intValue());
+        return new ZkClient(config.getZkAddr(), config.getTimeout().intValue());
     }
 
     @Bean

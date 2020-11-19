@@ -3,29 +3,26 @@ package com.zyblue.fastim.leaf.manager;
 import com.zyblue.fastim.leaf.config.ZKConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Random;
+import javax.annotation.Resource;
 
 /**
  * 雪花算法SnowFlake
- * @Author blueSky
+ * @author blueSky
  */
 @Component
 public class SnowFlakeManager {
 
     private final static Logger logger = LoggerFactory.getLogger(SnowFlakeManager.class);
 
-    private final long workerIdShift = 12L;
+    private final static long WORKER_ID_SHIFT = 12L;
 
-    private final long workerIdBits = 10L;
+    private final static long WORKER_ID_BITS = 10L;
 
-    private final long timestampLeftShift = 12L + workerIdBits;
+    private final static long TIMESTAMP_LEFT_SHIFT = 12L + WORKER_ID_BITS;
 
     private static final long START_TIME_STAMP = 1525229976179L;
-
-    private static final Random RANDOM = new Random();
 
     private static final short MAX_SEQUENCE = 4095;
 
@@ -36,7 +33,7 @@ public class SnowFlakeManager {
 
     private long  counter = 0L;
 
-    @Autowired
+    @Resource
     private ZKConfig zKConfig;
 
     public synchronized Long nextLong(){
@@ -75,6 +72,6 @@ public class SnowFlakeManager {
             counter = 0L;
         }
         lastTimestamp = timestamp;
-        return ((timestamp - START_TIME_STAMP) << timestampLeftShift) | workerId << workerIdShift | counter;
+        return ((timestamp - START_TIME_STAMP) << TIMESTAMP_LEFT_SHIFT) | workerId << WORKER_ID_SHIFT | counter;
     }
 }

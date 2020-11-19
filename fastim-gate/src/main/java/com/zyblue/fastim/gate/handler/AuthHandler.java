@@ -8,12 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import java.util.HashMap;
+
 
 public class AuthHandler extends ChannelInboundHandlerAdapter {
 
     private final static Logger logger = LoggerFactory.getLogger(AuthHandler.class);
-
-    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
