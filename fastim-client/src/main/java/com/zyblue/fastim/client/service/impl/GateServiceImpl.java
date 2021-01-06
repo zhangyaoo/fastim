@@ -2,15 +2,13 @@ package com.zyblue.fastim.client.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zyblue.fastim.client.service.GateService;
-
-import com.zyblue.fastim.common.ServerInfo;
-import com.zyblue.fastim.common.request.LoginRequest;
-import com.zyblue.fastim.common.request.RegisterRequest;
-import com.zyblue.fastim.common.response.LoginResponse;
-import com.zyblue.fastim.common.response.RegisterResponse;
+import com.zyblue.fastim.common.pojo.request.LoginRequest;
+import com.zyblue.fastim.common.pojo.request.RegisterRequest;
+import com.zyblue.fastim.common.pojo.response.LoginResponse;
+import com.zyblue.fastim.common.pojo.response.RegisterResponse;
 import com.zyblue.fastim.common.url.UrlConstant;
 import com.zyblue.fastim.common.util.HttpUtil;
-import com.zyblue.fastim.common.vo.BaseResponse;
+import com.zyblue.fastim.common.pojo.BaseResponse;
 import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

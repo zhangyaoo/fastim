@@ -16,12 +16,12 @@ public class ArrayCircularQueue {
         /**
          * 数组
          */
-        private String[] array;
+        private final String[] array;
 
         /**
          * 容量
          */
-        private Integer capacity;
+        private final Integer capacity;
 
         /**
          * 头指针
@@ -32,6 +32,11 @@ public class ArrayCircularQueue {
          * 尾指针
          */
         private Integer tail = 0;
+
+        public CircularQueue(Integer capacity) {
+            this.array = new String[capacity];
+            this.capacity = capacity;
+        }
 
         public boolean add(String data){
             int i = (tail + 1) % capacity;

@@ -2,10 +2,10 @@ package com.zyblue.fastim.gate.controller;
 
 
 import com.zyblue.fastim.common.ServerInfo;
-import com.zyblue.fastim.common.request.LoginRequest;
-import com.zyblue.fastim.common.response.LoginResponse;
+import com.zyblue.fastim.common.pojo.request.LoginRequest;
+import com.zyblue.fastim.common.pojo.response.LoginResponse;
 import com.zyblue.fastim.common.url.UrlConstant;
-import com.zyblue.fastim.common.vo.BaseResponse;
+import com.zyblue.fastim.common.pojo.BaseResponse;
 import com.zyblue.fastim.gate.service.ServerInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.vo;
+package com.zyblue.fastim.common.pojo;
 
 import com.alibaba.fastjson.JSONObject;
 

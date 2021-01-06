@@ -1,11 +1,10 @@
 package com.zyblue.fastim.leaf.controller;
 
 import com.zyblue.fastim.common.url.UrlConstant;
-import com.zyblue.fastim.common.vo.BaseResponse;
+import com.zyblue.fastim.common.pojo.BaseResponse;
 import com.zyblue.fastim.leaf.service.LeafService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

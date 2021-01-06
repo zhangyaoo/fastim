@@ -1,4 +1,4 @@
-package com.zyblue.fastim.common.response;
+package com.zyblue.fastim.common.pojo.response;
 
 import java.io.Serializable;
 

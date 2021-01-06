@@ -2,8 +2,8 @@ package com.zyblue.fastim.gate.service.impl;
 
 import com.zyblue.fastim.common.ServerInfo;
 import com.zyblue.fastim.common.redis.RedisKey;
-import com.zyblue.fastim.common.request.LoginRequest;
-import com.zyblue.fastim.common.response.LoginResponse;
+import com.zyblue.fastim.common.pojo.request.LoginRequest;
+import com.zyblue.fastim.common.pojo.response.LoginResponse;
 import com.zyblue.fastim.gate.service.ServerInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
