@@ -65,7 +65,15 @@ public class SnowFlakeManager {
             if (this.counter < MAX_SEQUENCE) {
                 this.counter++;
             } else {
-                throw new RuntimeException("Sequence exhausted at " + this.counter);
+                // 用完当前序列号，重新等待下一毫秒
+                try {
+                    wait(1);
+                }catch (Exception e){
+                    logger.error("wait interrupted");
+                    throw new RuntimeException("wait interrupted ");
+                }
+                timestamp = System.currentTimeMillis();
+                counter = 0L;
             }
         } else {
             //如果是新的ms开始
