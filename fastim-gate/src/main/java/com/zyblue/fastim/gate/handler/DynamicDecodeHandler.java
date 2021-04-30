@@ -7,6 +7,10 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.util.internal.AppendableCharSequence;
@@ -41,10 +45,10 @@ public class DynamicDecodeHandler extends ByteToMessageDecoder {
          * 服务端发现 180 秒未从客户端读取到消息，主动断开连接
          */
         channelHandlerContext.pipeline().addLast(new ReadTimeoutHandler(180, TimeUnit.SECONDS));
-        /*channelHandlerContext.pipeline().addLast(new ProtobufVarint32FrameDecoder());
+        channelHandlerContext.pipeline().addLast(new ProtobufVarint32FrameDecoder());
         channelHandlerContext.pipeline().addLast(new ProtobufDecoder());
         channelHandlerContext.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
-        channelHandlerContext.pipeline().addLast(new ProtobufEncoder());*/
+        channelHandlerContext.pipeline().addLast(new ProtobufEncoder());
 
         channelHandlerContext.pipeline().addLast(new AuthHandler());
         channelHandlerContext.pipeline().addLast(new FastImServerHandler());

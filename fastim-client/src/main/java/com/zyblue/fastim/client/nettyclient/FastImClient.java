@@ -1,15 +1,22 @@
 package com.zyblue.fastim.client.nettyclient;
 
-import com.zyblue.fastim.client.initializer.FastImClientInitializer;
+import com.zyblue.fastim.client.handler.FastImClientHandler;
 import com.zyblue.fastim.client.service.BizService;
 import com.zyblue.fastim.common.codec.Invocation;
 import com.zyblue.fastim.common.codec.InvocationType;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
+import io.netty.handler.timeout.IdleStateHandler;
+import io.netty.handler.timeout.ReadTimeoutHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +35,10 @@ public class FastImClient {
 
     private final static Logger logger = LoggerFactory.getLogger(FastImClient.class);
 
+    /**
+     * 重试次数
+     */
     private final Integer maxRetry = 5;
-
-    @Autowired
-    private BizService bizService;
 
     @Value("${gate.url}")
     private String gateUrl;
@@ -59,7 +66,25 @@ public class FastImClient {
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
                 .option(ChannelOption.SO_KEEPALIVE, true)
                 .option(ChannelOption.TCP_NODELAY, true)
-                .handler(new FastImClientInitializer());
+                .handler(new ChannelInitializer<Channel>() {
+                    @Override
+                    protected void initChannel(Channel channel) {
+                        channel.pipeline()
+                                /*
+                                 * 客户端发现 180 秒未从服务端读取到消息，主动断开连接
+                                 */
+                                .addLast(new ReadTimeoutHandler(180, TimeUnit.SECONDS))
+                                /*
+                                 * 服务端每 60 秒向服务端发起一次心跳消息，保证客户端端可以读取到消息。有3次机会保证不断开
+                                 */
+                                .addLast(new IdleStateHandler(60, 0, 0))
+                                .addLast(new ProtobufVarint32FrameDecoder())
+                                .addLast(new ProtobufDecoder(CIMResponseProto.CIMResProtocol.getDefaultInstance()))
+                                .addLast(new ProtobufVarint32LengthFieldPrepender())
+                                .addLast(new ProtobufEncoder())
+                                .addLast(new FastImClientHandler());
+                    }
+                });
         connect(bootstrap, maxRetry);
     }
 
@@ -98,7 +123,7 @@ public class FastImClient {
             return null;
         }
         // 发送消息
-        return channel.writeAndFlush(new Invocation<T>(InvocationType.CUSTOM_TCP.getVal(), msg));
+        return channel.writeAndFlush(new Invocation<>(InvocationType.CUSTOM_TCP.getVal(), msg));
     }
 
     @PreDestroy

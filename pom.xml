@@ -105,7 +105,12 @@
             <dependency>
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
-                <version>3.4.0</version>
+                <version>3.15.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java-util</artifactId>
+                <version>3.15.3</version>
             </dependency>
 
             <dependency>
@@ -114,10 +119,23 @@
                 <version>4.1.54.Final</version>
             </dependency>
 
+            <!--Jackson 核心库-->
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>1.2.31</version>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.8.9</version>
+            </dependency>
+            <!--Jackson 序列化库-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.8.9</version>
+            </dependency>
+            <!--Jackson 注解支持-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.8.9</version>
             </dependency>
 
             <dependency>

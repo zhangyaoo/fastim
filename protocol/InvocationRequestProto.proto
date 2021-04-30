@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package protocol;
+
+option java_package = "com.zyblue.fastim.common.protobuf";
+option java_outer_classname = "InvocationRequestProto";
+
+message InvocationReqProto {
+  required int32 type = 1;
+  required string message = 2;
+}
+

@@ -9,6 +9,7 @@ package com.zyblue.fastim.common.codec;
 public class Invocation<T> {
     /**
      * 类型
+     * @see InvocationType
      */
     private Integer type;
     /**
@@ -33,11 +34,11 @@ public class Invocation<T> {
         this.type = type;
     }
 
-    public String getMessage() {
+    public T getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(T message) {
         this.message = message;
     }
 }
