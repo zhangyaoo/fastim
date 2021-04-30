@@ -13,8 +13,6 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
 
     private final static Logger logger = LoggerFactory.getLogger(AuthHandler.class);
 
-    private StringRedisTemplate stringRedisTemplate;
-
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         logger.info("AuthHandler channelActive");
@@ -30,8 +28,6 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
 
         if(null == token){
             channelHandlerContext.channel().close();
-        }else {
-            super.channelRead(channelHandlerContext, o);
         }
         super.channelRead(channelHandlerContext, o);
     }

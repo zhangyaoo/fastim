@@ -4,13 +4,13 @@ import com.zyblue.fastim.leaf.config.ZKConfig;
 import org.I0Itec.zkclient.ZkClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.apache.commons.io.FileUtils;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.InetAddress;
@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
- * @Function 获取workerId
- * @Author blueSky
+ * 获取workerId
+ * @author blueSky
  */
 @Component
 public class NodeProcessor {
@@ -48,10 +48,10 @@ public class NodeProcessor {
      */
     private static final String WORKERID_PATH = "/tmp";
 
-    @Autowired
+    @Resource
     private ZKConfig zkConfig;
 
-    @Autowired
+    @Resource
     private ZkClient zkClient;
 
     @Value("${server.port}")
@@ -69,14 +69,14 @@ public class NodeProcessor {
 
     private Long lastUpdateTime = 0L;
 
-    @Autowired
+    @Resource
     private ScheduledExecutorService scheduledExecutorService;
 
     @PostConstruct
     public void init(){
         try {
             String hostAddress = InetAddress.getLocalHost().getHostAddress();
-            /**
+            /*
              * 本机的标识 IP:PORT
              */
             String pathAddress = hostAddress + ":" + serverPort;
@@ -124,22 +124,17 @@ public class NodeProcessor {
             logger.info("workerId:{}", workerId);
             zkConfig.setWorkerId(workerId);
 
-            /**
+            /*
              * 写入文件
              */
             writeWorkerId2Local(workerId);
 
-            /**
+            /*
              * 定时心跳 写入时间
              */
-            scheduledExecutorService.scheduleWithFixedDelay(new Runnable() {
-                @Override
-                public void run() {
-                    zookeeperHeartBeat();
-                }
-            }, 1L, HEARTBEAT_DELAY, TimeUnit.SECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(this::zookeeperHeartBeat, 1L, HEARTBEAT_DELAY, TimeUnit.SECONDS);
         }catch (Exception e){
-            logger.error("e:{}", e);
+            logger.error("e:", e);
             readWorkerIdFromLocal();
         }
     }
@@ -157,7 +152,7 @@ public class NodeProcessor {
                 properties.load(new FileInputStream(file));
                 zkConfig.setWorkerId(Integer.valueOf(properties.getProperty("workerId")));
             }catch (Exception e1){
-                logger.error("e:{}", e1);
+                logger.error("e:", e1);
                 throw new RuntimeException("workerId.properties is not available");
             }
         }else {
@@ -175,7 +170,7 @@ public class NodeProcessor {
             try {
                 FileUtils.writeStringToFile(file, "workerId=" + workerId, false);
             }catch (Exception e){
-                logger.error("e:{}", e);
+                logger.error("e:", e);
             }
         }else {
             boolean mkdirs = file.getParentFile().mkdirs();
@@ -186,7 +181,7 @@ public class NodeProcessor {
                         logger.info("local file cache workerID is {}", workerId);
                     }
                 }catch (Exception e){
-                    logger.error("e:{}", e);
+                    logger.error("e:", e);
                 }
             }
         }
