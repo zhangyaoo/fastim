@@ -7,9 +7,20 @@ import java.io.Serializable;
 public class ServerInfo implements Serializable {
     private static final long serialVersionUID = -6250430743260531316L;
 
-    private String ip ;
+    /**
+     * IP信息，如果IP信息为空，那么就用域名
+     */
+    private String ip;
+
+    /**
+     * 服务器域名
+     */
+    private Integer serverDomain;
+
+    /**
+     * 服务器端口
+     */
     private Integer serverPort;
-    private Integer httpPort;
 
     public String getIp() {
         return ip;
@@ -27,12 +38,12 @@ public class ServerInfo implements Serializable {
         this.serverPort = serverPort;
     }
 
-    public Integer getHttpPort() {
-        return httpPort;
+    public Integer getServerDomain() {
+        return serverDomain;
     }
 
-    public void setHttpPort(Integer httpPort) {
-        this.httpPort = httpPort;
+    public void setServerDomain(Integer serverDomain) {
+        this.serverDomain = serverDomain;
     }
 
     @Override

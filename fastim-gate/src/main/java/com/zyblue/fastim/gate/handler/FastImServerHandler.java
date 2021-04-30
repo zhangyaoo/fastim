@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.Charset;
 
 /**
- * 已识乾坤大，犹怜草木青
+ *
  */
 public class FastImServerHandler extends ChannelInboundHandlerAdapter {
 

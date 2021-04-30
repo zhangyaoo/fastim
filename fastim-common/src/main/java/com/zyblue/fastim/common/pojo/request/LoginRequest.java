@@ -1,22 +1,16 @@
 package com.zyblue.fastim.common.pojo.request;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.Serializable;
 
 public class LoginRequest implements Serializable {
 
     private static final long serialVersionUID = 5422016176211152480L;
 
-    private Long userId;
-
     private String mobile;
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+    private String pwd;
 
     public String getMobile() {
         return mobile;
@@ -26,11 +20,16 @@ public class LoginRequest implements Serializable {
         this.mobile = mobile;
     }
 
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
     @Override
     public String toString() {
-        return "LoginRequest{" +
-                "userId=" + userId +
-                ", mobile='" + mobile + '\'' +
-                '}';
+        return JSONObject.toJSONString(this);
     }
 }

@@ -8,8 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
-import java.util.HashMap;
-
 
 public class AuthHandler extends ChannelInboundHandlerAdapter {
 
@@ -30,8 +28,6 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
 
         if(null == token){
             channelHandlerContext.channel().close();
-        }else {
-            super.channelRead(channelHandlerContext, o);
         }
         super.channelRead(channelHandlerContext, o);
     }

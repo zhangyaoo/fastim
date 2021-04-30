@@ -4,23 +4,15 @@ import java.io.Serializable;
 
 public class RegisterResponse implements Serializable {
 
-
     private static final long serialVersionUID = 6377606297678069156L;
 
-    private Long userId;
+    private String token;
 
-    public Long getUserId() {
-        return userId;
+    public String getToken() {
+        return token;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    @Override
-    public String toString() {
-        return "RegisterResponse{" +
-                "userId=" + userId +
-                '}';
+    public void setToken(String token) {
+        this.token = token;
     }
 }

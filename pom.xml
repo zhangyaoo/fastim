@@ -17,7 +17,6 @@
         <module>fastim-logic</module>
         <module>fastim-client</module>
         <module>fastim-gate</module>
-        <module>fastim-gate-springcloud</module>
         <module>fastim-leaf</module>
         <module>fastim-router</module>
         <module>fastim-common</module>
@@ -31,11 +30,9 @@
         <spring-boot.version>2.3.6.RELEASE</spring-boot.version>
         <dubbo-spring-boot-starter.version>2.7.5</dubbo-spring-boot-starter.version>
         <dubbo.version>2.7.5</dubbo.version>
-        <logging-interceptor.version>3.8.0</logging-interceptor.version>
     </properties>
     <dependencyManagement>
         <dependencies>
-
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-validation</artifactId>
@@ -44,13 +41,8 @@
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
+                <artifactId>spring-boot-starter</artifactId>
                 <version>${spring-boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>logging-interceptor</artifactId>
-                <version>${logging-interceptor.version}</version>
             </dependency>
 
             <dependency>
@@ -105,9 +97,9 @@
             </dependency>
 
             <dependency>
-                <groupId>com.github.sgroschupf</groupId>
-                <artifactId>zkclient</artifactId>
-                <version>0.1</version>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.3.7</version>
             </dependency>
 
             <dependency>
@@ -119,13 +111,7 @@
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
-                <version>${netty.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
+                <version>4.1.54.Final</version>
             </dependency>
 
             <dependency>
