@@ -1,5 +1,6 @@
 package com.zyblue.fastim.gate.handler;
 
+import com.zyblue.fastim.common.protobuf.InvocationRequestProto;
 import com.zyblue.fastim.gate.handler.gate.GateAuthHandler;
 import com.zyblue.fastim.gate.util.HeaderParser;
 import io.netty.buffer.ByteBuf;
@@ -46,7 +47,8 @@ public class DynamicDecodeHandler extends ByteToMessageDecoder {
          */
         channelHandlerContext.pipeline().addLast(new ReadTimeoutHandler(180, TimeUnit.SECONDS));
         channelHandlerContext.pipeline().addLast(new ProtobufVarint32FrameDecoder());
-        channelHandlerContext.pipeline().addLast(new ProtobufDecoder());
+        channelHandlerContext.pipeline()
+                .addLast(new ProtobufDecoder(InvocationRequestProto.InvocationReqProto.getDefaultInstance()));
         channelHandlerContext.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
         channelHandlerContext.pipeline().addLast(new ProtobufEncoder());
 

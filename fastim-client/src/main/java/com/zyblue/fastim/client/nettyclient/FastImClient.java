@@ -1,9 +1,9 @@
 package com.zyblue.fastim.client.nettyclient;
 
 import com.zyblue.fastim.client.handler.FastImClientHandler;
-import com.zyblue.fastim.client.service.BizService;
 import com.zyblue.fastim.common.codec.Invocation;
 import com.zyblue.fastim.common.codec.InvocationType;
+import com.zyblue.fastim.common.protobuf.InvocationResponseProto;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -19,7 +19,6 @@ import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -79,7 +78,7 @@ public class FastImClient {
                                  */
                                 .addLast(new IdleStateHandler(60, 0, 0))
                                 .addLast(new ProtobufVarint32FrameDecoder())
-                                .addLast(new ProtobufDecoder(CIMResponseProto.CIMResProtocol.getDefaultInstance()))
+                                .addLast(new ProtobufDecoder(InvocationResponseProto.InvocationResProto.getDefaultInstance()))
                                 .addLast(new ProtobufVarint32LengthFieldPrepender())
                                 .addLast(new ProtobufEncoder())
                                 .addLast(new FastImClientHandler());

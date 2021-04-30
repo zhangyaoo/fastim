@@ -2,7 +2,6 @@ package com.zyblue.fastim.client.service.impl;
 
 import com.zyblue.fastim.client.nettyclient.FastImClient;
 import com.zyblue.fastim.client.service.BizService;
-import com.zyblue.fastim.common.codec.Invocation;
 import com.zyblue.fastim.common.pojo.BaseResponse;
 import com.zyblue.fastim.common.pojo.request.LoginRequest;
 import com.zyblue.fastim.common.pojo.request.MsgRequest;
@@ -80,9 +79,7 @@ public class BizServiceImpl implements BizService {
         future.addListener(new GenericFutureListener() {
             @Override
             public void operationComplete(Future future) throws Exception {
-                Invocation<?> invocation = JacksonUtils.obj2pojo(future.get(), Invocation.class);
-                Object message = invocation.getMessage();
-                BaseResponse<?> response = JacksonUtils.obj2pojo(message, BaseResponse.class);
+                BaseResponse<?> response = JacksonUtils.obj2pojo(future.get(), BaseResponse.class);
                 logger.info("response:{}", response);
             }
         });
