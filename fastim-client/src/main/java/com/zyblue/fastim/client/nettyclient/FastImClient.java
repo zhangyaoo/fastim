@@ -3,7 +3,7 @@ package com.zyblue.fastim.client.nettyclient;
 import com.zyblue.fastim.client.handler.FastImClientHandler;
 import com.zyblue.fastim.common.codec.Invocation;
 import com.zyblue.fastim.common.codec.InvocationType;
-import com.zyblue.fastim.common.protobuf.InvocationResponseProto;
+import com.zyblue.fastim.common.protobuf.InvocationRequestProto;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -78,7 +78,7 @@ public class FastImClient {
                                  */
                                 .addLast(new IdleStateHandler(60, 0, 0))
                                 .addLast(new ProtobufVarint32FrameDecoder())
-                                .addLast(new ProtobufDecoder(InvocationResponseProto.InvocationResProto.getDefaultInstance()))
+                                .addLast(new ProtobufDecoder(InvocationRequestProto.InvocationReqProto.getDefaultInstance()))
                                 .addLast(new ProtobufVarint32LengthFieldPrepender())
                                 .addLast(new ProtobufEncoder())
                                 .addLast(new FastImClientHandler());
@@ -94,6 +94,16 @@ public class FastImClient {
         ChannelFuture channelFuture = bootstrap.connect(gateUrl, gatePort).addListener(future -> {
             if (future.isSuccess()) {
                 logger.info("连接成功!");
+                /*
+                 * 考虑到如果有许多好友和群，如果一次性拉取会有非常大的流量，可以采取延迟拉取和按需拉取的策略，还可以的话可以采用分页拉取群消息
+                 * TODO 拉取以下信息
+                 * 1）好友列表；
+                 * 2）好友个人信息；   延迟拉取：打开个人窗口信息才拉取
+                 * 3）群组列表；
+                 * 4）群成员列表；    延迟拉取：打开某个群信息才拉取
+                 * 5）群成员个人信息； 延迟拉取：打开个人窗口信息才拉取
+                 * 6）离线消息。
+                 */
             } else if (retryTimes == 0) {
                 logger.info("重试次数已用完，放弃连接！");
             } else {

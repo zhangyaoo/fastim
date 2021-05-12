@@ -1,6 +1,5 @@
 package com.zyblue.fastim.common;
 
-import com.alibaba.fastjson.JSONObject;
 
 import java.io.Serializable;
 
@@ -48,6 +47,10 @@ public class ServerInfo implements Serializable {
 
     @Override
     public String toString() {
-        return JSONObject.toJSONString(this);
+        return "ServerInfo{" +
+                "ip='" + ip + '\'' +
+                ", serverDomain=" + serverDomain +
+                ", serverPort=" + serverPort +
+                '}';
     }
 }

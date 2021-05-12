@@ -1,8 +1,5 @@
 package com.zyblue.fastim.common.mytest.algorithm;
 
-
-import java.util.concurrent.Executors;
-
 public class AlgorithmMain {
     public static void main(String[] args) {
         TreeNode treeNode7 = new TreeNode();
@@ -23,7 +20,7 @@ public class AlgorithmMain {
         treeNode1.setVal(1);
         TreeNode treeNode0 = new TreeNode();
         treeNode0.setVal(0);
-        treeNode1.setLeft(treeNode0);
+        //treeNode1.setLeft(treeNode0);
         treeNode4.setLeft(treeNode2);
         treeNode2.setLeft(treeNode1);
         treeNode2.setRight(treeNode3);

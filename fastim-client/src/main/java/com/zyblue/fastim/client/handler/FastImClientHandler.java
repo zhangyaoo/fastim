@@ -1,8 +1,6 @@
 package com.zyblue.fastim.client.handler;
 
-import com.alibaba.fastjson.JSONObject;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
@@ -56,7 +54,7 @@ public class FastImClientHandler extends ChannelInboundHandlerAdapter {
         logger.info("maxWritableBytes(): " + buffer.maxWritableBytes());
     }
 
-    private ByteBuf encode(JSONObject jsonObject){
+   /* private ByteBuf encode(JSONObject jsonObject){
         // 1. 创建 ByteBuf 对象
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.ioBuffer();
         // 2. 序列化 Java 对象
@@ -75,5 +73,5 @@ public class FastImClientHandler extends ChannelInboundHandlerAdapter {
         byteBuf.writeBytes(bytes);
 
         return byteBuf;
-    }
+    }*/
 }
