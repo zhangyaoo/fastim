@@ -48,7 +48,7 @@ public class FindArrMoreNum {
         return res;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int[] ints = new int[15];
         ints[0] = 5;
         ints[1] = 3;
@@ -67,5 +67,5 @@ public class FindArrMoreNum {
 
         int i = find(ints);
         System.out.println("i:" + i);
-    }
+    }*/
 }

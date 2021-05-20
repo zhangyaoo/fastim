@@ -16,7 +16,7 @@ public class PrintMatrixInCircle {
 
     private static List<Integer> LIST =  Lists.newArrayList();
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         int[][] matrix = {
             {1,2,3,4,5},
@@ -27,7 +27,7 @@ public class PrintMatrixInCircle {
         };
 
         printMatrixCycle(matrix);
-    }
+    }*/
 
     private static void printMatrixCycle(int[][] matrix){
         int lengthY = matrix.length;

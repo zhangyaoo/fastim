@@ -26,4 +26,12 @@ public class Node implements Serializable {
     public void setTask(Task task) {
         this.task = task;
     }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "cycleNum=" + cycleNum +
+                ", task=" + task +
+                '}';
+    }
 }

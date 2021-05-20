@@ -1,7 +1,5 @@
 package com.zyblue.fastim.common.pojo.bo;
 
-import com.alibaba.fastjson.JSONObject;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -87,6 +85,15 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return JSONObject.toJSONString(this);
+        return "User{" +
+                "name='" + name + '\'' +
+                ", birthdayFirst=" + birthdayFirst +
+                ", birthdayEnd=" + birthdayEnd +
+                ", boy=" + boy +
+                ", number1=" + number1 +
+                ", number2=" + number2 +
+                ", number3=" + number3 +
+                ", number4=" + number4 +
+                '}';
     }
 }

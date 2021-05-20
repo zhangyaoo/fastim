@@ -13,9 +13,9 @@ public class LinkListCross {
         public ListNode next;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
-    }
+    }*/
 
     public static int Length(ListNode list) {  //求两个链表的长度
         int count = 0;

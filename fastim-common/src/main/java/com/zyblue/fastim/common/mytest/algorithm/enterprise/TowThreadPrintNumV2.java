@@ -20,7 +20,7 @@ public class TowThreadPrintNumV2 {
     private static List<Integer> list1 = new ArrayList();
     private static List<Integer> list2 = new ArrayList();
 
-    public static void main(String[] args) throws InterruptedException {
+    /*public static void main(String[] args) throws InterruptedException {
 
         Thread thread1 = new Thread(new Runnable() {
             @Override
@@ -68,5 +68,5 @@ public class TowThreadPrintNumV2 {
         thread2.join();
         System.out.println("list1:" + list1);
         System.out.println("list2:" + list2);
-    }
+    }*/
 }

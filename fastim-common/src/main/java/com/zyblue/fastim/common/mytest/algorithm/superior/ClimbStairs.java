@@ -71,7 +71,7 @@ public class ClimbStairs {
     }
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int n = 10;
         int i = climbStairsV2(n);
         System.out.println("i:" + i);
@@ -81,5 +81,5 @@ public class ClimbStairs {
         int[] dp = new int[n + 1];
 
 
-    }
+    }*/
 }

@@ -47,7 +47,7 @@ public class UpperRightLowerLeftString {
         return c >=65 && c <= 90;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         System.out.println(transfer("AkleBiCeilD"));
-    }
+    }*/
 }

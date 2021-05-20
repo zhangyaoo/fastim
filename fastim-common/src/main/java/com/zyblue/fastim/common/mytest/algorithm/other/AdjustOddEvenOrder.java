@@ -26,8 +26,8 @@ public class AdjustOddEvenOrder {
         return array;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int[] ints = new int[8];
         System.out.println("i:" + reOrderArray(ints));
-    }
+    }*/
 }

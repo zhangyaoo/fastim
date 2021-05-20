@@ -7,7 +7,7 @@ public class MainTest {
 
     private static BloomFilter<Integer> bf =  BloomFilter.create(Funnels.integerFunnel(), 1000000, 0.001);
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         for(int i=0;i<1000000;i++){
             bf.put(i);
         }
@@ -18,5 +18,5 @@ public class MainTest {
                 System.out.println("有坏人逃脱了~~~");
             }
         }
-    }
+    }*/
 }

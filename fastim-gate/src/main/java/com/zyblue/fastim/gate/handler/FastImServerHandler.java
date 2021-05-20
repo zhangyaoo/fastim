@@ -1,6 +1,5 @@
 package com.zyblue.fastim.gate.handler;
 
-import com.alibaba.fastjson.JSONObject;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -38,23 +37,5 @@ public class FastImServerHandler extends ChannelInboundHandlerAdapter {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         logger.info("===>exceptionCaught");
         logger.error(cause.getMessage(), cause);
-    }
-
-    private JSONObject decode(ByteBuf byteBuf){
-        // 跳过 magic number
-        byteBuf.skipBytes(4);
-
-        // 跳过版本号
-        byteBuf.skipBytes(1);
-        // 指令
-        byte command = byteBuf.readByte();
-
-        // 数据包长度
-        int length = byteBuf.readInt();
-
-        byte[] bytes = new byte[length];
-        byteBuf.readBytes(bytes);
-
-        return JSONObject.parseObject(bytes, JSONObject.class);
     }
 }

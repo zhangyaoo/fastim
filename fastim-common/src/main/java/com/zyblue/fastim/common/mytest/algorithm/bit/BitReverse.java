@@ -45,9 +45,9 @@ public class BitReverse {
         return i;
     }
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
 
         System.out.println(reverse(1<<30));
         System.out.println(1<<30);
-    }
+    }*/
 }

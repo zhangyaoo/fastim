@@ -1,7 +1,5 @@
 package com.zyblue.fastim.common.pojo.request;
 
-import com.alibaba.fastjson.JSONObject;
-
 import java.io.Serializable;
 
 public class LoginRequest implements Serializable {
@@ -30,6 +28,9 @@ public class LoginRequest implements Serializable {
 
     @Override
     public String toString() {
-        return JSONObject.toJSONString(this);
+        return "LoginRequest{" +
+                "mobile='" + mobile + '\'' +
+                ", pwd='" + pwd + '\'' +
+                '}';
     }
 }

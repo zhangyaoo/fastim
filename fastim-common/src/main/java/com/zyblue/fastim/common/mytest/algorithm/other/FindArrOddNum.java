@@ -16,7 +16,7 @@ public class FindArrOddNum {
         return val;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int[] ints = new int[7];
         ints[0] = 5;
         ints[1] = 3;
@@ -32,5 +32,5 @@ public class FindArrOddNum {
         int i1 = 4 >> 1 << 1;
         System.out.println("i:" + i1);
 
-    }
+    }*/
 }

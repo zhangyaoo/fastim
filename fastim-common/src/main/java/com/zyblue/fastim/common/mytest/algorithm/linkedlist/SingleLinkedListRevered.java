@@ -28,7 +28,7 @@ public class SingleLinkedListRevered {
 
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Node node1 = new Node();
         Node node2 = new Node();
         Node node3 = new Node();
@@ -55,7 +55,7 @@ public class SingleLinkedListRevered {
         System.out.println("node next:" + reversed.getNext().getData());
         System.out.println("node next next:" + reversed.getNext().getNext().getData());
 
-    }
+    }*/
 
     public static Node reversed(Node head) {
         // 头为空返回空

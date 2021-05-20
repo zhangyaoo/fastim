@@ -1,6 +1,5 @@
 package com.zyblue.fastim.logic.delayqueue;
 
-import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.zyblue.fastim.logic.manager.DelayQueueManager;
@@ -252,7 +251,7 @@ public class LoopQueue{
             if(CollectionUtils.isEmpty(elementDatum)){
                 continue;
             }
-            stringBuilder.append("index:").append(i).append("===>").append(JSONObject.toJSON(elementDatum));
+            stringBuilder.append("index:").append(i).append("===>").append(elementDatum.toString());
         }
         return stringBuilder.toString();
     }

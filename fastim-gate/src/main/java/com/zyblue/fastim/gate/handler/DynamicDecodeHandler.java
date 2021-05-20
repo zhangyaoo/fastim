@@ -1,6 +1,6 @@
 package com.zyblue.fastim.gate.handler;
 
-import com.zyblue.fastim.gate.handler.gate.GateAuthHandler;
+import com.zyblue.fastim.common.protobuf.InvocationResponseProto;
 import com.zyblue.fastim.gate.util.HeaderParser;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -46,7 +46,7 @@ public class DynamicDecodeHandler extends ByteToMessageDecoder {
          */
         channelHandlerContext.pipeline().addLast(new ReadTimeoutHandler(180, TimeUnit.SECONDS));
         channelHandlerContext.pipeline().addLast(new ProtobufVarint32FrameDecoder());
-        channelHandlerContext.pipeline().addLast(new ProtobufDecoder());
+        channelHandlerContext.pipeline().addLast(new ProtobufDecoder(InvocationResponseProto.InvocationResProto.getDefaultInstance()));
         channelHandlerContext.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
         channelHandlerContext.pipeline().addLast(new ProtobufEncoder());
 
@@ -63,7 +63,7 @@ public class DynamicDecodeHandler extends ByteToMessageDecoder {
         channelHandlerContext.pipeline().addLast(new HttpObjectAggregator(8192));
         // ChunkedWriteHandler来解决大文件或者码流传输过程中可能发生的内存溢出问题
         channelHandlerContext.pipeline().addLast(new ChunkedWriteHandler());
-        channelHandlerContext.pipeline().addLast(new GateAuthHandler());
+        //channelHandlerContext.pipeline().addLast(new GateAuthHandler());
     }
 
     /**

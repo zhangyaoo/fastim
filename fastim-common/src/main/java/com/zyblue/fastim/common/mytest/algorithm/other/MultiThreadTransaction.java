@@ -4,7 +4,10 @@ import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.util.ArrayList;
-import java.util.concurrent.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author will
@@ -23,10 +26,14 @@ import java.util.concurrent.*;
 public class MultiThreadTransaction {
     public static volatile boolean commit = true;
 
+    /*public static void main(String[] args) throws InterruptedException {
+        doProcess();
+    }*/
+
     /**
      * 一不小心就实现了简单的2PC
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void doProcess() throws InterruptedException {
         int workerCount = 5;
 
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(workerCount, workerCount, 1,

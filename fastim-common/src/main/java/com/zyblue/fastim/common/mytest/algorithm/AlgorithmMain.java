@@ -1,7 +1,7 @@
 package com.zyblue.fastim.common.mytest.algorithm;
 
 public class AlgorithmMain {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         TreeNode treeNode7 = new TreeNode();
         treeNode7.setVal(7);
         TreeNode treeNode8 = new TreeNode();
@@ -28,12 +28,12 @@ public class AlgorithmMain {
         treeNode6.setLeft(treeNode5);
         treeNode6.setRight(treeNode7);
         treeNode7.setRight(treeNode8);
-        /**
+        *//**
          *        4
          *     2     6
          *   1  3  5  7
          * 0            8
-         */
+         *//*
 
 
 
@@ -48,7 +48,7 @@ public class AlgorithmMain {
 
 
         recursion(treeNode4);
-    }
+    }*/
 
     public static void recursion(TreeNode node){
         if(node == null){

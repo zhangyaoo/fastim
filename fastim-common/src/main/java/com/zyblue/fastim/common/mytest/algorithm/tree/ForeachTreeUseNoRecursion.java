@@ -46,9 +46,9 @@ public class ForeachTreeUseNoRecursion {
 
 
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
 
-    }
+    }*/
 
     /**
      * 递归方式遍历二叉树

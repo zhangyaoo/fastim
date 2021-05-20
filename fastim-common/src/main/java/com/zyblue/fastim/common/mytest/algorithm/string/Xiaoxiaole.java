@@ -17,7 +17,7 @@ public class Xiaoxiaole {
         System.out.println(s);
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         xiao("accbdeeedc");
-    }
+    }*/
 }

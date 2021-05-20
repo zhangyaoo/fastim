@@ -25,8 +25,8 @@ public class TableSizeForNum {
         return n < 0 ? 1 : n + 1;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         final int i = tableSizeFor(8);
         System.out.println(i);
-    }
+    }*/
 }

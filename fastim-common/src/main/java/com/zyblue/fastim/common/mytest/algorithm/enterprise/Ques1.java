@@ -10,9 +10,9 @@ package com.zyblue.fastim.common.mytest.algorithm.enterprise;
  */
 public class Ques1 {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         System.out.println(isHelloWorld("heloworld","hhhhelllllllo wwwwwwworld"));
-    }
+    }*/
 
     public static boolean isHelloWorld(String helloWorld, String text) {
         text = text.replaceAll(" ", "");

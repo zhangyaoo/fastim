@@ -7,7 +7,7 @@ import com.zyblue.fastim.common.mytest.algorithm.TreeNode;
  */
 public class ArrayToTree {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int[] ints = new int[6];
         ints[0] = 0;
         ints[1] = 1;
@@ -19,7 +19,7 @@ public class ArrayToTree {
         TreeNode tree = change(ints);
 
         LayerTree.foreach(tree);
-    }
+    }*/
 
     public static TreeNode change(int[] ints){
         return getTree(ints, 0 , ints.length - 1);

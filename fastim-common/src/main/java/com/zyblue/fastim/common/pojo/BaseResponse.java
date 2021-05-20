@@ -1,6 +1,5 @@
 package com.zyblue.fastim.common.pojo;
 
-import com.alibaba.fastjson.JSONObject;
 
 import java.io.Serializable;
 
@@ -53,6 +52,10 @@ public class BaseResponse<T> implements Serializable {
 
     @Override
     public String toString() {
-        return JSONObject.toJSONString(this);
+        return "BaseResponse{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

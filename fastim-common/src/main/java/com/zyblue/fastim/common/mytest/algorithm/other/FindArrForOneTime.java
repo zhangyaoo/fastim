@@ -21,7 +21,7 @@ public class FindArrForOneTime {
         return val;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int[] ints = new int[8];
         ints[0] = 5;
         ints[1] = 3;
@@ -34,5 +34,5 @@ public class FindArrForOneTime {
 
         int i = find(ints);
         System.out.println("i:" + i);
-    }
+    }*/
 }

@@ -8,7 +8,11 @@ import java.util.concurrent.Executors;
  * Netty 简单源码
  */
 public class Start {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
+        doProcess();
+    }
+    */
+    public static void doProcess(){
         //声明线程池
         ExecutorService boss = Executors.newCachedThreadPool();
         ExecutorService work = Executors.newCachedThreadPool();

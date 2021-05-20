@@ -114,12 +114,12 @@ public class RedPackage {
         return entry.getKey() - entry.getValue();
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         RedPackage redPackage = new RedPackage(1500L, 10, 10L);
         long result = 0;
         for (int i = 0; i < 15; i++) {
             result = result + redPackage.nextAmount();
         }
         System.out.println(result);
-    }
+    }*/
 }

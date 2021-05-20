@@ -1,7 +1,5 @@
 package com.zyblue.fastim.common.mytest.algorithm.array;
 
-import com.alibaba.fastjson.JSONObject;
-
 /**
  * 移除排序数组中重复的值，返回移除后的大小
  * Author : BlueSky 2019.11.05
@@ -27,7 +25,7 @@ public class RemoveDuplicateSortArr {
         return pre + 1;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int[] ints = new int[10];
         ints[0] = 0;
         ints[1] = 0;
@@ -43,8 +41,7 @@ public class RemoveDuplicateSortArr {
         int remove = remove(ints);
 
         System.out.println(remove);
-        System.out.println(JSONObject.toJSONString(ints));
 
         //-new ReentrantLock()
-    }
+    }*/
 }

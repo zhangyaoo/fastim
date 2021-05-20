@@ -20,14 +20,14 @@ public class TowThreadPrintNum {
     private static List<Integer> list1 = new ArrayList();
     private static List<Integer> list2 = new ArrayList();
 
-    public static void main(String[] args) throws InterruptedException {
+    /*public static void main(String[] args) throws InterruptedException {
 
         Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (NUM <= 100){
                     if(flag){
-                        /*try {
+                        *//*try {
                             LOCK.lock();
                             System.out.println("thread1 add num " + NUM);
                             list1.add(NUM);
@@ -35,7 +35,7 @@ public class TowThreadPrintNum {
                         } finally {
                             LOCK.unlock();
                         }
-                        flag = false;*/
+                        flag = false;*//*
                         System.out.println("thread1 add num " + NUM);
                         list1.add(NUM);
                         NUM++;
@@ -49,7 +49,7 @@ public class TowThreadPrintNum {
             public void run() {
                 while (NUM <= 100){
                     if(!flag) {
-                        /*try {
+                        *//*try {
                             LOCK.lock();
                             System.out.println("thread2 add num " + NUM);
                             list2.add(NUM);
@@ -57,7 +57,7 @@ public class TowThreadPrintNum {
                         } finally {
                             LOCK.unlock();
                         }
-                        flag = true;*/
+                        flag = true;*//*
                         System.out.println("thread2 add num " + NUM);
                         list2.add(NUM);
                         NUM++;
@@ -72,7 +72,7 @@ public class TowThreadPrintNum {
         thread2.join();
         System.out.println("list1:" + list1);
         System.out.println("list2:" + list2);
-    }
+    }*/
 
 
 }

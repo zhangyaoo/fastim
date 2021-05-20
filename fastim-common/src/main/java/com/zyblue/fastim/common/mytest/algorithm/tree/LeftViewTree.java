@@ -1,7 +1,6 @@
 package com.zyblue.fastim.common.mytest.algorithm.tree;
 
 
-import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.zyblue.fastim.common.mytest.algorithm.TreeNode;
 
@@ -53,6 +52,6 @@ public class LeftViewTree {
             }
         }
 
-        System.out.println("res:"+ JSONObject.toJSONString(res));
+        System.out.println("res:"+ res.toString());
     }
 }

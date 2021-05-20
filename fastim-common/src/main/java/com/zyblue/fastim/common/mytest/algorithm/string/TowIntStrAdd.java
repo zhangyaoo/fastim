@@ -49,12 +49,12 @@ public class TowIntStrAdd {
         return res.toString();
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String str1 = "743129";
         String str2 = "443123";
         System.out.println(str2.charAt(5));
 
 
         System.out.println(add(str1,str2));
-    }
+    }*/
 }
