@@ -1,13 +1,11 @@
 package com.zyblue.fastim.common.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,15 +62,15 @@ public class JacksonUtils {
     /**
      * json字符串转换为map
      */
-    public static <T> Map<String, T> json2map(String jsonString, Class<T> clazz) throws Exception {
+    /*public static  Map<String, Object> json2map(String jsonString, Class<T> clazz) throws Exception {
         Map<String, Map<String, Object>> map = objectMapper.readValue(jsonString, new TypeReference<Map<String, T>>() {
         });
-        Map<String, T> result = new HashMap<String, T>();
+        Map<String, Object> result = new HashMap<, Object>();
         for (Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
             result.put(entry.getKey(), map2pojo(entry.getValue(), clazz));
         }
         return result;
-    }
+    }*/
 
     /**
      * 深度转换json成map
