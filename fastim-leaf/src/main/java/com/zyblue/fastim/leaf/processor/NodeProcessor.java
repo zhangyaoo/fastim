@@ -2,11 +2,11 @@ package com.zyblue.fastim.leaf.processor;
 
 import com.zyblue.fastim.leaf.config.ZKConfig;
 import org.I0Itec.zkclient.ZkClient;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.apache.commons.io.FileUtils;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
