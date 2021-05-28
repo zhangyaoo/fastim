@@ -5,7 +5,7 @@
 ### 1. 逻辑结构图和架构图
 #### 1.0 架构图
 基于可扩展性高可用原则，把网络层、业务逻辑层、数据层分离，网络层和业务层支持负载均衡策略、数据层支持分布式存储, 支持分布式部署.
-![09-icRnjQ](https://github.com/zhangyaoo/fastim/blob/master/IM系统架构图V1.jpg)
+![09-icRnjQ](https://github.com/zhangyaoo/fastim/blob/master/IM系统架构图.jpg)
 #### 1.1 逻辑图
 
 
@@ -214,5 +214,5 @@ gate一级缓存，redis二级缓存.如何维护缓存一致性？可以参考M
 ## 五、Q&A
 1. 为什么写同步消息到redis后，然后进行推送通知让客户端主动来拉最新的数据？
 2. 消息ID为什么是趋势递增就可以，为什么不是严格递增的？
-3. 架构设计为什么要增加router层和Kafka？
+3. 架构设计为什么要增加router层？为什么不当Kafka作为消息总线来进行gate层和logic层解耦？
 4. 为何消息存储存两份数据，一份到存储库，一份到消息同步库？
