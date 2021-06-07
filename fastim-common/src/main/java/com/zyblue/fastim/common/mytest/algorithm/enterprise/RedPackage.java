@@ -1,7 +1,7 @@
 package com.zyblue.fastim.common.mytest.algorithm.enterprise;
 
+import cn.hutool.core.util.RandomUtil;
 import com.google.common.collect.Maps;
-import org.apache.commons.lang3.RandomUtils;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -86,7 +86,7 @@ public class RedPackage {
             treeMap.put(packageAmount, 0L);
             for (int i = 0; i < packageSize - 1; i++) {
                 // 随机抽取切片
-                long splitNum = RandomUtils.nextLong(minAmount, packageAmount);
+                long splitNum = RandomUtil.randomLong(minAmount, packageAmount);
                 Long higher = treeMap.higherKey(splitNum);
                 higher = higher == null ? packageAmount : higher;
                 Long lower = treeMap.lowerKey(splitNum);
@@ -95,7 +95,7 @@ public class RedPackage {
                 while (higher - splitNum <= minAmount
                         || splitNum - lower <= minAmount
                         || treeMap.containsKey(splitNum)){
-                    splitNum = RandomUtils.nextLong(minAmount, packageAmount);
+                    splitNum = RandomUtil.randomLong(minAmount, packageAmount);
                 }
                 // value放入上一个entry的key,组成链条，防止再次循环
                 treeMap.put(splitNum, lower);

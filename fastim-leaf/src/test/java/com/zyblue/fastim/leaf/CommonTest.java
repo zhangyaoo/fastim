@@ -1,16 +1,17 @@
 package com.zyblue.fastim.leaf;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.mingyuanyun.lock.client.DistributeLockClient;
+import com.mingyuanyun.cache.client.CacheClient;
+import com.mingyuanyun.lock.client.LockClient;
 import com.zyblue.fastim.leaf.manager.SnowFlakeManager;
 import org.junit.jupiter.api.Test;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
 import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CountDownLatch;
@@ -25,10 +26,18 @@ public class CommonTest {
     private SnowFlakeManager snowFlakeManager;
 
     @Autowired
-    private DistributeLockClient distributeLockClient;
+    private LockClient distributeLockClient;
 
-    @Autowired
-    private RedissonClient redissonClient;
+    @Resource
+    private CacheClient<String> cacheClient;
+
+    @Test
+    public void testCache(){
+        cacheClient.set("zhang222", "a");
+        String zhang222 = cacheClient.get("zhang222");
+        cacheClient.expire("zhang222", 10L ,TimeUnit.SECONDS);
+        logger.info("zhang222:{}", zhang222);
+    }
 
     @Test
     public void testLock(){
@@ -39,9 +48,34 @@ public class CommonTest {
         distributeLockClient.unlock("zhangy");
         boolean result4 = distributeLockClient.hasLock("zhangy");
         logger.info("result1:{}, result2:{}, result3:{}, result4:{}", result1, result2, result3, result4);
+
+
+        distributeLockClient.batchLock(Lists.newArrayList("oldDriverA", "oldDriverB"));
+        distributeLockClient.batchUnlock(Lists.newArrayList("oldDriverA", "oldDriverB"));
+
+        try {
+            distributeLockClient.lockReleaseTime("oldDriverA", 10L, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            logger.error("error:", e);
+        }
+
+        try {
+            distributeLockClient.lockWaitTime("oldDriverA", 10L, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            logger.error("error:", e);
+        }
+
+        try {
+            boolean oldDriverA = distributeLockClient.lockWaitReleaseTime("oldDriverA", 10L, 10L, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            logger.error("error:", e);
+        }
+
+        boolean oldDriverA = distributeLockClient.hasLock("oldDriverA");
+
     }
 
-    @Test
+    /*@Test
     public void testLock2() throws InterruptedException {
         RLock a = redissonClient.getLock("a");
         RLock b = redissonClient.getLock("b");
@@ -65,7 +99,7 @@ public class CommonTest {
         while (true){
             TimeUnit.SECONDS.sleep(10);
         }
-    }
+    }*/
 
     @Test
     public void testMulLock() throws InterruptedException {

@@ -1,6 +1,5 @@
 package com.zyblue.fastim.common.mytest.algorithm.string;
 
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author will.zhang
@@ -14,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class UpperRightLowerLeftString {
     public static String transfer(String text){
-        if(StringUtils.isBlank(text)){
+        if(text.length() == 0){
             return "";
         }
 

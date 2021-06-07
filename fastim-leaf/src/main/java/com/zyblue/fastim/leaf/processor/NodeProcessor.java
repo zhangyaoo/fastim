@@ -1,8 +1,8 @@
 package com.zyblue.fastim.leaf.processor;
 
+import cn.hutool.core.io.FileUtil;
 import com.zyblue.fastim.leaf.config.ZKConfig;
 import org.I0Itec.zkclient.ZkClient;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -168,7 +168,8 @@ public class NodeProcessor {
         File file = new File(path);
         if(file.exists() && file.isFile()){
             try {
-                FileUtils.writeStringToFile(file, "workerId=" + workerId, false);
+                FileUtil.clean(file);
+                FileUtil.appendUtf8String( "workerId=" + workerId, file);
             }catch (Exception e){
                 logger.error("e:", e);
             }
@@ -177,7 +178,7 @@ public class NodeProcessor {
             if(mkdirs){
                 try {
                     if (file.createNewFile()) {
-                        FileUtils.writeStringToFile(file, "workerId=" + workerId, false);
+                        FileUtil.appendUtf8String( "workerId=" + workerId, file);
                         logger.info("local file cache workerID is {}", workerId);
                     }
                 }catch (Exception e){

@@ -21,7 +21,6 @@ public class ServerInfoServiceImpl implements ServerInfoService {
 
     @Override
     public LoginResponse getServerInfo(LoginRequest request) {
-        // TODO 一致性hash
         ServerInfo info = new ServerInfo();
         info.setIp("127.0.0.1");
         info.setServerPort(9527);

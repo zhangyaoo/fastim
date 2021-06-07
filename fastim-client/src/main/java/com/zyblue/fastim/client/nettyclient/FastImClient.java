@@ -64,6 +64,7 @@ public class FastImClient {
                 // .attr(AttributeKey.newInstance("token"), loginResponse.getToken())
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
                 .option(ChannelOption.SO_KEEPALIVE, true)
+                // Nagle算法就是为了尽可能发送大块数据，避免网络中充斥着许多小数据块。使用TCP_NODELAY来关闭Nagle算法
                 .option(ChannelOption.TCP_NODELAY, true)
                 .handler(new ChannelInitializer<Channel>() {
                     @Override
@@ -109,6 +110,10 @@ public class FastImClient {
             } else {
                 int order = (maxRetry - retryTimes) + 1;
                 logger.info("客户端第{}次重新ing", order);
+                /*
+                 * 当网络异常恢复后，大量客户端可能会同时发起TCP重连及进行应用层请求，可能会造成服务端过载、网络带宽耗尽等问题
+                 * 所以增加指数退让机制
+                 */
                 int delay = 1 << order;
                 // 定时到点执行
                 bootstrap.config().group().schedule(() -> connect(bootstrap, retryTimes - 1),

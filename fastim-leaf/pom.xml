@@ -17,11 +17,11 @@
     </properties>
 
     <dependencies>
-        <!--<dependency>
+        <dependency>
             <groupId>com.mingyuanyun</groupId>
             <artifactId>ykj-cache-spring-boot-starter</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
-        </dependency>-->
+            <version>1.0.4-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.mingyuanyun</groupId>
             <artifactId>ykj-lock-spring-boot-starter</artifactId>
@@ -49,18 +49,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.101tec</groupId>
             <artifactId>zkclient</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
         </dependency>
     </dependencies>
 

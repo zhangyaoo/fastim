@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.6.RELEASE</version>
+        <version>2.3.7.RELEASE</version>
     </parent>
     <groupId>com.zyblue</groupId>
     <artifactId>fastim</artifactId>
@@ -20,6 +20,8 @@
         <module>fastim-leaf</module>
         <module>fastim-router</module>
         <module>fastim-common</module>
+        <module>fastim-lsb</module>
+        <module>fastim-das</module>
     </modules>
 
     <properties>
@@ -27,9 +29,15 @@
         <java.encoding>UTF-8</java.encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.3.6.RELEASE</spring-boot.version>
+        <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <dubbo-spring-boot-starter.version>2.7.5</dubbo-spring-boot-starter.version>
+        <netty.version>4.1.65.Final</netty.version>
         <dubbo.version>2.7.5</dubbo.version>
+        <nacos.version>2.0.1</nacos.version>
+        <protobuf.version>3.15.3</protobuf.version>
+        <hutool.version>5.3.7</hutool.version>
+        <jackson.version>2.12.3</jackson.version>
+        <guava.version>30.0-jre</guava.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -91,70 +99,68 @@
             </dependency>
 
             <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>3.8.0</version>
-            </dependency>
-
-            <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
-                <version>5.3.7</version>
+                <version>${hutool.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
-                <version>3.15.3</version>
+                <version>${protobuf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java-util</artifactId>
-                <version>3.15.3</version>
+                <version>${protobuf.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
-                <version>4.1.54.Final</version>
+                <version>${netty.version}</version>
             </dependency>
 
             <!--Jackson 核心库-->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.12.3</version>
+                <version>${jackson.version}</version>
             </dependency>
             <!--Jackson 序列化库-->
-            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.12.3</version>
+                <version>${jackson.version}</version>
             </dependency>
             <!--Jackson 注解支持-->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>2.12.3</version>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>30.0-jre</version>
-            </dependency>
-
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>2.7</version>
+                <version>${guava.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.101tec</groupId>
                 <artifactId>zkclient</artifactId>
                 <version>0.11</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
