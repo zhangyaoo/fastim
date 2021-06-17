@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.7.RELEASE</version>
+        <version>2.4.5</version>
     </parent>
     <groupId>com.zyblue</groupId>
     <artifactId>fastim</artifactId>
@@ -29,11 +29,12 @@
         <java.encoding>UTF-8</java.encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+        <spring-boot.version>2.4.5</spring-boot.version>
         <dubbo-spring-boot-starter.version>2.7.5</dubbo-spring-boot-starter.version>
         <netty.version>4.1.65.Final</netty.version>
         <dubbo.version>2.7.5</dubbo.version>
-        <nacos.version>2.0.1</nacos.version>
+        <nacos.version>2.0.2</nacos.version>
+        <nacos-config-spring-boot-starter.version>0.2.8</nacos-config-spring-boot-starter.version>
         <protobuf.version>3.15.3</protobuf.version>
         <hutool.version>5.3.7</hutool.version>
         <jackson.version>2.12.3</jackson.version>
@@ -41,11 +42,11 @@
     </properties>
     <dependencyManagement>
         <dependencies>
-            <dependency>
+            <!--<dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-validation</artifactId>
                 <version>${spring-boot.version}</version>
-            </dependency>
+            </dependency>-->
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -59,10 +60,21 @@
                 <version>${spring-boot.version}</version>
                 <scope>test</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${spring-boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>redis.clients</groupId>
+                        <artifactId>jedis</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.lettuce</groupId>
+                        <artifactId>lettuce-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -76,6 +88,12 @@
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>
                 <version>${dubbo-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos.version}</version>
             </dependency>
 
             <dependency>
@@ -107,11 +125,6 @@
             <dependency>
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
-                <version>${protobuf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.protobuf</groupId>
-                <artifactId>protobuf-java-util</artifactId>
                 <version>${protobuf.version}</version>
             </dependency>
 
@@ -155,12 +168,12 @@
                 <groupId>com.101tec</groupId>
                 <artifactId>zkclient</artifactId>
                 <version>0.11</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.nacos</groupId>
-                <artifactId>nacos-client</artifactId>
-                <version>${nacos.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>

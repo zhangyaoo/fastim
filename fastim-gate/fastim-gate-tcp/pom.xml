@@ -1,46 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.zyblue</groupId>
-        <artifactId>fastim</artifactId>
+        <artifactId>fastim-gate</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>fastim-leaf</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>fastim-leaf</name>
-    <packaging>jar</packaging>
 
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <artifactId>fastim-gate-tcp</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>fastim-gate-tcp</name>
+
 
     <dependencies>
-        <dependency>
-            <groupId>com.mingyuanyun</groupId>
-            <artifactId>ykj-cache-spring-boot-starter</artifactId>
-            <version>1.0.4-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mingyuanyun</groupId>
-            <artifactId>ykj-lock-spring-boot-starter</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-
         <dependency>
             <groupId>com.zyblue</groupId>
             <artifactId>fastim-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>redis.clients</groupId>
+                    <artifactId>jedis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.lettuce</groupId>
+                    <artifactId>lettuce-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -49,14 +57,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.101tec</groupId>
-            <artifactId>zkclient</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
         </dependency>
     </dependencies>
 
@@ -66,6 +68,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>${project.name}</finalName>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

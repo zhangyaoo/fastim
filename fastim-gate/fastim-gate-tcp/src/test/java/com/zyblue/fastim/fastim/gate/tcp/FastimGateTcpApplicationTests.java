@@ -1,13 +1,13 @@
-package com.zyblue.fastim.client;
+package com.zyblue.fastim.fastim.gate.tcp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class FastimClientApplicationTests {
+class FastimGateTcpApplicationTests {
 
     @Test
-    public void contextLoads() {
+    void contextLoads() {
     }
 
 }

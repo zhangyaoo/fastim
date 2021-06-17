@@ -1,63 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.zyblue</groupId>
-        <artifactId>fastim</artifactId>
+        <artifactId>fastim-gate</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>fastim-leaf</artifactId>
+    <artifactId>fastim-gate-http</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>fastim-leaf</name>
-    <packaging>jar</packaging>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <name>fastim-gate-http</name>
 
     <dependencies>
         <dependency>
-            <groupId>com.mingyuanyun</groupId>
-            <artifactId>ykj-cache-spring-boot-starter</artifactId>
-            <version>1.0.4-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mingyuanyun</groupId>
-            <artifactId>ykj-lock-spring-boot-starter</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.zyblue</groupId>
-            <artifactId>fastim-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <artifactId>dubbo</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.101tec</groupId>
-            <artifactId>zkclient</artifactId>
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
             <exclusions>
                 <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty</artifactId>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>
@@ -66,6 +51,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>${project.name}</finalName>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
