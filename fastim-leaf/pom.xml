@@ -18,17 +18,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.mingyuanyun</groupId>
-            <artifactId>ykj-cache-spring-boot-starter</artifactId>
-            <version>1.0.4-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mingyuanyun</groupId>
-            <artifactId>ykj-lock-spring-boot-starter</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.zyblue</groupId>
             <artifactId>fastim-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
@@ -49,14 +38,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.101tec</groupId>
-            <artifactId>zkclient</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
         </dependency>
     </dependencies>
 

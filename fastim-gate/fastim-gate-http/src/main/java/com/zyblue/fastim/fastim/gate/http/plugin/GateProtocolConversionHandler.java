@@ -42,6 +42,9 @@ public class GateProtocolConversionHandler implements GatePluginHandler{
         GenericService genericService = reference.get();
         CompletableFuture<Object> future = genericService.$invokeAsync(interfaceMetadata.getMethodName(),
                 interfaceMetadata.getParameterTypes(), interfaceMetadata.getParams());
+        /*
+         * TODO 请求和响应如何保证是同一条线程？
+         */
         future.whenCompleteAsync((result, throwable) -> {
             HttpResponseStatus status = HttpResponseStatus.OK;
             if(throwable != null){

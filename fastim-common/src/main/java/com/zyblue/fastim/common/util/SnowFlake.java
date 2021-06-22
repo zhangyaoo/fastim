@@ -1,6 +1,5 @@
 package com.zyblue.fastim.common.util;
 
-import cn.hutool.core.util.RandomUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -121,7 +120,8 @@ public class SnowFlake {
     private static void initHost(){
         InetAddress localHostExactAddress = getLocalHostExactAddress();
         if(localHostExactAddress == null){
-            machineId = RandomUtil.randomLong(0, 1 << 16);
+            //machineId = RandomUtil.randomLong(0, 1 << 16);
+            machineId = 1L;
         }else {
             String hostAddress = localHostExactAddress.getHostAddress();
             String[] splits = hostAddress.split("\\.");
@@ -132,7 +132,8 @@ public class SnowFlake {
                 l1 = (l1 == 0 ? 1 : l1);
                 machineId = l | l1;
             }else {
-                machineId = RandomUtil.randomLong(0, 1 << 16);
+                //machineId = RandomUtil.randomLong(0, 1 << 16);
+                machineId = 2L;
             }
         }
         logger.info("machineId:{}", machineId);

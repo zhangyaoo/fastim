@@ -68,11 +68,13 @@ public class BizServiceImpl implements BizService {
         return new BaseResponse<>(200, "success", loginResponse);
     }
 
-    /**
-     * 使用测试
-     */
     @Override
-    public BaseResponse<?> sendMsgTest(MsgRequest request) {
+    public BaseResponse<?> logout() {
+        return null;
+    }
+
+    @Override
+    public BaseResponse<?> sendMsg(MsgRequest request) {
         logger.info("sendMsgTest|request:{}", request);
 
         // (1) 尝试socket发送
@@ -98,5 +100,15 @@ public class BizServiceImpl implements BizService {
             return new BaseResponse<>(500, "failed", null);
         }
         return new BaseResponse<>(200, "success", response);
+    }
+
+    @Override
+    public BaseResponse<?> getOfflineMsg() {
+        return null;
+    }
+
+    @Override
+    public BaseResponse<?> onMsgRecieved() {
+        return null;
     }
 }

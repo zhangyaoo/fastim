@@ -1,15 +1,9 @@
 package com.zyblue.fastim.common.util;
 
-import com.zyblue.fastim.common.codec.Invocation;
-import com.zyblue.fastim.common.codec.InvocationType;
-import okhttp3.*;
-
-import java.util.concurrent.TimeUnit;
-
 public class HttpUtil {
 
     public static String doPost(String url, Object body) throws Exception{
-        OkHttpClient client = new OkHttpClient.Builder()
+        /*OkHttpClient client = new OkHttpClient.Builder()
                 // 连接超时2秒
                 .connectTimeout(1000, TimeUnit.MILLISECONDS)
                 // 读取超时2秒
@@ -28,6 +22,7 @@ public class HttpUtil {
         if(responseBody == null){
             throw new Exception("response is null");
         }
-        return responseBody.string();
+        return responseBody.string();*/
+        return null;
     }
 }

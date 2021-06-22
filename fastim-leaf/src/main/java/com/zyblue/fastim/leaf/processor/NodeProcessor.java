@@ -1,8 +1,8 @@
 package com.zyblue.fastim.leaf.processor;
 
-import cn.hutool.core.io.FileUtil;
 import com.zyblue.fastim.leaf.config.ZKConfig;
-import org.I0Itec.zkclient.ZkClient;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.zookeeper.CreateMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.RandomAccessFile;
 import java.net.InetAddress;
 import java.util.List;
 import java.util.Properties;
@@ -52,7 +53,7 @@ public class NodeProcessor {
     private ZKConfig zkConfig;
 
     @Resource
-    private ZkClient zkClient;
+    private CuratorFramework curatorFramework;
 
     @Value("${server.port}")
     private int serverPort ;
@@ -83,17 +84,17 @@ public class NodeProcessor {
             logger.info("pathAddress:{}", pathAddress);
 
             int workerId = 0;
-
-            boolean exists = zkClient.exists(zkConfig.getZkRoot() + LEAF_FOREVER);
+            boolean exists = curatorFramework.checkExists().forPath(zkConfig.getZkRoot() + LEAF_FOREVER) != null;
             logger.info("exists:{}", exists);
             if(!exists){
                 // 创建永久节点
-                zkClient.createPersistent(zkConfig.getZkRoot() + LEAF_FOREVER, true);
-                nodeAddress = zkClient.createPersistentSequential(zkConfig.getZkRoot() + LEAF_FOREVER + "/" + pathAddress + "-", System.currentTimeMillis());
+                curatorFramework.create().withMode(CreateMode.PERSISTENT).forPath(zkConfig.getZkRoot() + LEAF_FOREVER);
+                String nodeAddress = curatorFramework.create().withMode(CreateMode.PERSISTENT_SEQUENTIAL)
+                        .forPath(zkConfig.getZkRoot() + LEAF_FOREVER + "/" + pathAddress + "-", Long.valueOf(System.currentTimeMillis()).toString().getBytes());
                 logger.info("nodeAddress:{}", nodeAddress);
             }else {
                 // 格式 ip:port-00001
-                List<String> children = zkClient.getChildren(zkConfig.getZkRoot() + LEAF_FOREVER);
+                List<String> children = curatorFramework.getChildren().forPath(zkConfig.getZkRoot() + LEAF_FOREVER);
                 boolean createNewNode = false;
                 if(CollectionUtils.isEmpty(children)){
                     createNewNode = true;
@@ -115,7 +116,10 @@ public class NodeProcessor {
 
                 if(createNewNode){
                     // 表示新启动的节点,创建持久节点，不用check时间
-                    nodeAddress = zkClient.createPersistentSequential(zkConfig.getZkRoot() + LEAF_FOREVER + "/" + pathAddress + "-", System.currentTimeMillis());
+
+                    curatorFramework.create().withMode(CreateMode.PERSISTENT).forPath(zkConfig.getZkRoot() + LEAF_FOREVER);
+                    nodeAddress = curatorFramework.create().withMode(CreateMode.PERSISTENT_SEQUENTIAL)
+                            .forPath(zkConfig.getZkRoot() + LEAF_FOREVER + "/" + pathAddress + "-", Long.valueOf(System.currentTimeMillis()).toString().getBytes());
                     logger.info("nodeAddress:{}", nodeAddress);
                     workerId = Integer.parseInt(nodeAddress.split("-")[1]);
                 }
@@ -166,26 +170,27 @@ public class NodeProcessor {
     private void writeWorkerId2Local(int workerId){
         String path = WORKERID_PATH + File.separator + applicationName + File.separator + "workerId.properties";
         File file = new File(path);
-        if(file.exists() && file.isFile()){
-            try {
-                FileUtil.clean(file);
-                FileUtil.appendUtf8String( "workerId=" + workerId, file);
-            }catch (Exception e){
-                logger.error("e:", e);
-            }
-        }else {
-            boolean mkdirs = file.getParentFile().mkdirs();
-            if(mkdirs){
-                try {
-                    if (file.createNewFile()) {
-                        FileUtil.appendUtf8String( "workerId=" + workerId, file);
-                        logger.info("local file cache workerID is {}", workerId);
+        try (RandomAccessFile rFile = new RandomAccessFile(file, "rw")){
+            if(file.exists() && file.isFile()){
+                rFile.setLength(0);
+                rFile.write(("workerId=" + workerId).getBytes());
+            }else {
+                boolean mkdirs = file.getParentFile().mkdirs();
+                if(mkdirs){
+                    try {
+                        if (file.createNewFile()) {
+                            rFile.write(("workerId=" + workerId).getBytes());
+                            logger.info("local file cache workerID is {}", workerId);
+                        }
+                    }catch (Exception e){
+                        logger.error("e:", e);
                     }
-                }catch (Exception e){
-                    logger.error("e:", e);
                 }
             }
+        }catch (Exception e){
+            logger.error("e:", e);
         }
+
     }
 
     public void zookeeperHeartBeat(){
@@ -196,7 +201,12 @@ public class NodeProcessor {
             return;
         }else {
             // 定时写入本机时间
-            zkClient.writeData(zkConfig.getZkRoot() + LEAF_FOREVER + "/" + nodeAddress, now);
+            try {
+                curatorFramework.setData().forPath(zkConfig.getZkRoot() + LEAF_FOREVER + "/" + nodeAddress,
+                        Long.valueOf(now).toString().getBytes());
+            } catch (Exception e) {
+                logger.error("e:", e);
+            }
             lastUpdateTime = now;
         }
         logger.info("upload local time to Zookeeper end");

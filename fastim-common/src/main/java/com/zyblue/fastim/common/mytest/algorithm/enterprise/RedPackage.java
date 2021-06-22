@@ -1,3 +1,4 @@
+/*
 package com.zyblue.fastim.common.mytest.algorithm.enterprise;
 
 import cn.hutool.core.util.RandomUtil;
@@ -6,6 +7,7 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 import java.util.TreeMap;
 
+*/
 /**
  * @author will
  * @date 2020/12/21 10:56
@@ -25,46 +27,63 @@ import java.util.TreeMap;
  * 1分钱处理：判断相邻间隔的大小
  *
  * 代码实现：利用treeMap or sortSet实现
- */
+ *//*
+
 public class RedPackage {
-    /**
+    */
+/**
      * 红包最小金额
-     */
+     *//*
+
     private long minAmount = 1L;
 
-    /**
+    */
+/**
      * 最大的红包是平均值的N倍
-     */
+     *//*
+
     private static final long N = 2;
 
-    /**
+    */
+/**
      * 红包最大金额
-     */
+     *//*
+
     private long maxAmount;
 
-    /**
+    */
+/**
      * 红包金额 分
-     */
+     *//*
+
     private long packageAmount;
 
-    /**
+    */
+/**
      * 红包个数
-     */
+     *//*
+
     private long packageSize;
 
-    /**
+    */
+/**
      * 是否抢完
-     */
+     *//*
+
     private boolean finish;
 
-    /**
+    */
+/**
      * 存储红包的金额顺序
-     */
+     *//*
+
     private final TreeMap<Long, Long> treeMap = Maps.newTreeMap((o1, o2) -> o1 > o2 ? 1 : o1.equals(o2) ? 0 : -1);
 
-    /**
+    */
+/**
      * 构造函数不写业务逻辑
-     */
+     *//*
+
     public RedPackage(long packageAmount, int packageSize){
         this.packageAmount = packageAmount;
         this.packageSize = packageSize;
@@ -77,9 +96,11 @@ public class RedPackage {
         this.minAmount = minAmount;
     }
 
-    /**
+    */
+/**
      * 获取金额
-     */
+     *//*
+
     public synchronized long nextAmount(){
         // 前置校验，初始化
         if(!finish && treeMap.size() == 0){
@@ -114,12 +135,15 @@ public class RedPackage {
         return entry.getKey() - entry.getValue();
     }
 
-    /*public static void main(String[] args) {
+    */
+/*public static void main(String[] args) {
         RedPackage redPackage = new RedPackage(1500L, 10, 10L);
         long result = 0;
         for (int i = 0; i < 15; i++) {
             result = result + redPackage.nextAmount();
         }
         System.out.println(result);
-    }*/
+    }*//*
+
 }
+*/

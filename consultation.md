@@ -10,6 +10,7 @@ https://mp.weixin.qq.com/s/TUIxcg0EJC0S26gKrKqYKg 瓜子IM系统设计
 https://mp.weixin.qq.com/s/TYUNPgf_3rkBr38rNlEZ2g 分布式IM系统设计
 https://mp.weixin.qq.com/s/a4sDH48PWTHax2uBej1Jtg 基于消息总线的高可扩展性IM系统后台架构设计
 https://help.aliyun.com/document_detail/141820.html 阿里云IM消息系统设计
+http://www.52im.net/thread-699-1-1.html MQ来进行通信的业务场景是否合适
 
 IM消息可靠性实现
 http://www.52im.net/thread-294-1-1.html 保证在线实时消息的可靠投递
@@ -19,6 +20,9 @@ http://www.52im.net/thread-280-1-1.html IM该如何设计“失败重试”机�
 IM消息同步实现
 http://www.52im.net/thread-1230-1-1.html  消息的同步和存储方案
 http://www.52im.net/thread-714-1-1.html  保证IM实时消息的“时序性”与“一致性”
+
+IM消息时序性
+http://www.52im.net/thread-866-1-1.html 简单时序性保证
 
 群聊
 IM群聊消息的已读回执功能该怎么实现
