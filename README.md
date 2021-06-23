@@ -4,7 +4,7 @@
 ## 一、系统设计
 ### 1. IM架构图
 基于可扩展性高可用原则，把网络层、业务逻辑层、数据层分离，并且支持分布式部署
-![09-icRnjQ](https：//github.com/zhangyaoo/fastim/blob/master/architecture.jpg)
+![IM架构图](https://github.com/zhangyaoo/fastim/blob/master/architecture.jpg)
 
 ### 2. 架构设计
 #### 2.0 CLIENT设计：
@@ -68,7 +68,7 @@ IM协议采用二进制定长包头和变长包体来实现客户端和服务端
 
 ### 6. 消息管理
 一个正常的消息流转需要如图所示的流程：
-![09-icRnjQ](https：//github.com/zhangyaoo/fastim/blob/master/pic/IM-pic1.jpg)
+![IM核心流程图](https://github.com/zhangyaoo/fastim/blob/master/pic/IM-pic1.jpg)
 
 1. 客户端A发送请求包R
 2. server将消息存储到DB
