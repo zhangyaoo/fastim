@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 
 @Component
 public class HttpServer {
@@ -26,8 +25,7 @@ public class HttpServer {
 
     private static NioEventLoopGroup bossGroup;
 
-    @Resource(name = "nioThreadPool")
-    private NioEventLoopGroup workerGroup;
+    private static NioEventLoopGroup workerGroup;
 
     private static Channel serverChannel;
 
@@ -40,8 +38,10 @@ public class HttpServer {
     }
 
     private void startHttpServer(){
-        // bossGroup设置1个，参考NG
+        // bossGroup设置1个，参考NG。 在不 bind 多端口的情况下 BossEventLoopGroup 中只需要包含一个 EventLoop，也只能用上一个，多了没用。
         bossGroup = new NioEventLoopGroup(1);
+        int cpuCount = Runtime.getRuntime().availableProcessors();
+        workerGroup = new NioEventLoopGroup(cpuCount << 1 + 1);
 
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap.group(bossGroup, workerGroup)

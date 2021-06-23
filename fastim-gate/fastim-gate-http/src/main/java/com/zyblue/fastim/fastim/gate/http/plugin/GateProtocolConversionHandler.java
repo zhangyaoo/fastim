@@ -4,15 +4,16 @@ import com.zyblue.fastim.fastim.gate.http.plugin.chain.HttpHandlerContext;
 import com.zyblue.fastim.fastim.gate.http.pojo.InterfaceMetadata;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.handler.codec.http.*;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.DefaultHttpRequest;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.rpc.service.GenericService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 
@@ -25,9 +26,6 @@ import java.util.concurrent.CompletableFuture;
 public class GateProtocolConversionHandler implements GatePluginHandler{
 
     private final static Logger logger = LoggerFactory.getLogger(GateProtocolConversionHandler.class);
-
-    @Resource(name = "nioThreadPool")
-    private NioEventLoopGroup workerGroup;
 
     private final ReferenceConfig<GenericService> reference = new ReferenceConfig<>();
 
@@ -42,9 +40,7 @@ public class GateProtocolConversionHandler implements GatePluginHandler{
         GenericService genericService = reference.get();
         CompletableFuture<Object> future = genericService.$invokeAsync(interfaceMetadata.getMethodName(),
                 interfaceMetadata.getParameterTypes(), interfaceMetadata.getParams());
-        /*
-         * TODO 请求和响应如何保证是同一条线程？
-         */
+
         future.whenCompleteAsync((result, throwable) -> {
             HttpResponseStatus status = HttpResponseStatus.OK;
             if(throwable != null){
@@ -54,7 +50,7 @@ public class GateProtocolConversionHandler implements GatePluginHandler{
             ByteBuf buf = Unpooled.wrappedBuffer("result".getBytes(StandardCharsets.UTF_8));
             DefaultFullHttpResponse defaultHttpResponse = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, status, buf);
             response(context, request, defaultHttpResponse);
-        }, workerGroup);
+        }, context.getChannelHandlerContext().executor());
     }
 
     /**

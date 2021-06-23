@@ -47,6 +47,10 @@ public class HttpHandlerContext {
         if (this.prev != null) {
             this.prev.handler.response(this, request, response);
         }else {
+            /*
+             * ctx.writeAndFlush  直接走到下一个outbound handler
+             * channel.writeAndFlush 从末尾开始倒着向前挨个路过pipeline中的所有outbound handlers
+             */
             channelHandlerContext.writeAndFlush(response);
             int refCnt = response.refCnt();
             if(refCnt > 0){
@@ -65,5 +69,9 @@ public class HttpHandlerContext {
 
     public void setChannelHandlerContext(ChannelHandlerContext channelHandlerContext) {
         this.channelHandlerContext = channelHandlerContext;
+    }
+
+    public ChannelHandlerContext getChannelHandlerContext() {
+        return channelHandlerContext;
     }
 }

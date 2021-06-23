@@ -45,3 +45,6 @@ https://www.jianshu.com/p/1346f7fb6442 网关基于Netty在Http协议的实践
 https://mp.weixin.qq.com/s/XS1_dSDqebUL85gtJn-DeA 喜马拉雅网关实践
 http://www.linkedkeeper.com/detail/blog.action?bid=1065  京麦网关实践
 https://mp.weixin.qq.com/s/67qc-xN-LtVvAtYTS0Fr8A 知乎长连接网关
+http://www.52im.net/thread-3539-1-1.html 爱奇艺WebSocket实时推送网关技术实践
+http://www.52im.net/thread-166-1-1.html 基于Netty实现海量接入的推送服务技术要点
+http://www.52im.net/thread-1548-1-1.html 京东到家基于Netty的WebSocket应用实践分享
