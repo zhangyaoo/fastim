@@ -3,6 +3,9 @@ https://gitee.com/drunk_and_happy/oss/raw/master/mypic/IM%E6%9E%B6%E6%9E%841.png
 https://gitee.com/drunk_and_happy/oss/raw/master/mypic/IM%E6%9E%B6%E6%9E%842.jpg
 
 IM架构文章
+https://juejin.cn/post/6844903555489333261  即时通讯IM技术领域基础篇
+https://juejin.cn/post/6844903555493527565  即时通讯IM技术领域提高篇
+https://www.codedump.info/post/20190608-im-design-base/   IM服务器设计-基础
 http://www.52im.net/thread-812-1-1.html  IM架构设计实践
 http://www.52im.net/forum.php?mod=viewthread&tid=3472&ctid=7 分布式IM系统设计
 http://www.52im.net/thread-300-1-1.html 58到家消息系统的架构设计
@@ -19,7 +22,7 @@ http://www.52im.net/thread-280-1-1.html IM该如何设计“失败重试”机�
 
 IM消息同步实现
 http://www.52im.net/thread-1230-1-1.html  消息的同步和存储方案
-http://www.52im.net/thread-714-1-1.html  保证IM实时消息的“时序性”与“一致性”
+http://www.52im.net/thre**ad-714-1-1.html  保证IM实时消息的“时序性”与“一致性”
 
 IM消息时序性
 http://www.52im.net/thread-866-1-1.html 简单时序性保证
@@ -33,8 +36,12 @@ http://www.52im.net/thread-1616-1-1.html
 
 IM万人群聊实践
 http://mp.weixin.qq.com/s/LT2dASI7QVpcOVxDAsMeVg
+
 已读未读功能在存储空间方面的实现思路
 http://www.52im.net/forum.php?mod=viewthread&tid=3054&extra=page%3D3%26filter%3Dtypeid%26typeid%3D37
+
+分布式ID生成策略
+http://www.52im.net/forum.php?mod=viewthread&tid=2747&highlight=%CF%FB%CF%A2ID  融云IM产品的聊天消息ID生成策略
 
 协议
 http://www.52im.net/thread-298-1-1.html 58到家实时消息系统的协议设计
@@ -48,3 +55,4 @@ https://mp.weixin.qq.com/s/67qc-xN-LtVvAtYTS0Fr8A 知乎长连接网关
 http://www.52im.net/thread-3539-1-1.html 爱奇艺WebSocket实时推送网关技术实践
 http://www.52im.net/thread-166-1-1.html 基于Netty实现海量接入的推送服务技术要点
 http://www.52im.net/thread-1548-1-1.html 京东到家基于Netty的WebSocket应用实践分享
+https://www.codedump.info/post/20190818-im-msg-gate/  IM服务器设计-网关接入层
