@@ -1,6 +1,5 @@
 package com.zyblue.fastim.fastim.gate.tcp.server;
 
-import com.zyblue.fastim.fastim.gate.tcp.handler.DynamicDecodeHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 
 /**
  * IMServer生命周期跟随spring
@@ -30,16 +30,14 @@ public class FastImServer {
 
     private NioEventLoopGroup bossGroup;
 
+    @Resource(name = "nioEventLoopGroup")
     private NioEventLoopGroup workerGroup;
 
     private Channel serverChannel;
 
     @PostConstruct
     public void start() {
-        int cpuCount = Runtime.getRuntime().availableProcessors();
-        logger.info("cpuCount:{}", cpuCount);
-        bossGroup = new NioEventLoopGroup(cpuCount);
-        workerGroup = new NioEventLoopGroup(cpuCount << 1 + 1);
+        bossGroup = new NioEventLoopGroup(1);
 
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap.group(bossGroup, workerGroup)
@@ -66,7 +64,7 @@ public class FastImServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>(){
                     @Override
                     protected void initChannel(NioSocketChannel channel){
-                        channel.pipeline().addLast(new DynamicDecodeHandler());
+                        //channel.pipeline().addLast(new DynamicDecodeHandler());
                     }
                 });
         bind(serverBootstrap, nettyPort);

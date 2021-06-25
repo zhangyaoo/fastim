@@ -1,12 +1,9 @@
 package com.zyblue.fastim.fastim.gate.tcp.handler;
 
-import com.zyblue.fastim.common.redis.RedisKey;
-import com.zyblue.fastim.fastim.gate.tcp.util.SpringBeanFactory;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.StringRedisTemplate;
 
 
 public class AuthHandler extends ChannelInboundHandlerAdapter {
@@ -22,14 +19,6 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
         logger.info("channelRead");
-        StringRedisTemplate stringRedisTemplate = SpringBeanFactory.getBean(StringRedisTemplate.class);
-        String token = stringRedisTemplate.opsForValue().get(RedisKey.FASTIM_TOKEN + 9527);
-        logger.info("token:{}", token);
-
-        if(null == token){
-            channelHandlerContext.channel().close();
-        }
-        super.channelRead(channelHandlerContext, o);
     }
 
     @Override

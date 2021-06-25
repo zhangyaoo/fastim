@@ -39,7 +39,7 @@
 
         <dependency>
             <groupId>org.apache.curator</groupId>
-            <artifactId>curator-recipes</artifactId>
+            <artifactId>curator-framework</artifactId>
         </dependency>
     </dependencies>
 
