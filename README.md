@@ -68,7 +68,7 @@ IM协议采用二进制定长包头和变长包体来实现客户端和服务端
 
 ### 6. 消息管理
 一个正常的消息流转需要如图所示的流程：
-![IM核心流程图](https://github.com/zhangyaoo/fastim/blob/master/pic/IM-pic1.jpg)
+![IM核心流程图](https://github.com/zhangyaoo/fastim/blob/master/pic/IM-pic1.png)
 
 1. 客户端A发送请求包R
 2. server将消息存储到DB
