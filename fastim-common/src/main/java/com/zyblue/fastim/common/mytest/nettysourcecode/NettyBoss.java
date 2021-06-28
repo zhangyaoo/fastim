@@ -73,7 +73,7 @@ public class NettyBoss {
             // 设置为非阻塞
             channel.configureBlocking(false);
             // 获取一个worker
-            NettyWork nextworker = threadHandle.workeres[Math.abs(threadHandle.workerIndex.getAndIncrement() % threadHandle.workeres.length)];
+            NettyWork nextworker = ThreadHandle.workeres[Math.abs(threadHandle.workerIndex.getAndIncrement() % ThreadHandle.workeres.length)];
             // 注册新客户端接入任务
             Runnable runnable = () -> {
                 try {

@@ -141,7 +141,7 @@ IM协议采用二进制定长包头和变长包体来实现客户端和服务端
 ##### 8.1.1 设计方案：
 参考[基于Netty的长连接网关设计与实现](https://github.com/zhangyaoo/fastim/blob/master/fastim-gate/fastim-gate-tcp/README.md)
 
-notify包的数据经网关的流程图：
+一个Notify包的数据经网关的线程模型流程图：
 ![TCP网关线程模型](https://github.com/zhangyaoo/fastim/blob/master/pic/TCP-Gate-ThreadModel.png)
 
 

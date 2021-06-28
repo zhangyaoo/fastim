@@ -14,12 +14,12 @@ public class ThreadHandle {
     public static NettyWork[] workeres;
 
     public ThreadHandle(ExecutorService boss, ExecutorService work) {
-        this.bosses = new NettyBoss[1];
+        bosses = new NettyBoss[1];
         //初始化boss线程池
         for (int i = 0; i < bosses.length; i++) {
             bosses[i] = new NettyBoss(boss,this);
         }
-        this.workeres = new NettyWork[Runtime.getRuntime().availableProcessors() * 2];
+        workeres = new NettyWork[Runtime.getRuntime().availableProcessors() * 2];
         //初始化work线程池
         for (int i = 0; i < workeres.length; i++) {
             workeres[i] = new NettyWork(work);
