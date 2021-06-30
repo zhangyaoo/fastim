@@ -40,7 +40,7 @@
 ## 四、系统设计
 ### 1. IM架构图
 基于可扩展性高可用原则，把网络层、业务逻辑层、数据层分离，并且支持分布式部署
-![IM架构图](https://github.com/zhangyaoo/fastim/blob/master/pic/architecture.jpg)
+![IM架构图](https://github.com/zhangyaoo/fastim/blob/master/pic/architecture.png)
 
 ### 2. 架构设计
 #### 2.0 CLIENT设计：
@@ -204,7 +204,7 @@ IM协议采用二进制定长包头和变长包体来实现客户端和服务端
 参考[基于Netty的API网关设计与实现](https://github.com/zhangyaoo/fastim/blob/master/fastim-gate/fastim-gate-http/README.md)
 
 一个请求包的数据经网关的架构图：
-![网关的架构图](https://github.com/zhangyaoo/fastim/blob/master/pic/HTTP-gate.png.png)
+![网关的架构图](https://github.com/zhangyaoo/fastim/blob/master/pic/HTTP-gate.png)
 
 ### 9. 业务优化
 
