@@ -42,20 +42,10 @@ public class FastImServer {
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
-                // TODO 长连接TTL
-                // 给服务器端连接请求队列中队列的大小,达到上限则不进行新的tcp连接
                 .option(ChannelOption.SO_BACKLOG, 1024)
-                // 客户端连接是否长连接
                 .childOption(ChannelOption.SO_KEEPALIVE, true)
-                // 客户端连接开启Nagle算法，true表示关闭，false表示开启   高实时性就关闭，否则开启
-                /*
-                 * 其他TCP参数详解：
-                 * SO_SNDBUF 发送缓冲区大小
-                 * 缓冲区太小，会降低TCP吞吐量，无法高效利用网络带宽，导致通信延迟升高；缓冲区太大，会导致TCP连接内存占用高以及受限于带宽时延积的瓶颈，从而造成内存浪费。Linux系统可以自动进行动态调节，所以不要轻易设置TCP缓冲区大小
-                 */
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .handler(new ChannelInitializer<NioServerSocketChannel>() {
-                    // handler供boss使用，childHandler供worker使用
                     @Override
                     protected void initChannel(NioServerSocketChannel ch) {
                         logger.info("服务端启动中");
