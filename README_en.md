@@ -1,7 +1,7 @@
 ## FastIM
 > 🚀 Based on Netty's highly available distributed instant messaging system, it supports long-connected gateway management, single chat, group chat, login log-out, chat history query, offline message storage, message push, heartbeat, distributed unique ID,redpacket, message synchronization, and roaming, supporting the distributed architecture of cluster deployment.
 
-[Chinese中文文档](https://github.com/zhangyaoo/fastim/blob/master/README_zh.md)
+[Chinese中文文档](https://github.com/zhangyaoo/fastim/blob/master/README.md)
 
 ## Project Structure
 - fastim-logic:logical services such as single chat, group chat, red envelope, offline, and other business logic
@@ -21,7 +21,7 @@
 * [x] IM table structure design
 * [ ] The TCP gateway design implementation
 * [ ] HTTP gateway design implementation
-* [ ] Communication protocol design
+* [ ] Communication protocol design and protobuf serialize
 * [ ] Single chat, group chat
 * [ ] The heartbeat is alive
 * [ ] Chat history storage and queries

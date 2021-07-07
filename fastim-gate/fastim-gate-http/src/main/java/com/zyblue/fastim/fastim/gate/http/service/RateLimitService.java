@@ -1,11 +1,7 @@
 package com.zyblue.fastim.fastim.gate.http.service;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author will
@@ -22,10 +18,5 @@ public class RateLimitService {
      * key：用户ID
      * value：计数器
      */
-    private final Cache<String, Integer> cache = CacheBuilder.newBuilder()
-            .expireAfterWrite(limit, TimeUnit.SECONDS).build();
-
-    public void a(){
-        //RateLimiter.create()
-    }
+    //private final Cache<String, Integer> cache = CacheBuilder.newBuilder().expireAfterWrite(limit, TimeUnit.SECONDS).build();
 }

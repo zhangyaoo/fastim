@@ -1,6 +1,10 @@
 package com.zyblue.fastim.fastim.gate.tcp.server;
 
+import com.zyblue.fastim.fastim.gate.tcp.codec.MyFastImDecoder;
+import com.zyblue.fastim.fastim.gate.tcp.codec.MyFastImEncoder;
+import com.zyblue.fastim.fastim.gate.tcp.handler.FastImServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -45,6 +49,7 @@ public class FastImServer {
                 .option(ChannelOption.SO_BACKLOG, 1024)
                 .childOption(ChannelOption.SO_KEEPALIVE, true)
                 .childOption(ChannelOption.TCP_NODELAY, true)
+                .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
                 .handler(new ChannelInitializer<NioServerSocketChannel>() {
                     @Override
                     protected void initChannel(NioServerSocketChannel ch) {
@@ -54,7 +59,10 @@ public class FastImServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>(){
                     @Override
                     protected void initChannel(NioSocketChannel channel){
-                        //channel.pipeline().addLast(new DynamicDecodeHandler());
+                        channel.pipeline()
+                                .addLast(new MyFastImEncoder())
+                                .addLast(new MyFastImDecoder())
+                                .addLast(new FastImServerHandler());
                     }
                 });
         bind(serverBootstrap, nettyPort);

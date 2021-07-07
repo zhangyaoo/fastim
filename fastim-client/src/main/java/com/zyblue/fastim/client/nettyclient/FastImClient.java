@@ -3,7 +3,6 @@ package com.zyblue.fastim.client.nettyclient;
 import com.zyblue.fastim.client.handler.FastImClientHandler;
 import com.zyblue.fastim.common.codec.Invocation;
 import com.zyblue.fastim.common.codec.InvocationType;
-import com.zyblue.fastim.common.protobuf.InvocationRequestProto;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -11,7 +10,6 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
@@ -79,7 +77,7 @@ public class FastImClient {
                                  */
                                 .addLast(new IdleStateHandler(60, 0, 0))
                                 .addLast(new ProtobufVarint32FrameDecoder())
-                                .addLast(new ProtobufDecoder(InvocationRequestProto.InvocationReqProto.getDefaultInstance()))
+                                //.addLast(new ProtobufDecoder(InvocationRequestProto.InvocationReqProto.getDefaultInstance()))
                                 .addLast(new ProtobufVarint32LengthFieldPrepender())
                                 .addLast(new ProtobufEncoder())
                                 .addLast(new FastImClientHandler());
