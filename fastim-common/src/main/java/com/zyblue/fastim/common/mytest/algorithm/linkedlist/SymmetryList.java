@@ -2,7 +2,7 @@ package com.zyblue.fastim.common.mytest.algorithm.linkedlist;
 
 /**
  * 判断是否是回文链表
- * Author : BlueSky 2019.12.24
+ * Author : will 2019.12.24
  * 要求：O(n) 时间复杂度和 O(1) 空间复杂度
  *
  * 输入: 1->2->2->1

@@ -1,17 +1,12 @@
 package com.zyblue.fastim.common.codec;
 
-import com.zyblue.fastim.common.constant.ConstantValue;
+import com.zyblue.fastim.common.constant.CommonConstant;
 
 /**
  * @author will
  * @date 2021/7/6 15:30
  */
 public class FastImProtocol {
-    /**
-     * 消息的开头的信息标志
-     */
-    private final int headData = ConstantValue.HEAD_DATA;
-
     /**
      * 版本
      */
@@ -43,17 +38,15 @@ public class FastImProtocol {
     private byte dataType;
 
     /**
-     * 消息的长度
-     */
-    private int dataLength;
-
-    /**
      * 消息的内容
      */
-    private Object data;
+    private byte[] data;
 
-    public int getHeadData() {
-        return headData;
+    public byte getHeadData() {
+        /*
+         * 消息的开头的信息标志
+         */
+        return CommonConstant.Protocol.HEAD_DATA;
     }
 
     public int getVersion() {
@@ -104,19 +97,11 @@ public class FastImProtocol {
         this.dataType = dataType;
     }
 
-    public int getDataLength() {
-        return dataLength;
-    }
-
-    public void setDataLength(int dataLength) {
-        this.dataLength = dataLength;
-    }
-
-    public Object getData() {
+    public byte[] getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(byte[] data) {
         this.data = data;
     }
 }

@@ -1,12 +1,10 @@
 package com.zyblue.fastim.common.pojo.request;
 
-import java.io.Serializable;
-
 /**
  * @author will
  * @date 2021/4/30 10:53
  */
-public class MsgRequest implements Serializable {
+public class MsgRequest{
 
     private String token;
 

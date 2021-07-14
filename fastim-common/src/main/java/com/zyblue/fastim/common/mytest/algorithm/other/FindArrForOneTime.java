@@ -2,7 +2,7 @@ package com.zyblue.fastim.common.mytest.algorithm.other;
 
 /**
  * 找出数组中唯一的一个出现一次数字的,并且其他数字都只出现了两次
- * Author : BlueSky 2019.11.05
+ * Author : will 2019.11.05
  * 思路与或运算
  *      int a = 5; // 0000 0101
  *     int b = 3; // 0000 0011

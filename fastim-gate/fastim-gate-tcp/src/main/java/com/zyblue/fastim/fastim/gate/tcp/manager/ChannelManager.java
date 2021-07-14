@@ -1,6 +1,7 @@
 package com.zyblue.fastim.fastim.gate.tcp.manager;
 
-import com.zyblue.fastim.common.codec.Invocation;
+import com.zyblue.fastim.common.codec.FastImProtocol;
+import com.zyblue.fastim.common.util.ProtoStuffUtils;
 import io.netty.channel.Channel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.springframework.stereotype.Component;
@@ -46,7 +47,7 @@ public class ChannelManager {
     /**
      * 向指定用户发送消息
      */
-    public void send(Long userId, Invocation<?> invocation) {
+    public <T> void send(Long userId, FastImProtocol protocol, T msg) {
         Channel channel = getChannels(userId).get(userId);
         if (channel == null) {
             return;
@@ -54,24 +55,26 @@ public class ChannelManager {
         if (!channel.isActive()) {
             return;
         }
-        channel.writeAndFlush(invocation);
+        protocol.setData(ProtoStuffUtils.serialize(msg));
+        channel.writeAndFlush(protocol);
     }
 
     /**
      * 向所有用户发送消息
      */
-    public void sendAll(Invocation<?> invocation) {
+    public <T> void sendAll(FastImProtocol protocol, T msg) {
+        protocol.setData(ProtoStuffUtils.serialize(msg));
         for (Channel channel : channelsA.values()) {
             if (!channel.isActive()) {
                 return;
             }
-            channel.writeAndFlush(invocation);
+            channel.writeAndFlush(protocol);
         }
         for (Channel channel : channelsB.values()) {
             if (!channel.isActive()) {
                 return;
             }
-            channel.writeAndFlush(invocation);
+            channel.writeAndFlush(protocol);
         }
     }
 }

@@ -2,7 +2,7 @@ package com.zyblue.fastim.common.mytest.algorithm.sort;
 
 /**
  *  快速排序
- *  Author : BlueSky 2019.11.08
+ *  Author : will 2019.11.08
  *  思路：
  *  1、排序数组中下标从 p 到 r 之间的一组数据，选择 p 到 r 之间的任意一个数据作为 partitionPoint（分区点）。
  *  2、遍历 p 到 r 之间的数据，将小于 partitionPoint 的放到左边，将大于 partitionPoint 的放到右边，将 partitionPoint 放到中间。

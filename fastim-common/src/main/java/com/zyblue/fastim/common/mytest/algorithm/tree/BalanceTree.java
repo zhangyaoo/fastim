@@ -2,7 +2,7 @@ package com.zyblue.fastim.common.mytest.algorithm.tree;
 
 /**
  * 判断是否是平衡二叉树
- * Author : BlueSky 2019.11.14
+ * Author : will 2019.11.14
  * 平衡二叉树定义：左子树和右子树的高度相差值小于1
  * 思路一：
  * 1、遍历每个结点，借助一个获取树深度的递归函数

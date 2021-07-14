@@ -2,7 +2,7 @@ package com.zyblue.fastim.common.mytest.algorithm.array;
 
 /**
  * 循数组实现循环队列
- * Author : BlueSky 2019.11.05
+ * Author : will 2019.11.05
  * 思路：
  * 1、循环队列和非循环队列类似，但是要注意队列空和队列满的情况
  * 2、队列空 tail = head

@@ -1,66 +1,55 @@
 package com.zyblue.fastim.client.service.impl;
 
-import com.zyblue.fastim.client.nettyclient.FastImClient;
 import com.zyblue.fastim.client.service.BizService;
-import com.zyblue.fastim.common.codec.Invocation;
 import com.zyblue.fastim.common.pojo.BaseResponse;
 import com.zyblue.fastim.common.pojo.request.LoginRequest;
-import com.zyblue.fastim.common.pojo.request.MsgRequest;
+import com.zyblue.fastim.common.pojo.request.LogoutRequest;
 import com.zyblue.fastim.common.pojo.request.RegisterRequest;
 import com.zyblue.fastim.common.pojo.response.LoginResponse;
+import com.zyblue.fastim.common.pojo.response.LogoutResponse;
 import com.zyblue.fastim.common.pojo.response.RegisterResponse;
-import com.zyblue.fastim.common.url.UrlConstant;
-import com.zyblue.fastim.common.util.HttpUtil;
-import com.zyblue.fastim.common.util.JacksonUtils;
-import io.netty.channel.ChannelFuture;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
+import com.zyblue.fastim.common.constant.UrlConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.client.RestTemplate;
 
 @Service
-public class BizServiceImpl implements BizService {
+public class BizServiceImpl implements BizService{
     private final static Logger logger = LoggerFactory.getLogger(BizServiceImpl.class);
 
-    @Value("${gate.url}")
+    @Value("${http.gate.url}")
     private String gateUrl;
 
-    @Value("${gate.port}")
+    @Value("${http.gate.port}")
     private Integer gatePort;
 
     @Autowired
-    private FastImClient client;
+    private RestTemplate restTemplate;
 
     @Override
-    public BaseResponse<RegisterResponse> register(RegisterRequest request) {
+    public BaseResponse<?> register(RegisterRequest request) {
         logger.info("register|request:{}", request);
 
-        RegisterResponse registerResponse = null;
+        RegisterResponse registerResponse;
         try {
-            String body = HttpUtil.doPost(gateUrl + ":" + gatePort + UrlConstant.Gate.REGISTER, request);
-            BaseResponse<?> baseResponse = JacksonUtils.json2pojo(body, BaseResponse.class);
-            logger.info("baseResponse:{}", baseResponse);
-            registerResponse  = JacksonUtils.json2pojo(baseResponse.getData().toString(), RegisterResponse.class);
+            registerResponse = restTemplate.postForObject(gateUrl + ":" + gatePort + UrlConstant.Gate.REGISTER, request, RegisterResponse.class);
         }catch (Exception e){
             logger.error("error:", e);
+            return new BaseResponse<>(500, "failed", null);
         }
         return new BaseResponse<>(200, "success", registerResponse);
     }
 
     @Override
-    public BaseResponse<LoginResponse> login(LoginRequest request) {
+    public BaseResponse<?> login(LoginRequest request) {
         logger.info("login|request:{}", request);
 
         LoginResponse loginResponse;
         try {
-            String body = HttpUtil.doPost(gateUrl + ":" + gatePort + UrlConstant.Gate.LOGIN, request);
-            BaseResponse<?> baseResponse = JacksonUtils.json2pojo(body, BaseResponse.class);
-            logger.info("baseResponse:{}", baseResponse);
-            loginResponse  = JacksonUtils.json2pojo(baseResponse.getData().toString(), LoginResponse.class);
+            loginResponse = restTemplate.postForObject(gateUrl + ":" + gatePort + UrlConstant.Gate.LOGIN, request, LoginResponse.class);
         }catch (Exception e){
             logger.error("error:", e);
             return new BaseResponse<>(500, "failed", null);
@@ -69,46 +58,16 @@ public class BizServiceImpl implements BizService {
     }
 
     @Override
-    public BaseResponse<?> logout() {
-        return null;
-    }
+    public BaseResponse<?> logout(LogoutRequest request) {
+        logger.info("login|logout:{}", request);
 
-    @Override
-    public BaseResponse<?> sendMsg(MsgRequest request) {
-        logger.info("sendMsgTest|request:{}", request);
-
-        // (1) 尝试socket发送
-        ChannelFuture future = client.send(request);
-        future.addListener(new GenericFutureListener() {
-            @Override
-            public void operationComplete(Future future) throws Exception {
-                Invocation<?> invocation = JacksonUtils.obj2pojo(future.get(), Invocation.class);
-                Object message = invocation.getMessage();
-                BaseResponse<?> response = JacksonUtils.obj2pojo(message, BaseResponse.class);
-                logger.info("response:{}", response);
-            }
-        });
-
-        // (2) 尝试http发送
-        BaseResponse<?> response;
+        LogoutResponse logoutResponse;
         try {
-            String body = HttpUtil.doPost(gateUrl + ":" + gatePort + UrlConstant.Biz.MSG1, request);
-            response = JacksonUtils.json2pojo(body, BaseResponse.class);
-            logger.info("response:{}", response);
+            logoutResponse = restTemplate.postForObject(gateUrl + ":" + gatePort + UrlConstant.Gate.LOGOUT, request, LogoutResponse.class);
         }catch (Exception e){
             logger.error("error:", e);
             return new BaseResponse<>(500, "failed", null);
         }
-        return new BaseResponse<>(200, "success", response);
-    }
-
-    @Override
-    public BaseResponse<?> getOfflineMsg() {
-        return null;
-    }
-
-    @Override
-    public BaseResponse<?> onMsgRecieved() {
-        return null;
+        return new BaseResponse<>(200, "success", logoutResponse);
     }
 }

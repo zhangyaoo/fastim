@@ -2,7 +2,7 @@ package com.zyblue.fastim.common.mytest.algorithm.linkedlist;
 
 /**
  * 链表是否有环
- * Author : BlueSky 2019.10.29
+ * Author : will 2019.10.29
  * 思路：利用快慢指针
  */
 public class RingLinkedList {

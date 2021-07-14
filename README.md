@@ -6,7 +6,7 @@
 - fastim-client：客户端逻辑实现，实现发送消息、断线重连、SDK包等功能
 - fastim-gate-tcp：HTTP API网关实现，实现限流降级、版本路由、openAPI管理、协议转换、泛化调用等功能
 - fastim-gate-http：长连接TCP网关实现，实现自定义协议、channel管理、心跳检测、泛化调用等功能
-- fastim-leaf：分布式ID实现，基于zookeeper的实现或者完全基于内存的实现
+- fastim-leaf：分布式ID实现，基于zookeeper的实现或基于redis实现或完全基于内存的实现
 - fastim-router：路由逻辑服务，主要负责消息的路由转发，以及客户端在线状态的维护
 - fastim-common：共用类，主要是实体类和工具类的存放
 - fastim-lsb：LSB service，提供接入层IP和port来进行负载均衡的连接
@@ -47,6 +47,17 @@
 1. client每个设备会在本地存每一个会话，保留有最新一条消息的顺序 ID
 2. 为了避免client宕机，也就是退出应用，保存在内存的消息ID丢失，会存到本地的文件中
 3. client需要在本地维护一个等待ack队列，并配合timer超时机制，来记录哪些消息没有收到ack：N，以定时重发。
+4. 客户端本地生成一个递增序列号发送给服务器，用作保证发送顺序性。该序列号还用作ack队列收消息时候的移除。
+
+##### 2.0.0 客户端序列号设计
+![客户端序列号](https://github.com/zhangyaoo/fastim/blob/master/pic/sequenceId.png)
+
+基于以下考虑：
+- 发送消息速率不是非常快，可以设计成每秒并发4个消息
+- 数据传输中的大小尽量小用int，不用long
+- 只保证递增即可
+说明：上述生成器可以用18年[(2^29-1)/3600/24/365]左右，并且每秒并发4个消息
+
 
 #### 2.1 LSB设计：
 1. 接入层的高可用、负载均衡、扩展性全部在这里面做

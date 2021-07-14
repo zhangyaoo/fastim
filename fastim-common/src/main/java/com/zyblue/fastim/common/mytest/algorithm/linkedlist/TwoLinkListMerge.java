@@ -2,7 +2,7 @@ package com.zyblue.fastim.common.mytest.algorithm.linkedlist;
 
 /**
  * 两个有序链表合并
- * Author : BlueSky 2019.10.29
+ * Author : will 2019.10.29
  * Function : 两个有序链表合并为一个新的有序链表并返回
  * Example:
  *  输入：1->2->4, 1->3->4

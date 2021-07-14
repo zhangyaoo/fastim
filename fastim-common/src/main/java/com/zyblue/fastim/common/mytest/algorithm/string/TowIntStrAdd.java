@@ -2,7 +2,7 @@ package com.zyblue.fastim.common.mytest.algorithm.string;
 
 /**
  * 两个整数字符串相加，要求不能转换为整数，返回值还是字符串
- * Author : BlueSky 2019.12.18
+ * Author : will 2019.12.18
  *
  * 思路：
  * 1、如果两个字符串长度不同，那么长度小的用0来补齐高位

@@ -1,6 +1,6 @@
 package com.zyblue.fastim.common.pojo.response;
 
-import com.zyblue.fastim.common.ServerInfo;
+import com.zyblue.fastim.common.pojo.ServerInfo;
 
 import java.io.Serializable;
 

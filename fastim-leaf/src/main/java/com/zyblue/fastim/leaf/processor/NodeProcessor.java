@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 /**
  * 获取workerId
- * @author blueSky
+ * @author will
  */
 @Component
 public class NodeProcessor {
@@ -75,6 +75,10 @@ public class NodeProcessor {
 
     @PostConstruct
     public void init(){
+        if(curatorFramework == null){
+            return;
+        }
+
         try {
             String hostAddress = InetAddress.getLocalHost().getHostAddress();
             /*

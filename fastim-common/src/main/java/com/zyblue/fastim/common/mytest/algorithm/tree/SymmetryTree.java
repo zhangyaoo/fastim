@@ -2,7 +2,7 @@ package com.zyblue.fastim.common.mytest.algorithm.tree;
 
 /**
  * 判断是否是对称二叉树
- * Author : BlueSky 2019.11.14
+ * Author : will 2019.11.14
  * 例如
  *    1
  *   / \

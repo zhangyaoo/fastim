@@ -3,7 +3,7 @@ package com.zyblue.fastim.common.mytest.algorithm.array;
 
 /**
  * 数组实现队列
- * Author : BlueSky 2019.11.01
+ * Author : will 2019.11.01
  * 思路：
  * 1、利用双指针分别指向头结点和尾结点来控制先进先出的特性。
  * 2、每次出队操作，将后面的数据向前移一位，来解决头和尾指针向后移动以至于不能插入新数据的问题，但是时间复杂度比较高，出队时间复杂度会由O(1) 变为 O(n)，不建议采用。

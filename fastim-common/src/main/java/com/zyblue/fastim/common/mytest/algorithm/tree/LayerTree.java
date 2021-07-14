@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 /**
  * 层序遍历二叉树
- * Author : BlueSky 2019.11.15
+ * Author : will 2019.11.15
  * 思路：利用队列实现
  */
 public class LayerTree {

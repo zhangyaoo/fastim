@@ -7,7 +7,7 @@ import java.util.Stack;
 
 /**
  * 非递归方式中序遍历二叉树
- * Author : BlueSky 2019.12.09
+ * Author : will 2019.12.09
  */
 public class ForeachTreeUseNoRecursion {
 

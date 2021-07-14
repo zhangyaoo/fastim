@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * 归并排序
- * Author : BlueSky 2019.11.07
+ * Author : will 2019.11.07
  * 思路:递归
  * 1、写出递推公式：merge_sort(p…r) = merge(merge_sort(p…q), merge_sort(q+1…r))
  * 2、判断终止条件：head >= tail

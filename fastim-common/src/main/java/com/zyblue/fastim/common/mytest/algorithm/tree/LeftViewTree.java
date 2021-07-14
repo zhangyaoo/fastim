@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 树的左视图
- * @Author : BlueSky 2019.12.23
+ * @Author : will 2019.12.23
  *        4
  *     2     6
  *   1  3  5  7

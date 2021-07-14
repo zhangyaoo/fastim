@@ -2,7 +2,7 @@ package com.zyblue.fastim.common.mytest.algorithm.linkedlist;
 
 /**
  * 单链表反转
- * Author : BlueSky 2019.10.29
+ * Author : will 2019.10.29
  * Function：把每个节点的指针域由原来的指向下一个节点变为指向其前一个节点
  * Example:
  *  输入: 1->2->3->4->5->NULL

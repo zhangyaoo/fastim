@@ -1,8 +1,8 @@
 package com.zyblue.fastim.fastim.gate.tcp.server;
 
-import com.zyblue.fastim.fastim.gate.tcp.codec.MyFastImDecoder;
-import com.zyblue.fastim.fastim.gate.tcp.codec.MyFastImEncoder;
-import com.zyblue.fastim.fastim.gate.tcp.handler.FastImServerHandler;
+import com.zyblue.fastim.fastim.gate.tcp.handler.codec.MyFastImDecoder;
+import com.zyblue.fastim.fastim.gate.tcp.handler.codec.MyFastImEncoder;
+import com.zyblue.fastim.fastim.gate.tcp.handler.gate.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
@@ -43,6 +43,12 @@ public class FastImServer {
     public void start() {
         bossGroup = new NioEventLoopGroup(1);
 
+        GateLimitHandler gateLimitHandler = new GateLimitHandler();
+        GateServiceSelfProtectHandler gateServiceSelfProtectHandler = new GateServiceSelfProtectHandler();
+        GateDynamicRouteHandler gateDynamicRouteHandler = new GateDynamicRouteHandler();
+        GateProtocolConversionHandler gateProtocolConversionHandler = new GateProtocolConversionHandler();
+        GateServiceTimeoutHandler gateServiceTimeoutHandler = new GateServiceTimeoutHandler();
+
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
@@ -62,7 +68,12 @@ public class FastImServer {
                         channel.pipeline()
                                 .addLast(new MyFastImEncoder())
                                 .addLast(new MyFastImDecoder())
-                                .addLast(new FastImServerHandler());
+                                .addLast(new GateAuthHandler())
+                                .addLast(gateLimitHandler)
+                                .addLast(gateServiceSelfProtectHandler)
+                                .addLast(gateDynamicRouteHandler)
+                                .addLast(gateProtocolConversionHandler)
+                                .addLast(gateServiceTimeoutHandler);
                     }
                 });
         bind(serverBootstrap, nettyPort);

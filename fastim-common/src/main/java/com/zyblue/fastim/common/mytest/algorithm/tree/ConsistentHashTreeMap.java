@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 /**
  * Treemap实现一致性hash算法
- * Author : BlueSky 2019.11.18
+ * Author : will 2019.11.18
  * function：主要利用了红黑树的tailMap（key）方法，找到比key大的map集合
  */
 public class ConsistentHashTreeMap {

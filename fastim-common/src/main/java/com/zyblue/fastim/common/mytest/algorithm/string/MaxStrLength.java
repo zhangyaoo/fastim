@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * 最大字符串长度
- * Author : BlueSky 2019.11.05
+ * Author : will 2019.11.05
  * exe:  asddww  asd 3         pwwkew wke 3
  */
 public class MaxStrLength {
