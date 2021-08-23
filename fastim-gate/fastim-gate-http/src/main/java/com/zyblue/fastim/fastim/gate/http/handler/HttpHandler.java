@@ -22,6 +22,7 @@ public class HttpHandler extends SimpleChannelInboundHandler<DefaultHttpRequest>
          * 1、可以利用netty本身责任链的实现
          * 2、可以利用自己实现的一个自定义责任链
          */
+        
         chain.process(channelHandlerContext, httpRequest);
     }
 }

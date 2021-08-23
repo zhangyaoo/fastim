@@ -12,6 +12,9 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
+import io.netty.util.concurrent.DefaultThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,8 +44,11 @@ public class FastImServer {
 
     @PostConstruct
     public void start() {
-        bossGroup = new NioEventLoopGroup(1);
+        bossGroup = new NioEventLoopGroup(1, new DefaultThreadFactory("boss"));
 
+        LoggingHandler loggingHandler = new LoggingHandler(LogLevel.INFO);
+        GateAuthHandler gateAuthHandler = new GateAuthHandler();
+        GateMetricsHandler gateMetricsHandler = new GateMetricsHandler();
         GateLimitHandler gateLimitHandler = new GateLimitHandler();
         GateServiceSelfProtectHandler gateServiceSelfProtectHandler = new GateServiceSelfProtectHandler();
         GateDynamicRouteHandler gateDynamicRouteHandler = new GateDynamicRouteHandler();
@@ -66,9 +72,11 @@ public class FastImServer {
                     @Override
                     protected void initChannel(NioSocketChannel channel){
                         channel.pipeline()
-                                .addLast(new MyFastImEncoder())
-                                .addLast(new MyFastImDecoder())
-                                .addLast(new GateAuthHandler())
+                                .addLast("fastImEncoder" ,new MyFastImEncoder())
+                                .addLast("fastImDecoder", new MyFastImDecoder())
+                                .addLast(gateMetricsHandler)
+                                .addLast(loggingHandler)
+                                .addLast(gateAuthHandler)
                                 .addLast(gateLimitHandler)
                                 .addLast(gateServiceSelfProtectHandler)
                                 .addLast(gateDynamicRouteHandler)

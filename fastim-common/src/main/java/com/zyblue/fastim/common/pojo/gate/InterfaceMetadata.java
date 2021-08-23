@@ -1,4 +1,4 @@
-package com.zyblue.fastim.fastim.gate.http.pojo;
+package com.zyblue.fastim.common.pojo.gate;
 
 /**
  * @author will

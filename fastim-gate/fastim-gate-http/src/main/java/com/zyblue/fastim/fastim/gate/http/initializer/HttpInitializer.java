@@ -18,6 +18,8 @@ import io.netty.handler.stream.ChunkedWriteHandler;
 public class HttpInitializer extends ChannelInitializer<Channel> {
     private final HttpHandler httpHandler = new HttpHandler();
 
+    private final LoggingHandler loggingHandler = new LoggingHandler(LogLevel.INFO);
+
     @Override
     protected void initChannel(Channel channel) throws Exception {
         channel.pipeline()
@@ -26,7 +28,7 @@ public class HttpInitializer extends ChannelInitializer<Channel> {
                 .addLast(new HttpResponseEncoder())
                 .addLast(new ChunkedWriteHandler())
                 .addLast(new CorsHandler(CorsHandlerConfig.getInstance()))
-                .addLast(httpHandler)
-                .addLast("logging", new LoggingHandler(LogLevel.INFO));
+                .addLast("logging", loggingHandler)
+                .addLast(httpHandler);
     }
 }

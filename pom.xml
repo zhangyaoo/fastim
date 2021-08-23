@@ -41,6 +41,7 @@
         <curator.version>5.1.0</curator.version>
         <redisson.version>3.15.6</redisson.version>
         <protostuff.version>1.7.4</protostuff.version>
+        <metrics.version>4.2.3</metrics.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -206,6 +207,18 @@
                 <groupId>io.netty</groupId>
                 <artifactId>netty-handler</artifactId>
                 <version>${netty.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-jmx</artifactId>
+                <version>${metrics.version}</version>
+                <exclusions>
+                    <exclusion>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>

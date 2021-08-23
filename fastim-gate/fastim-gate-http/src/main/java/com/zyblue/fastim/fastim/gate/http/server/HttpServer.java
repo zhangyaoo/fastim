@@ -8,6 +8,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.concurrent.DefaultThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,9 +40,9 @@ public class HttpServer {
 
     private void startHttpServer(){
         // bossGroup设置1个，参考NG。 在不 bind 多端口的情况下 BossEventLoopGroup 中只需要包含一个 EventLoop，也只能用上一个，多了没用。
-        bossGroup = new NioEventLoopGroup(1);
+        bossGroup = new NioEventLoopGroup(1, new DefaultThreadFactory("boss"));
         int cpuCount = Runtime.getRuntime().availableProcessors();
-        workerGroup = new NioEventLoopGroup(cpuCount << 1 + 1);
+        workerGroup = new NioEventLoopGroup(cpuCount << 1 + 1, new DefaultThreadFactory("worker"));
 
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap.group(bossGroup, workerGroup)

@@ -1,6 +1,7 @@
 package com.zyblue.fastim.fastim.gate.tcp.handler.gate;
 
-import com.zyblue.fastim.common.codec.FastImProtocol;
+import com.zyblue.fastim.common.codec.FastImMsg;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
@@ -11,14 +12,21 @@ import org.slf4j.LoggerFactory;
  * 认证handler
  * 认证通过后可以移除此handler
  */
-public class GateAuthHandler extends SimpleChannelInboundHandler<FastImProtocol> {
+@ChannelHandler.Sharable
+public class GateAuthHandler extends SimpleChannelInboundHandler<FastImMsg> {
 
-    private final static Logger logger = LoggerFactory.getLogger(GateAuthHandler.class);
+    private final static Logger log = LoggerFactory.getLogger(GateAuthHandler.class);
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, FastImProtocol protocol) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, FastImMsg protocol) throws Exception {
+        try {
 
-        channelHandlerContext.fireChannelRead(protocol);
-        channelHandlerContext.handler().handlerRemoved(channelHandlerContext);
+        } catch (Exception e) {
+            log.error("exception happen for: " + e.getMessage(), e);
+            channelHandlerContext.close();
+        } finally {
+            // 认证不通过，也移除，因为连接已经关闭
+            channelHandlerContext.pipeline().remove(this);
+        }
     }
 }

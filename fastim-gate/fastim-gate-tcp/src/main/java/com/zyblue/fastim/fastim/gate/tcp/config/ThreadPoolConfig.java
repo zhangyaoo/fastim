@@ -1,6 +1,7 @@
 package com.zyblue.fastim.fastim.gate.tcp.config;
 
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.util.concurrent.DefaultThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,6 +15,6 @@ public class ThreadPoolConfig {
     @Bean(name = "nioEventLoopGroup")
     public NioEventLoopGroup workerGroup(){
         int cpuCount = Runtime.getRuntime().availableProcessors();
-        return new NioEventLoopGroup(cpuCount << 1);
+        return new NioEventLoopGroup(cpuCount << 1, new DefaultThreadFactory("worker"));
     }
 }

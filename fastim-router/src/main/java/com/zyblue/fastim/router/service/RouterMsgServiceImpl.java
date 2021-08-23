@@ -11,6 +11,12 @@ import org.apache.dubbo.config.annotation.Service;
 public class RouterMsgServiceImpl implements RouterMsgService {
     @Override
     public Object routerMsg() {
+        System.out.println("routerMsg ok");
         return "ok";
+    }
+
+    @Override
+    public void routerMsgVoid() {
+        System.out.println("routerMsgVoid ok");
     }
 }

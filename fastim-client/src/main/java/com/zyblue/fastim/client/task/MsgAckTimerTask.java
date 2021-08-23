@@ -1,7 +1,7 @@
 package com.zyblue.fastim.client.task;
 
 import com.zyblue.fastim.client.manager.MsgManager;
-import com.zyblue.fastim.common.codec.FastImProtocol;
+import com.zyblue.fastim.common.codec.FastImMsg;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.Timeout;
 import io.netty.util.TimerTask;
@@ -26,9 +26,9 @@ public class MsgAckTimerTask implements TimerTask {
 
     private Integer sendRetry;
 
-    private final FastImProtocol msg;
+    private final FastImMsg msg;
 
-    public MsgAckTimerTask(NioSocketChannel channel, Integer sendDuration, Integer sendRetry, FastImProtocol msg) {
+    public MsgAckTimerTask(NioSocketChannel channel, Integer sendDuration, Integer sendRetry, FastImMsg msg) {
         this.channel = channel;
         this.sendDuration = sendDuration;
         this.sendRetry = sendRetry;

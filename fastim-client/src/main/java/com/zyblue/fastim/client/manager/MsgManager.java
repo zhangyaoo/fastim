@@ -8,5 +8,8 @@ import io.netty.util.collection.IntObjectHashMap;
  * @date 2021/7/12 14:41
  */
 public class MsgManager {
+    /**
+     * TODO thread not safe
+     */
     public static final IntObjectHashMap<Timeout> ACK_MSG_LIST = new IntObjectHashMap<>();
 }

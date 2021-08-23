@@ -1,6 +1,6 @@
 package com.zyblue.fastim.fastim.gate.tcp.handler.gate;
 
-import com.zyblue.fastim.common.codec.FastImProtocol;
+import com.zyblue.fastim.common.codec.FastImMsg;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -12,9 +12,9 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * 限流处理
  */
 @ChannelHandler.Sharable
-public class GateLimitHandler extends SimpleChannelInboundHandler<FastImProtocol> {
+public class GateLimitHandler extends SimpleChannelInboundHandler<FastImMsg> {
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, FastImProtocol protocol) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, FastImMsg protocol) throws Exception {
         channelHandlerContext.fireChannelRead(protocol);
 
     }

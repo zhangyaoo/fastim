@@ -4,9 +4,9 @@ import com.zyblue.fastim.client.handler.FastImClientHandler;
 import com.zyblue.fastim.client.handler.MyFastImDecoder;
 import com.zyblue.fastim.client.handler.MyFastImEncoder;
 import com.zyblue.fastim.client.manager.MsgManager;
-import com.zyblue.fastim.client.service.impl.SequenceIdServiceImpl;
 import com.zyblue.fastim.client.task.MsgAckTimerTask;
-import com.zyblue.fastim.common.codec.FastImProtocol;
+import com.zyblue.fastim.client.service.SequenceIdService;
+import com.zyblue.fastim.common.codec.FastImMsg;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -50,6 +51,9 @@ public class FastImClient {
 
     @Value("${gate.port}")
     private Integer gatePort;
+
+    @Resource
+    private SequenceIdService sequenceIdService;
 
     private NioEventLoopGroup workerGroup;
 
@@ -140,13 +144,17 @@ public class FastImClient {
      * 发送消息
      * @param msg 消息体
      */
-    public void send(FastImProtocol msg) {
-        if (channel == null || !channel.isActive()) {
-            logger.error("[send][连接不存在][连接未激活]");
-            connect(connectRetry);
+    public void send(FastImMsg msg) {
+        if (!channel.isActive() || !channel.isWritable()) {
+            logger.error("[send][连接不存在][连接未激活][连接不可写]");
+            channel.close().addListener(future ->{
+               if(future.isSuccess()){
+                   connect(connectRetry);
+               }
+            });
         }else {
             // 发送消息
-            int sequenceId = SequenceIdServiceImpl.generateSequenceId();
+            int sequenceId = sequenceIdService.generateSequenceId();
             msg.setSequenceId(sequenceId);
             channel.writeAndFlush(msg).addListener(future ->{
                 // 增加定时器, 多久没有ack的就重复发送

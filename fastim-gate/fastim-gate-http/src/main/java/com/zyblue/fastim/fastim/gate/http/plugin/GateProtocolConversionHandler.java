@@ -1,7 +1,7 @@
 package com.zyblue.fastim.fastim.gate.http.plugin;
 
 import com.zyblue.fastim.fastim.gate.http.plugin.chain.HttpHandlerContext;
-import com.zyblue.fastim.fastim.gate.http.pojo.InterfaceMetadata;
+import com.zyblue.fastim.common.pojo.gate.InterfaceMetadata;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
@@ -31,6 +31,7 @@ public class GateProtocolConversionHandler implements GatePluginHandler{
 
     @Override
     public void execute(HttpHandlerContext context, DefaultHttpRequest request) {
+        logger.info("GateProtocolConversionHandler execute");
         InterfaceMetadata interfaceMetadata = transferParam(request);
 
         reference.setInterface(interfaceMetadata.getInterfaceName());
@@ -62,6 +63,7 @@ public class GateProtocolConversionHandler implements GatePluginHandler{
 
     @Override
     public void response(HttpHandlerContext context, DefaultHttpRequest request, DefaultFullHttpResponse response) {
+        logger.info("GateProtocolConversionHandler response");
         context.fireResult(request, response);
     }
 }

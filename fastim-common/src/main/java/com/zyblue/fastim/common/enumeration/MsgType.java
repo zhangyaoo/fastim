@@ -7,7 +7,7 @@ package com.zyblue.fastim.common.enumeration;
 public enum MsgType {
 
     REQUEST((byte) 1, "客户端请求包"),
-    RESPONSE((byte) 2, "响应包"),
+    ACK((byte) 2, "响应包"),
     NOTIFY((byte) 3, "服务端通知包");
 
     MsgType(byte val, String desc) {

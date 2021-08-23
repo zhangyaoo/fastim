@@ -6,4 +6,6 @@ package com.zyblue.fastim.router.service;
  */
 public interface RouterMsgService {
     Object routerMsg();
+
+    void routerMsgVoid();
 }

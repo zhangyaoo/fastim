@@ -1,7 +1,7 @@
 package com.zyblue.fastim.client.handler;
 
 
-import com.zyblue.fastim.common.codec.FastImProtocol;
+import com.zyblue.fastim.common.codec.FastImMsg;
 import com.zyblue.fastim.common.constant.CommonConstant;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -19,7 +19,7 @@ public class MyFastImDecoder extends ByteToMessageDecoder {
     /**
      * 按照协议头来解析
      */
-    public final int BASE_LENGTH = 1 + 4 + 1 + 1 + 4 + 4 + 1 + 4;
+    public final int BASE_LENGTH = 1 + 4 + 1 + 1 + 4 + 4 + 4;
 
     /**
      * 数据包最大大小 2M
@@ -66,7 +66,6 @@ public class MyFastImDecoder extends ByteToMessageDecoder {
         byte msgType = byteBuf.readByte();
         int logId = byteBuf.readInt();
         int sequenceId = byteBuf.readInt();
-        byte dataType = byteBuf.readByte();
         int bodyLength = byteBuf.readInt();
 
         if(byteBuf.readableBytes() < bodyLength){
@@ -78,13 +77,12 @@ public class MyFastImDecoder extends ByteToMessageDecoder {
         byte[] bodyData = new byte[bodyLength];
         byteBuf.readBytes(bodyData);
 
-        FastImProtocol protocol = new FastImProtocol();
+        FastImMsg protocol = new FastImMsg();
         protocol.setVersion(version);
         protocol.setCmd(cmd);
         protocol.setMsgType(msgType);
         protocol.setLogId(logId);
         protocol.setSequenceId(sequenceId);
-        protocol.setDataType(dataType);
         protocol.setData(bodyData);
         list.add(protocol);
     }

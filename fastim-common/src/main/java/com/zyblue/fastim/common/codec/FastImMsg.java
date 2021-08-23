@@ -1,19 +1,21 @@
 package com.zyblue.fastim.common.codec;
 
+
 import com.zyblue.fastim.common.constant.CommonConstant;
 
 /**
  * @author will
  * @date 2021/7/6 15:30
  */
-public class FastImProtocol {
+public class FastImMsg {
     /**
      * 版本
      */
     private int version;
 
     /**
-     * 业务类型，心跳、推送、单聊、群聊
+     * 业务类型，心跳、推送、单聊、群聊、系统消息、聊天室、客服
+     * see cmdType
      */
     private byte cmd;
 
@@ -28,14 +30,9 @@ public class FastImProtocol {
     private int logId;
 
     /**
-     * 序列化ID，可以用作异步处理或者顺序性
+     * 序列化ID，可以用作异步处理
      */
     private int sequenceId;
-
-    /**
-     * 消息的内容类型 文本 图片链接 文件链接
-     */
-    private byte dataType;
 
     /**
      * 消息的内容
@@ -87,14 +84,6 @@ public class FastImProtocol {
 
     public void setSequenceId(int sequenceId) {
         this.sequenceId = sequenceId;
-    }
-
-    public byte getDataType() {
-        return dataType;
-    }
-
-    public void setDataType(byte dataType) {
-        this.dataType = dataType;
     }
 
     public byte[] getData() {
