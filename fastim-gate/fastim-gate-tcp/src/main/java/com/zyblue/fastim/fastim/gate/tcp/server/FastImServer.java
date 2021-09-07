@@ -49,7 +49,6 @@ public class FastImServer {
         LoggingHandler loggingHandler = new LoggingHandler(LogLevel.INFO);
         GateAuthHandler gateAuthHandler = new GateAuthHandler();
         GateMetricsHandler gateMetricsHandler = new GateMetricsHandler();
-        GateLimitHandler gateLimitHandler = new GateLimitHandler();
         GateServiceSelfProtectHandler gateServiceSelfProtectHandler = new GateServiceSelfProtectHandler();
         GateDynamicRouteHandler gateDynamicRouteHandler = new GateDynamicRouteHandler();
         GateProtocolConversionHandler gateProtocolConversionHandler = new GateProtocolConversionHandler();
@@ -77,7 +76,7 @@ public class FastImServer {
                                 .addLast(gateMetricsHandler)
                                 .addLast(loggingHandler)
                                 .addLast(gateAuthHandler)
-                                .addLast(gateLimitHandler)
+                                .addLast("limitHandler", new GateLimitHandler())
                                 .addLast(gateServiceSelfProtectHandler)
                                 .addLast(gateDynamicRouteHandler)
                                 .addLast(gateProtocolConversionHandler)
