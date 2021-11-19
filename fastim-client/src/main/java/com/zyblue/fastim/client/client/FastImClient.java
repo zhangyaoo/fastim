@@ -4,9 +4,10 @@ import com.zyblue.fastim.client.handler.FastImClientHandler;
 import com.zyblue.fastim.client.handler.MyFastImDecoder;
 import com.zyblue.fastim.client.handler.MyFastImEncoder;
 import com.zyblue.fastim.client.manager.MsgManager;
-import com.zyblue.fastim.client.task.MsgAckTimerTask;
 import com.zyblue.fastim.client.service.SequenceIdService;
+import com.zyblue.fastim.client.task.MsgAckTimerTask;
 import com.zyblue.fastim.common.codec.FastImMsg;
+import com.zyblue.fastim.common.pojo.message.MsgRequest;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -21,41 +22,29 @@ import io.netty.util.Timeout;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
  * 滚滚长江东流水ing
  */
-@Component
 public class FastImClient {
+
+    private static final FastImClient CLIENT = new FastImClient();
+
+    public static FastImClient getInstance() {
+        return CLIENT;
+    }
 
     private final static Logger logger = LoggerFactory.getLogger(FastImClient.class);
 
-    @Value("${max.connect.retry.time}")
-    private Integer connectRetry;
-
-    @Value("${max.send.retry.time}")
-    private Integer sendRetry;
-
-    @Value("${max.send.retry.duration}")
-    private Integer sendDuration;
-
-    @Value("${gate.url}")
-    private String gateUrl;
-
-    @Value("${gate.port}")
-    private Integer gatePort;
-
-    @Resource
-    private SequenceIdService sequenceIdService;
-
     private NioEventLoopGroup workerGroup;
+
+    public FastImClient() {
+        if (bootstrap == null) {
+            bootstrap = initBootstrap();
+        }
+    }
 
     /**
      * 客户端channel
@@ -70,8 +59,8 @@ public class FastImClient {
     private final HashedWheelTimer ackTimer = new HashedWheelTimer(new DefaultThreadFactory("send-msg-ack-timer"), 100,
             TimeUnit.MILLISECONDS, 1024, false);
 
-    @PostConstruct
-    public void start() {
+
+    public Bootstrap initBootstrap() {
         logger.info("fastim client starting..");
 
         workerGroup = new NioEventLoopGroup();
@@ -79,10 +68,8 @@ public class FastImClient {
         bootstrap = new Bootstrap();
         bootstrap.group(workerGroup)
                 .channel(NioSocketChannel.class)
-                // .attr(AttributeKey.newInstance("token"), loginResponse.getToken())
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
                 .option(ChannelOption.SO_KEEPALIVE, true)
-                // Nagle算法就是为了尽可能发送大块数据，避免网络中充斥着许多小数据块。使用TCP_NODELAY来关闭Nagle算法
                 .option(ChannelOption.TCP_NODELAY, true)
                 .handler(new ChannelInitializer<Channel>() {
                     @Override
@@ -101,14 +88,23 @@ public class FastImClient {
                                 .addLast(new FastImClientHandler());
                     }
                 });
-        connect(connectRetry);
         logger.info("fastim client started");
+        return bootstrap;
     }
+
+    private String gateUrl;
+
+    private Integer gatePort;
 
     /**
      * 客户端重连
      */
-    private void connect(Integer retryTimes){
+    public void connect(String gateUrl, Integer gatePort, Integer retryTimes) {
+        if(gatePort == null || gateUrl == null){
+            throw new RuntimeException("url or port is null");
+        }
+        this.gateUrl = gateUrl;
+        this.gatePort = gatePort;
         ChannelFuture channelFuture = bootstrap.connect(gateUrl, gatePort).addListener(future -> {
             if (future.isSuccess()) {
                 logger.info("连接成功!");
@@ -133,43 +129,66 @@ public class FastImClient {
                  */
                 int delay = 1 << order;
                 // 定时到点执行
-                bootstrap.config().group().schedule(() -> connect(retryTimes - 1),
+                bootstrap.config().group().schedule(() -> connect(gateUrl, gatePort, retryTimes - 1),
                         delay, TimeUnit.SECONDS);
             }
         });
+        // TODO 连接失败channel如何处理
         channel = (NioSocketChannel) channelFuture.channel();
     }
 
     /**
      * 发送消息
+     *
      * @param msg 消息体
      */
-    public void send(FastImMsg msg) {
+    public void send(FastImMsg msg, MsgRequest request) {
+        if (channel == null) {
+            logger.error("[channel][未初始化]");
+            connect(gateUrl, gatePort,  1);
+        }
         if (!channel.isActive() || !channel.isWritable()) {
-            logger.error("[send][连接不存在][连接未激活][连接不可写]");
-            channel.close().addListener(future ->{
-               if(future.isSuccess()){
-                   connect(connectRetry);
-               }
+            logger.error("[send][连接未激活][连接不可写]");
+            channel.close().addListener(future -> {
+                if (future.isSuccess()) {
+                    connect(gateUrl, gatePort,  1);
+                }
             });
-        }else {
+        } else {
             // 发送消息
-            int sequenceId = sequenceIdService.generateSequenceId();
+            int sequenceId = SequenceIdService.getInstance().generateSequenceId();
             msg.setSequenceId(sequenceId);
-            channel.writeAndFlush(msg).addListener(future ->{
+            channel.writeAndFlush(msg).addListener(future -> {
                 // 增加定时器, 多久没有ack的就重复发送
-                if(future.isSuccess()){
+                if (future.isSuccess()) {
                     Timeout timeout = ackTimer.newTimeout(new MsgAckTimerTask(channel, sendDuration, sendRetry, msg), sendDuration, TimeUnit.MILLISECONDS);
-                    MsgManager.ACK_MSG_LIST.put(sequenceId, timeout);
+                    MsgManager.ACK_MSG_TIMEOUT_LIST.put(sequenceId, timeout);
+                    MsgManager.MSG_REQUEST_LIST.put(sequenceId, request);
                 }
             });
         }
     }
 
-    @PreDestroy
-    public void destroy(){
-        if(workerGroup != null && !workerGroup.isShutdown()){
+    public void destroy() {
+        channel.close();
+        ackTimer.stop();
+        if (workerGroup != null && !workerGroup.isShutdown()) {
             workerGroup.shutdownGracefully();
         }
+    }
+
+    private Integer connectRetry;
+    private Integer sendDuration;
+    private Integer sendRetry;
+
+    public void setConnectRetry(Integer connectRetry) {
+        this.connectRetry = connectRetry;
+    }
+
+    public void setSendDuration(Integer sendDuration) {
+        this.sendDuration = sendDuration;
+    }
+    public void setSendRetry(Integer sendRetry) {
+        this.sendRetry = sendRetry;
     }
 }

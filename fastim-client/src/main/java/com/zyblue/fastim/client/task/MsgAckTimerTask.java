@@ -40,14 +40,14 @@ public class MsgAckTimerTask implements TimerTask {
         int sequenceId = msg.getSequenceId();
         logger.info("msg resend, sequenceId:{}, sendRetry:{}", sequenceId, sendRetry);
         if(timeout.isCancelled()){
-            if(MsgManager.ACK_MSG_LIST.containsKey(sequenceId)) {
-                MsgManager.ACK_MSG_LIST.remove(sequenceId);
+            if(MsgManager.ACK_MSG_TIMEOUT_LIST.containsKey(sequenceId)) {
+                MsgManager.ACK_MSG_TIMEOUT_LIST.remove(sequenceId);
             }
             return;
         }
 
         // 还未回ack
-        if(MsgManager.ACK_MSG_LIST.containsKey(sequenceId)){
+        if(MsgManager.ACK_MSG_TIMEOUT_LIST.containsKey(sequenceId)){
             if(sendRetry > 0){
                 channel.writeAndFlush(msg).addListener(future ->{
                     if(future.isSuccess()){
@@ -55,7 +55,7 @@ public class MsgAckTimerTask implements TimerTask {
                     }
                 });
             }else {
-                MsgManager.ACK_MSG_LIST.remove(sequenceId);
+                MsgManager.ACK_MSG_TIMEOUT_LIST.remove(sequenceId);
                 timeout.cancel();
             }
 

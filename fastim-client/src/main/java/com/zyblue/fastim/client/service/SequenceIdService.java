@@ -2,7 +2,6 @@ package com.zyblue.fastim.client.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -11,10 +10,14 @@ import java.time.ZoneOffset;
  * @author will
  * @date 2021/7/19 15:45
  */
-@Component
 public class SequenceIdService {
     private final static Logger log = LoggerFactory.getLogger(SequenceIdService.class);
 
+    private final static SequenceIdService sequenceIdService = new SequenceIdService();
+
+    public static SequenceIdService getInstance(){
+        return sequenceIdService;
+    }
     /**
      * 基准时间 2021-7-28 14:31
      */

@@ -1,14 +1,20 @@
 package com.zyblue.fastim.client.handler;
 
 import com.zyblue.fastim.client.constant.CmdType;
-import com.zyblue.fastim.client.service.ImService;
-import com.zyblue.fastim.client.util.SpringBeanFactory;
+import com.zyblue.fastim.client.service.impl.GroupChatServiceImpl;
+import com.zyblue.fastim.client.service.impl.HeartbeatServiceImpl;
+import com.zyblue.fastim.client.service.impl.PushServiceImpl;
+import com.zyblue.fastim.client.service.impl.SingleChatServiceImpl;
 import com.zyblue.fastim.common.codec.FastImMsg;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 客户端处理
+ * @author will
+ */
 public class FastImClientHandler extends SimpleChannelInboundHandler<FastImMsg> {
 
     private final static Logger logger = LoggerFactory.getLogger(FastImClientHandler.class);
@@ -28,8 +34,16 @@ public class FastImClientHandler extends SimpleChannelInboundHandler<FastImMsg> 
             throw new RuntimeException("param error: cmd");
         }
 
-        // TODO 组提交优化 责任链优化
-        ImService service = (ImService) SpringBeanFactory.getBean(cmdType.getClazz());
-        service.received(fastImMsg);
+        switch (cmdType){
+            case SINGLE_CHAT:
+                SingleChatServiceImpl.getInstance().received(fastImMsg);break;
+            case GROUP_CHAT:
+                GroupChatServiceImpl.getInstance().received(fastImMsg);break;
+            case HEARTBEAT:
+                HeartbeatServiceImpl.getInstance().received(fastImMsg);break;
+            case PUSH:
+                PushServiceImpl.getInstance().received(fastImMsg);break;
+            default:break;
+        }
     }
 }

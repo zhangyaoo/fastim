@@ -6,27 +6,32 @@ import com.zyblue.fastim.client.service.ImService;
 import com.zyblue.fastim.common.codec.FastImMsg;
 import com.zyblue.fastim.common.enumeration.MsgType;
 import com.zyblue.fastim.common.pojo.message.GroupChatRequest;
+import com.zyblue.fastim.common.pojo.message.GroupChatResponse;
 import com.zyblue.fastim.common.util.ProtoStuffUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * @author will
  * @date 2021/7/12 18:03
  */
-@Component
 public class GroupChatServiceImpl implements ImService<GroupChatRequest> {
 
     private final static Logger logger = LoggerFactory.getLogger(SingleChatServiceImpl.class);
 
-    @Autowired
-    private FastImClient fastImClient;
+    private static final GroupChatServiceImpl singleChatService = new GroupChatServiceImpl();
+
+    public static ImService<?> getInstance() {
+        return singleChatService;
+    }
 
     @Override
     public void received(FastImMsg fastImMsg) {
+        GroupChatResponse response = ProtoStuffUtils.deserialize(fastImMsg.getData(), GroupChatResponse.class);
 
+        /*
+         * 群聊消息通过推拉结合来做
+         */
     }
 
     @Override
@@ -36,6 +41,6 @@ public class GroupChatServiceImpl implements ImService<GroupChatRequest> {
         protocol.setCmd(CmdType.GROUP_CHAT.getVal());
         protocol.setMsgType(MsgType.REQUEST.getVal());
         protocol.setData(ProtoStuffUtils.serialize(request));
-        fastImClient.send(protocol);
+        FastImClient.getInstance().send(protocol, request);
     }
 }

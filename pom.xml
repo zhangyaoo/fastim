@@ -22,6 +22,7 @@
         <module>fastim-common</module>
         <module>fastim-lsb</module>
         <module>fastim-das</module>
+        <module>fastim-sample</module>
     </modules>
 
     <properties>

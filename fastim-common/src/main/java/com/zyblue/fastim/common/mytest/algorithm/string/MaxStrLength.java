@@ -1,6 +1,7 @@
 package com.zyblue.fastim.common.mytest.algorithm.string;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -28,9 +29,27 @@ public class MaxStrLength {
         return res;
     }
 
-    /*public static void main(String[] args) {
-        int i = maxLength("abcabcbb");
+    public static int maxLength2(String str){
+        int length = str.length();
+        int i = 0, j = 0;
+        int res = 0;
+        HashSet<Character> objects = new HashSet<>();
+        while (i < length && j < length){
+            char c = str.charAt(j);
+            if(objects.contains(c)){
+                objects.remove(str.charAt(i++));
+            }else {
+                objects.add(c);
+                j++;
+                res = Math.max(res, j - i);
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int i = maxLength2("asd524566745272dww");
         System.out.println("maxLength:" + i);
 
-    }*/
+    }
 }

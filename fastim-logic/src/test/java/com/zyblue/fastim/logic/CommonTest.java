@@ -17,6 +17,7 @@ public class CommonTest {
 
     @Test
     public void test() throws InterruptedException {
+        // ReferenceConfig 封装了所有与注册中心及服务提供方连接
         ReferenceConfig<GenericService> reference = new ReferenceConfig<>();
         reference.setUrl("dubbo://127.0.0.1:20881");
         reference.setInterface("com.zyblue.fastim.router.service.RouterMsgService");

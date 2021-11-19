@@ -6,38 +6,44 @@ import com.zyblue.fastim.client.manager.MsgManager;
 import com.zyblue.fastim.client.service.ImService;
 import com.zyblue.fastim.common.codec.FastImMsg;
 import com.zyblue.fastim.common.enumeration.MsgType;
+import com.zyblue.fastim.common.pojo.message.MsgRequest;
 import com.zyblue.fastim.common.pojo.message.SingleChatRequest;
 import com.zyblue.fastim.common.pojo.message.SingleChatResponse;
 import com.zyblue.fastim.common.util.ProtoStuffUtils;
 import io.netty.util.Timeout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * @author will
  * @date 2021/7/12 18:02
  */
-@Component
 public class SingleChatServiceImpl implements ImService<SingleChatRequest> {
-
     private final static Logger logger = LoggerFactory.getLogger(SingleChatServiceImpl.class);
 
-    @Autowired
-    private FastImClient fastImClient;
+    private static final SingleChatServiceImpl singleChatService = new SingleChatServiceImpl();
+
+    public static ImService<?> getInstance() {
+        return singleChatService;
+    }
 
     @Override
     public void received(FastImMsg fastImMsg) {
-        SingleChatResponse response = ProtoStuffUtils.deserialize(fastImMsg.getData(), SingleChatResponse.class);
-        if(fastImMsg.getMsgType() == MsgType.ACK.getVal()){
+        if (fastImMsg.getMsgType() == MsgType.ACK.getVal()) {
+            SingleChatResponse response = ProtoStuffUtils.deserialize(fastImMsg.getData(), SingleChatResponse.class);
             int sequenceId = fastImMsg.getSequenceId();
-            Timeout timeout = MsgManager.ACK_MSG_LIST.remove(sequenceId);
+            Timeout timeout = MsgManager.ACK_MSG_TIMEOUT_LIST.remove(sequenceId);
             timeout.cancel();
-            // TODO 回调前端发送消息成功
-        }else if(fastImMsg.getMsgType() == MsgType.NOTIFY.getVal()){
+            MsgRequest msgRequest = MsgManager.MSG_REQUEST_LIST.remove(sequenceId);
+            logger.info("消息发送成功, msgId:{}, sequenceId:{}, msgRequest:{}", response.getMsgId(), sequenceId, msgRequest);
+        } else if (fastImMsg.getMsgType() == MsgType.NOTIFY.getVal()) {
+            /*
+             * 单聊消息为了保证实时性，服务器直接推算过来
+             */
+            SingleChatRequest request = ProtoStuffUtils.deserialize(fastImMsg.getData(), SingleChatRequest.class);
 
-        }else {
+
+        } else {
             logger.info("received request packet, ignored");
         }
     }
@@ -49,6 +55,6 @@ public class SingleChatServiceImpl implements ImService<SingleChatRequest> {
         protocol.setCmd(CmdType.SINGLE_CHAT.getVal());
         protocol.setMsgType(MsgType.REQUEST.getVal());
         protocol.setData(ProtoStuffUtils.serialize(request));
-        fastImClient.send(protocol);
+        FastImClient.getInstance().send(protocol, request);
     }
 }
