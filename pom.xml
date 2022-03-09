@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -32,7 +31,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.4.5</spring-boot.version>
         <dubbo-spring-boot-starter.version>2.7.5</dubbo-spring-boot-starter.version>
-        <netty.version>4.1.65.Final</netty.version>
+        <netty.version>4.1.71.Final</netty.version>
         <dubbo.version>2.7.5</dubbo.version>
         <nacos.version>2.0.2</nacos.version>
         <nacos-config-spring-boot-starter.version>0.2.8</nacos-config-spring-boot-starter.version>
