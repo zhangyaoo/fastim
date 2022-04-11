@@ -1,12 +1,25 @@
 package com.zyblue.fastim.fastim.gate.tcp;
 
+import com.alibaba.nacos.api.annotation.NacosInjected;
+import com.alibaba.nacos.api.naming.NamingService;
+import com.alibaba.nacos.client.naming.utils.NetUtils;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @EnableDubbo
-public class FastimGateTcpApplication {
+public class FastimGateTcpApplication implements CommandLineRunner {
+    @NacosInjected
+    private NamingService namingService;
+
+    @Value("${instance.name}")
+    private String instanceName;
+
+    @Value("${fastim.server.port}")
+    private int nettyPort;
 
     public static void main(String[] args) {
         /*
@@ -18,4 +31,9 @@ public class FastimGateTcpApplication {
         SpringApplication.run(FastimGateTcpApplication.class, args);
     }
 
+    @Override
+    public void run(String... args) throws Exception {
+        // 通过Naming服务注册实例到注册中心
+        namingService.registerInstance(instanceName, NetUtils.localIP(), nettyPort);
+    }
 }

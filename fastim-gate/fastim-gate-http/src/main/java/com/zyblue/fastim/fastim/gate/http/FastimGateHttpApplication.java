@@ -14,7 +14,6 @@ public class FastimGateHttpApplication {
          * when,触发检测的时机：当new一个ByteBuf时候检测，不是周期性检测
          */
         //System.setProperty("io.netty.leakDetection.level", "PARANOID");
-
         SpringApplication.run(FastimGateHttpApplication.class, args);
     }
 

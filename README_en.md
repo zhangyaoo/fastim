@@ -9,7 +9,6 @@
 - fastim-gate-tcp:HTTP API gateway implementation for streaming downgrades, version routing,openAPI management, protocol conversion, generalization calls, and more
 - fastim-gate-http:A long-connected TCP gateway implementation that enables custom protocols,channel management, heartbeat detection, generalization calls, and more
 - fastim-leaf:Distributed ID implementation, zookeeper-based implementation or full memory-based implementation
-- fastim-router:A routing logic service that is primarily responsible for routing messages and maintaining the online status of clients
 - fastim-common:Common classes, mainly the storage of entity and tool classes
 - fastim-lsb:LSB service,which provides access layer IP and port for load balancing connections
 - fastim-das:Data access layer implementation, encapsulating one layer, providing an addition and deletion portal to the data

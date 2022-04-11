@@ -1,6 +1,6 @@
 package com.zyblue.fastim.client.task;
 
-import com.zyblue.fastim.client.manager.MsgManager;
+import com.zyblue.fastim.client.msg.MsgManager;
 import com.zyblue.fastim.common.codec.FastImMsg;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.Timeout;
@@ -40,9 +40,7 @@ public class MsgAckTimerTask implements TimerTask {
         int sequenceId = msg.getSequenceId();
         logger.info("msg resend, sequenceId:{}, sendRetry:{}", sequenceId, sendRetry);
         if(timeout.isCancelled()){
-            if(MsgManager.ACK_MSG_TIMEOUT_LIST.containsKey(sequenceId)) {
-                MsgManager.ACK_MSG_TIMEOUT_LIST.remove(sequenceId);
-            }
+            MsgManager.ACK_MSG_TIMEOUT_LIST.remove(sequenceId);
             return;
         }
 

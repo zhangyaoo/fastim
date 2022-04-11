@@ -1,5 +1,7 @@
 package com.zyblue.fastim.common.mytest.algorithm.superior;
 
+import java.util.List;
+
 /**
  * 求三角形的最小路径和   动态规划
  * [
@@ -13,4 +15,7 @@ package com.zyblue.fastim.common.mytest.algorithm.superior;
  *
  */
 public class MinimumPathSum {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        return 0;
+    }
 }

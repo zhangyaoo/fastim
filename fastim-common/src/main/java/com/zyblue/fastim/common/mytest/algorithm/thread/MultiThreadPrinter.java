@@ -72,17 +72,14 @@ public class MultiThreadPrinter {
     public class Printer extends Thread{
         private final int index;
         private int nextIndex;
-        int count = 0;
 
         public Printer(String name, int index) {
             super(name);
             this.index = index;
-            // 下一个线程index
-            nextIndex = index;
-            nextIndex++;
+            // 下一个线程index,方便通知下一个线程
+            nextIndex = ++index;
             if (nextIndex == threadNums) {
                 nextIndex = 0;
-                count++;
             }
         }
 
@@ -90,7 +87,7 @@ public class MultiThreadPrinter {
         public void run() {
             lock.lock();
             try {
-                while (count < 500) {
+                while (true) {
                     conditions.get(index).await();
                     // 打印
                     System.out.println(this.getName() + "-" + atomicInteger.get());

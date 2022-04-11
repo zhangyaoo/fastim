@@ -6,9 +6,21 @@ package com.zyblue.fastim.common.pojo.message;
  */
 public class SingleChatResponse {
     /**
+     * 会话ID
+     */
+    private Long sessionId;
+    /**
      * 消息发送成功的消息ID
      */
     private Long msgId;
+
+    public Long getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(Long sessionId) {
+        this.sessionId = sessionId;
+    }
 
     public Long getMsgId() {
         return msgId;

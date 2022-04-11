@@ -3,6 +3,7 @@ package com.zyblue.fastim.common.mytest.algorithm.tree;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -10,6 +11,35 @@ import java.util.Stack;
  * Author : will 2019.12.09
  */
 public class ForeachTreeUseNoRecursion {
+
+    /**
+     * 更加简单的中序遍历二叉树
+     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        // 中序遍历 左根右
+        Stack<Object> stack = new Stack<>();
+        if(root == null){
+            return new ArrayList<>();
+        }
+        stack.add(root);
+        List<Integer> res = new ArrayList<>();
+        while(!stack.empty()){
+            Object pop = stack.pop();
+            if(pop instanceof TreeNode){
+                TreeNode popN = (TreeNode)pop;
+                if(popN.right != null){
+                    stack.push(popN.right);
+                }
+                stack.push(popN.val);
+                if(popN.left != null){
+                    stack.push(popN.left);
+                }
+            }else if(pop instanceof Integer){
+                res.add((Integer)pop);
+            }
+        }
+        return res;
+    }
 
 
     /**

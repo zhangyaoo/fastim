@@ -2,17 +2,16 @@ package com.zyblue.fastim.client.service.impl;
 
 import com.zyblue.fastim.client.service.ImService;
 import com.zyblue.fastim.common.codec.FastImMsg;
-import com.zyblue.fastim.common.pojo.message.PushRequest;
 
 /**
  * @author will
  * @date 2021/7/12 18:02
  */
-public class PushServiceImpl implements ImService<PushRequest> {
+public class PushServiceImpl implements ImService {
 
     private static final SingleChatServiceImpl singleChatService = new SingleChatServiceImpl();
 
-    public static ImService<?> getInstance() {
+    public static ImService getInstance() {
         return singleChatService;
     }
 
@@ -22,7 +21,7 @@ public class PushServiceImpl implements ImService<PushRequest> {
     }
 
     @Override
-    public void sendMsg(FastImMsg protocol, PushRequest request) {
+    public void sendMsg(FastImMsg protocol) {
 
     }
 }

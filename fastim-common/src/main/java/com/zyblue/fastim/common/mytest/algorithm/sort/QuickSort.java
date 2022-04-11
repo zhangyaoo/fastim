@@ -12,32 +12,42 @@ package com.zyblue.fastim.common.mytest.algorithm.sort;
  *  6、使用原地排序算法在插入数组数据时候，可以使用交换swap操作，而不是迁移数组。降低插入的时间复杂度。
  */
 public class QuickSort {
-    /*public static void main(String[] args) {
-        int capacity = 8;
-        Integer[] arr = new Integer[capacity];
-        arr[0] = 4;
-        arr[1] = 1;
-        arr[2] = 7;
-        arr[3] = 3;
-        arr[4] = 0;
-        arr[5] = 5;
-        arr[6] = 6;
-        arr[7] = 2;
 
-        mergeSortMethod(arr,capacity);
-        System.out.println("==>final arr:"+ Arrays.toString(arr));
-    }*/
-
-    public static void mergeSortMethod(Integer[] arr, int capacity){
-        sort(arr, 0, capacity-1);
+    public static void main(String[] args) {
+        int[] arr1 = {9,8,7,6,5,4,3,2,1};
+        quickSort1(arr1, 0, arr1.length - 1);
     }
 
-    public static void sort(Integer[] arr, int head, int tail){
-        int partitionPoint = tail;
-        int length = tail - head;
+    public static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
 
-        /*for(){
-
-        }*/
+    public static void quickSort1(int[] arr, int L , int R) {
+        if (L > R) {
+            return;
+        }
+        int M = partition(arr, L, R);
+        quickSort1(arr, L, M - 1);
+        quickSort1(arr, M + 1, R);
+    }
+    public static int partition(int[] arr, int L, int R) {
+        if (L > R) {
+            return -1;
+        }
+        if (L == R) {
+            return L;
+        }
+        int lessEqual = L - 1;
+        int index = L;
+        while (index < R) {
+            if (arr[index] <= arr[R]) {
+                swap(arr, index, ++lessEqual);
+            }
+            index++;
+        }
+        swap(arr, ++lessEqual, R);
+        return lessEqual;
     }
 }

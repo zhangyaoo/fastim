@@ -14,15 +14,13 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>fastim-logic</module>
         <module>fastim-client</module>
         <module>fastim-gate</module>
         <module>fastim-leaf</module>
-        <module>fastim-router</module>
         <module>fastim-common</module>
         <module>fastim-lsb</module>
-        <module>fastim-das</module>
         <module>fastim-sample</module>
+        <module>fastim-logic</module>
     </modules>
 
     <properties>
@@ -32,10 +30,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.4.5</spring-boot.version>
         <dubbo-spring-boot-starter.version>2.7.5</dubbo-spring-boot-starter.version>
-        <netty.version>4.1.65.Final</netty.version>
+        <netty.version>4.1.70.Final</netty.version>
         <dubbo.version>2.7.5</dubbo.version>
         <nacos.version>2.0.2</nacos.version>
-        <nacos-config-spring-boot-starter.version>0.2.8</nacos-config-spring-boot-starter.version>
+        <nacos.config.version>0.2.8</nacos.config.version>
         <protobuf.version>3.15.3</protobuf.version>
         <jackson.version>2.12.3</jackson.version>
         <guava.version>30.0-jre</guava.version>
@@ -43,6 +41,9 @@
         <redisson.version>3.15.6</redisson.version>
         <protostuff.version>1.7.4</protostuff.version>
         <metrics.version>4.2.3</metrics.version>
+        <nacos.discovery.version>0.2.7</nacos.discovery.version>
+        <netty-websocket.version>0.12.0</netty-websocket.version>
+        <okhttp3.version>4.9.1</okhttp3.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -101,39 +102,15 @@
             </dependency>
 
             <dependency>
-                <groupId>com.alibaba.nacos</groupId>
-                <artifactId>nacos-client</artifactId>
-                <version>${nacos.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>javassist</artifactId>
-                        <groupId>org.javassist</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-all</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.google.protobuf</groupId>
-                        <artifactId>protobuf-java</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-databind</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.reflections</groupId>
-                        <artifactId>reflections</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.google.api.grpc</groupId>
-                        <artifactId>proto-google-common-protos</artifactId>
-                    </exclusion>
-                </exclusions>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-registry-nacos</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.boot</groupId>
+                <artifactId>nacos-discovery-spring-boot-starter</artifactId>
+                <version>${nacos.discovery.version}</version>
             </dependency>
 
             <!--Jackson 核心库-->
@@ -206,9 +183,25 @@
             </dependency>
             <dependency>
                 <groupId>io.netty</groupId>
+                <artifactId>netty-codec-http2</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
                 <artifactId>netty-handler</artifactId>
                 <version>${netty.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.yeauty</groupId>
+                <artifactId>netty-websocket-spring-boot-starter</artifactId>
+                <version>${netty-websocket.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp3.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>io.dropwizard.metrics</groupId>

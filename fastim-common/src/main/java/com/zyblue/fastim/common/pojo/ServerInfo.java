@@ -1,8 +1,15 @@
 package com.zyblue.fastim.common.pojo;
 
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import java.io.Serializable;
 
+/**
+ * @author zy
+ */
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ServerInfo implements Serializable {
     private static final long serialVersionUID = -6250430743260531316L;
 

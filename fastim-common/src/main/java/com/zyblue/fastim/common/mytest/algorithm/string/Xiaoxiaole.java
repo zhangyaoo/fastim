@@ -4,6 +4,8 @@ package com.zyblue.fastim.common.mytest.algorithm.string;
  * 消消乐
  * TODO
  * 例子： abbbeccddcdee ==>  a
+ *
+ * 解法：用栈
  */
 public class Xiaoxiaole {
 

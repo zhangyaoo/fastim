@@ -19,14 +19,24 @@ public class TransferSystem {
 
     public static void transfer(int fromAccountId, int toAccountId, BigDecimal amount){
         /*
-         * 订单系统
+         * 校验系统，防止任意转账
          */
-        Long orderNo = orderHandle(fromAccountId, toAccountId, amount);
+        if(validate(fromAccountId, toAccountId, amount)){
+            /*
+             * 订单系统
+             */
+            Long orderNo = orderHandle(fromAccountId, toAccountId, amount);
 
-        /*
-         * 账户系统
-         */
-        Boolean result = accountHandle(orderNo, fromAccountId, toAccountId, amount);
+            /*
+             * 账户系统
+             */
+            Boolean result = accountHandle(orderNo, fromAccountId, toAccountId, amount);
+        }
+    }
+
+    public static Boolean validate(int fromAccountId, int toAccountId, BigDecimal amount){
+        // 防刷、防重、验签
+        return true;
     }
 
     public static Long orderHandle(int fromAccountId, int toAccountId, BigDecimal amount){

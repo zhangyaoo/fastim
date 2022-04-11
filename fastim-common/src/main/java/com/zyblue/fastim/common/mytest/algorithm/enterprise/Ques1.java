@@ -7,6 +7,8 @@ package com.zyblue.fastim.common.mytest.algorithm.enterprise;
  * 大宇无限
  * 描述：判断从一个字符串中是否能抓取出helloworld，可以不连续但是一定要保持顺序。
  * 如hhhhelllllllo wwwwwwworld 但不能是helolllllworld。
+ *
+ * 目前想到的就是利用栈来解决
  */
 public class Ques1 {
 

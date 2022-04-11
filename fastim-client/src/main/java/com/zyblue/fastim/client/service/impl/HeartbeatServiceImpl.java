@@ -8,11 +8,11 @@ import com.zyblue.fastim.common.pojo.message.KeepAliveRequest;
  * @author will
  * @date 2021/7/12 18:01
  */
-public class HeartbeatServiceImpl implements ImService<KeepAliveRequest> {
+public class HeartbeatServiceImpl implements ImService {
 
     private static final SingleChatServiceImpl singleChatService = new SingleChatServiceImpl();
 
-    public static ImService<?> getInstance() {
+    public static ImService getInstance() {
         return singleChatService;
     }
 
@@ -22,7 +22,7 @@ public class HeartbeatServiceImpl implements ImService<KeepAliveRequest> {
     }
 
     @Override
-    public void sendMsg(FastImMsg protocol, KeepAliveRequest request) {
+    public void sendMsg(FastImMsg protocol) {
 
     }
 }

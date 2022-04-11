@@ -1,11 +1,12 @@
 package com.zyblue.fastim.fastim.gate.tcp.server;
 
+import com.alibaba.nacos.api.annotation.NacosInjected;
+import com.alibaba.nacos.api.naming.NamingService;
 import com.zyblue.fastim.fastim.gate.tcp.handler.codec.MyFastImDecoder;
 import com.zyblue.fastim.fastim.gate.tcp.handler.codec.MyFastImEncoder;
 import com.zyblue.fastim.fastim.gate.tcp.handler.gate.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -25,7 +26,8 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 /**
- * IMServer生命周期跟随spring
+ * server
+ * @author zhangy75
  */
 @Component
 public class FastImServer {
@@ -40,19 +42,25 @@ public class FastImServer {
     @Resource(name = "nioEventLoopGroup")
     private NioEventLoopGroup workerGroup;
 
-    private Channel serverChannel;
+    @NacosInjected
+    private NamingService namingService;
+
+    @Value("${instance.server-logic.name}")
+    private String instanceName;
+
+    private NioServerSocketChannel serverChannel;
 
     @PostConstruct
     public void start() {
         bossGroup = new NioEventLoopGroup(1, new DefaultThreadFactory("boss"));
 
         LoggingHandler loggingHandler = new LoggingHandler(LogLevel.INFO);
-        GateAuthHandler gateAuthHandler = new GateAuthHandler();
+        //GateAuthHandler gateAuthHandler = new GateAuthHandler();
         GateMetricsHandler gateMetricsHandler = new GateMetricsHandler();
-        GateServiceSelfProtectHandler gateServiceSelfProtectHandler = new GateServiceSelfProtectHandler();
-        GateDynamicRouteHandler gateDynamicRouteHandler = new GateDynamicRouteHandler();
-        GateProtocolConversionHandler gateProtocolConversionHandler = new GateProtocolConversionHandler();
-        GateServiceTimeoutHandler gateServiceTimeoutHandler = new GateServiceTimeoutHandler();
+        //GateServiceSelfProtectHandler gateServiceSelfProtectHandler = new GateServiceSelfProtectHandler();
+        GateDynamicRouteHandler gateDynamicRouteHandler = new GateDynamicRouteHandler(namingService, instanceName);
+        GateProtocolConversionHandler gateProtocolConversionHandler = new GateProtocolConversionHandler(namingService, instanceName);
+        //GateServiceTimeoutHandler gateServiceTimeoutHandler = new GateServiceTimeoutHandler();
 
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap.group(bossGroup, workerGroup)
@@ -75,31 +83,15 @@ public class FastImServer {
                                 .addLast("fastImDecoder", new MyFastImDecoder())
                                 .addLast(gateMetricsHandler)
                                 .addLast(loggingHandler)
-                                .addLast(gateAuthHandler)
-                                .addLast("limitHandler", new GateLimitHandler())
-                                .addLast(gateServiceSelfProtectHandler)
+                                //.addLast(gateAuthHandler)
+                                //.addLast("limitHandler", new GateLimitHandler())
+                                //.addLast(gateServiceSelfProtectHandler)
                                 .addLast(gateDynamicRouteHandler)
-                                .addLast(gateProtocolConversionHandler)
-                                .addLast(gateServiceTimeoutHandler);
+                                //.addLast(gateServiceTimeoutHandler)
+                                .addLast(gateProtocolConversionHandler);
                     }
                 });
         bind(serverBootstrap, nettyPort);
-    }
-
-    /**
-     * 绑定端口
-     */
-    private void bind(ServerBootstrap serverBootstrap, Integer nettyPort){
-        ChannelFuture future2 = serverBootstrap.bind(nettyPort).addListener(future -> {
-            if (future.isSuccess()) {
-                logger.info("端口绑定成功 ImServer start success!");
-            } else {
-                logger.info("端口绑定失败! port:{}", nettyPort);
-                logger.info("重新绑定ing");
-                bind(serverBootstrap, nettyPort + 1);
-            }
-        });
-        serverChannel =  future2.channel();
     }
 
     @PreDestroy
@@ -113,5 +105,19 @@ public class FastImServer {
         if(workerGroup != null && !workerGroup.isShutdown()){
             workerGroup.shutdownGracefully();
         }
+    }
+
+    /**
+     * 绑定端口
+     */
+    private void bind(ServerBootstrap serverBootstrap, Integer nettyPort){
+        ChannelFuture future2 = serverBootstrap.bind(nettyPort).addListener(future -> {
+            if (future.isSuccess()) {
+                logger.info("端口绑定成功 ImServer start success!");
+            } else {
+                logger.info("端口绑定失败! port:{}", nettyPort);
+            }
+        });
+        serverChannel = (NioServerSocketChannel) future2.channel();
     }
 }

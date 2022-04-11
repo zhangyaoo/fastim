@@ -7,7 +7,8 @@ package com.zyblue.fastim.common.enumeration;
 public enum DataType {
     TEXT((byte) 1, "文本"),
     PIC((byte) 2, "图片链接"),
-    FILE((byte) 3, "文件链接");
+    FILE((byte) 3, "文件链接"),
+    RED_PACKAGE((byte) 4, "红包服务");
 
     DataType(byte val, String desc) {
         this.val = val;

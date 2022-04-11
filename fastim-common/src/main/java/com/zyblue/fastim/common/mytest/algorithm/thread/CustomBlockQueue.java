@@ -35,10 +35,13 @@ public class CustomBlockQueue<E> {
         // 先校验
         putLock.lockInterruptibly();
         try {
-            if(count == items.length){
+            // 用while不用if的原因是notEmptyCondition唤醒一个线程后，可能存在虚假唤醒的情况，为了防止其他线程跳出逻辑，则使用while来避免
+            while (count >= items.length){
                 notFullCondition.await();
             }
             items[putIndex++] = element;
+            // 为了循环利用数组，不发生移动或者浪费内存，使用一个循环队列来存储数据
+            // 因为有count的存在，putIndex和takeIndex直接暴力置为0即可
             if(putIndex == items.length){
                 putIndex = 0;
             }
@@ -53,7 +56,7 @@ public class CustomBlockQueue<E> {
         // 先校验
         takeLock.lockInterruptibly();
         try {
-            if(items.length == 0){
+            while (count <= 0){
                 notFullCondition.await();
             }
             @SuppressWarnings("unchecked")

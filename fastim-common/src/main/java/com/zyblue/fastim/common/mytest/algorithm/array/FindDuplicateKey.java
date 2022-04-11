@@ -1,5 +1,7 @@
 package com.zyblue.fastim.common.mytest.algorithm.array;
 
+import java.util.Arrays;
+
 /**
  * 数据中寻找重复数
  * 示例 1:
@@ -25,16 +27,38 @@ package com.zyblue.fastim.common.mytest.algorithm.array;
  */
 public class FindDuplicateKey {
 
-    public class Solution {
-        public int findDuplicate(int[] nums) {
-            for(int i = 0; i < nums.length; i++){
-                for(int j = i + 1; j < nums.length; j++){
-                    if(nums[i] == nums[j]) {
-                        return nums[i];
-                    }
+    public int findDuplicate(int[] nums) {
+        for(int i = 0; i < nums.length; i++){
+            for(int j = i + 1; j < nums.length; j++){
+                if(nums[i] == nums[j]) {
+                    return nums[i];
                 }
             }
-            return 0;
         }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        int[] ints = new int[6];
+        ints[0] = 0;
+        ints[1] = 1;
+        ints[2] = 3;
+        ints[3] = 5;
+        ints[4] = 4;
+        ints[5] = 2;
+        System.out.println(findDuplicate1(ints));
+    }
+
+    public static int findDuplicate1(int[] nums) {
+        int[] arr = new int[nums.length];
+        for (int num : nums) {
+            System.out.println("before:" + Arrays.toString(arr));
+            arr[num]++;
+            System.out.println("after:" + Arrays.toString(arr));
+            if (arr[num] > 1) {
+                return num;
+            }
+        }
+        return -1;
     }
 }
