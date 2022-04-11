@@ -30,7 +30,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.4.5</spring-boot.version>
         <dubbo-spring-boot-starter.version>2.7.5</dubbo-spring-boot-starter.version>
-        <netty.version>4.1.70.Final</netty.version>
+        <netty.version>4.1.71.Final</netty.version>
         <dubbo.version>2.7.5</dubbo.version>
         <nacos.version>2.0.2</nacos.version>
         <nacos.config.version>0.2.8</nacos.config.version>
