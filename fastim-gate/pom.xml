@@ -19,6 +19,7 @@
     <modules>
         <module>fastim-gate-http</module>
         <module>fastim-gate-tcp</module>
+        <module>fastim-gate-websocket</module>
     </modules>
 
 

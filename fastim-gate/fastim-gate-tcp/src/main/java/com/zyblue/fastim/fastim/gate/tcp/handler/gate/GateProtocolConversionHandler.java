@@ -1,3 +1,4 @@
+/*
 package com.zyblue.fastim.fastim.gate.tcp.handler.gate;
 
 import com.alibaba.nacos.api.exception.NacosException;
@@ -26,17 +27,18 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 
+*/
 /**
  * @author will
  * @date 2021/4/30 12:46
  * 协议转换
- */
+ *//*
+
 @ChannelHandler.Sharable
 public class GateProtocolConversionHandler extends SimpleChannelInboundHandler<FastImMsg> {
 
     private final static Logger log = LoggerFactory.getLogger(GateProtocolConversionHandler.class);
 
-    private final ReferenceConfig<GenericService> reference = new ReferenceConfig<>();
 
     private final NamingService namingService;
 
@@ -80,13 +82,17 @@ public class GateProtocolConversionHandler extends SimpleChannelInboundHandler<F
 
         // TODO 这里代码有问题，因为IM业务特殊性问题，网关层到服务层，只需要单向传输发请求，网关层不需要关心调用的结果。
         //  而客户端想要的ack或者notify请求是由router层发送数据到网关层，网关层只转发数据，不做额外的逻辑处理
-        /*
+        */
+/*
          * 保证发送的线程和返回数据的线程是同一个
-         */
+         *//*
+
         future.whenCompleteAsync((result, throwable) -> {
-            /*
+            */
+/*
              * DUBBO和HTTP是request-response请求响应模型，而IM通讯场景会有request而没有response
-             */
+             *//*
+
             if(result != null){
                 protocol.setData(ProtoStuffUtils.serialize(result));
                 channelHandlerContext.writeAndFlush(protocol);
@@ -94,9 +100,11 @@ public class GateProtocolConversionHandler extends SimpleChannelInboundHandler<F
         }, channelHandlerContext.channel().eventLoop());
     }
 
-    /**
+    */
+/**
      * 根据规则转换成参数
-     */
+     *//*
+
     private InterfaceMetadata transferParam(FastImMsg protocol, CmdType cmdType) throws NacosException {
         // 根据服务名和方法获取入参类型
         String mapService = cmdType.getMapService();
@@ -126,3 +134,4 @@ public class GateProtocolConversionHandler extends SimpleChannelInboundHandler<F
         channelHandlerContext.writeAndFlush(protocol);
     }
 }
+*/

@@ -29,7 +29,7 @@ public enum CmdType {
      */
     PUSH((byte) 4, "推送", PushServiceImpl.class);
 
-    CmdType(byte val, String desc, Class<? extends ImService<?>> clazz) {
+    CmdType(byte val, String desc, Class<? extends ImService> clazz) {
         this.val = val;
         this.desc = desc;
         this.clazz = clazz;
@@ -48,7 +48,7 @@ public enum CmdType {
 
     private String desc;
 
-    private Class<? extends ImService<?>> clazz;
+    private Class<? extends ImService> clazz;
 
     public byte getVal() {
         return val;
@@ -66,11 +66,11 @@ public enum CmdType {
         this.desc = desc;
     }
 
-    public Class<? extends ImService<?>> getClazz() {
+    public Class<? extends ImService> getClazz() {
         return clazz;
     }
 
-    public void setClazz(Class<? extends ImService<?>> clazz) {
+    public void setClazz(Class<? extends ImService> clazz) {
         this.clazz = clazz;
     }
 }

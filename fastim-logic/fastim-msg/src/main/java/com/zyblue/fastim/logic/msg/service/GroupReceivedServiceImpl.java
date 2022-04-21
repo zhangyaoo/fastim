@@ -3,13 +3,11 @@ package com.zyblue.fastim.logic.msg.service;
 import com.zyblue.fastim.common.pojo.message.GroupChatNotifyResponse;
 import com.zyblue.fastim.common.pojo.message.GroupChatRequest;
 import com.zyblue.fastim.common.pojo.message.GroupChatResponse;
-import org.apache.dubbo.config.annotation.Service;
 
 /**
  * @author will
  * @date 2021/12/27 10:47
  */
-@Service
 public class GroupReceivedServiceImpl implements GroupReceivedService{
 
     @Override

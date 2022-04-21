@@ -1,4 +1,4 @@
-package com.zyblue.fastim.fastim.gate.tcp;
+package com.zyblue.fastim.fastim.gate.websocket;
 
 import com.alibaba.nacos.api.annotation.NacosInjected;
 import com.alibaba.nacos.api.naming.NamingService;
@@ -8,8 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author will
+ */
 @SpringBootApplication
-public class FastimGateTcpApplication implements CommandLineRunner {
+public class FastimGateWebsocketApplication implements CommandLineRunner {
     @NacosInjected
     private NamingService namingService;
 
@@ -26,7 +29,7 @@ public class FastimGateTcpApplication implements CommandLineRunner {
          */
         System.setProperty("io.netty.leakDetection.level", "PARANOID");
 
-        SpringApplication.run(FastimGateTcpApplication.class, args);
+        SpringApplication.run(FastimGateWebsocketApplication.class, args);
     }
 
     @Override

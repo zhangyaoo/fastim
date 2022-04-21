@@ -37,18 +37,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-handler</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.yeauty</groupId>
-            <artifactId>netty-websocket-spring-boot-starter</artifactId>
         </dependency>
 
         <!-- 统计 -->

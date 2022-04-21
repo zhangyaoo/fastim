@@ -30,12 +30,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.4.5</spring-boot.version>
         <dubbo-spring-boot-starter.version>2.7.5</dubbo-spring-boot-starter.version>
-        <netty.version>4.1.70.Final</netty.version>
+        <netty.version>4.1.75.Final</netty.version>
         <dubbo.version>2.7.5</dubbo.version>
         <nacos.version>2.0.2</nacos.version>
         <nacos.config.version>0.2.8</nacos.config.version>
         <protobuf.version>3.15.3</protobuf.version>
-        <jackson.version>2.12.3</jackson.version>
+        <jackson.version>2.12.6</jackson.version>
         <guava.version>30.0-jre</guava.version>
         <curator.version>5.1.0</curator.version>
         <redisson.version>3.15.6</redisson.version>
@@ -195,6 +195,16 @@
                 <groupId>org.yeauty</groupId>
                 <artifactId>netty-websocket-spring-boot-starter</artifactId>
                 <version>${netty-websocket.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-codec-http</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-handler</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>

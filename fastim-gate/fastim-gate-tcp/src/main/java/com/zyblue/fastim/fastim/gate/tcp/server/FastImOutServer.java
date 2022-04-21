@@ -2,9 +2,9 @@ package com.zyblue.fastim.fastim.gate.tcp.server;
 
 import com.alibaba.nacos.api.annotation.NacosInjected;
 import com.alibaba.nacos.api.naming.NamingService;
+import com.zyblue.fastim.fastim.gate.tcp.handler.MessageOutHandler;
 import com.zyblue.fastim.fastim.gate.tcp.handler.codec.MyFastImDecoder;
 import com.zyblue.fastim.fastim.gate.tcp.handler.codec.MyFastImEncoder;
-import com.zyblue.fastim.fastim.gate.tcp.handler.gate.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelFuture;
@@ -13,8 +13,6 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,14 +25,14 @@ import javax.annotation.Resource;
 
 /**
  * server
- * @author zhangy75
+ * @author will
  */
 @Component
-public class FastImServer {
+public class FastImOutServer {
 
-    private final static Logger logger = LoggerFactory.getLogger(FastImServer.class);
+    private final static Logger logger = LoggerFactory.getLogger(FastImOutServer.class);
 
-    @Value("${fastim.server.port}")
+    @Value("${server.port.out}")
     private int nettyPort;
 
     private NioEventLoopGroup bossGroup;
@@ -53,15 +51,6 @@ public class FastImServer {
     @PostConstruct
     public void start() {
         bossGroup = new NioEventLoopGroup(1, new DefaultThreadFactory("boss"));
-
-        LoggingHandler loggingHandler = new LoggingHandler(LogLevel.INFO);
-        //GateAuthHandler gateAuthHandler = new GateAuthHandler();
-        GateMetricsHandler gateMetricsHandler = new GateMetricsHandler();
-        //GateServiceSelfProtectHandler gateServiceSelfProtectHandler = new GateServiceSelfProtectHandler();
-        GateDynamicRouteHandler gateDynamicRouteHandler = new GateDynamicRouteHandler(namingService, instanceName);
-        GateProtocolConversionHandler gateProtocolConversionHandler = new GateProtocolConversionHandler(namingService, instanceName);
-        //GateServiceTimeoutHandler gateServiceTimeoutHandler = new GateServiceTimeoutHandler();
-
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
@@ -81,14 +70,7 @@ public class FastImServer {
                         channel.pipeline()
                                 .addLast("fastImEncoder" ,new MyFastImEncoder())
                                 .addLast("fastImDecoder", new MyFastImDecoder())
-                                .addLast(gateMetricsHandler)
-                                .addLast(loggingHandler)
-                                //.addLast(gateAuthHandler)
-                                //.addLast("limitHandler", new GateLimitHandler())
-                                //.addLast(gateServiceSelfProtectHandler)
-                                .addLast(gateDynamicRouteHandler)
-                                //.addLast(gateServiceTimeoutHandler)
-                                .addLast(gateProtocolConversionHandler);
+                                .addLast(new MessageOutHandler());
                     }
                 });
         bind(serverBootstrap, nettyPort);

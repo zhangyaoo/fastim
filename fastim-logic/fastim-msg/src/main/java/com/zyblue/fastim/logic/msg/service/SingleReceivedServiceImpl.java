@@ -3,13 +3,11 @@ package com.zyblue.fastim.logic.msg.service;
 import com.zyblue.fastim.common.pojo.message.SingleChatNotifyResponse;
 import com.zyblue.fastim.common.pojo.message.SingleChatRequest;
 import com.zyblue.fastim.common.pojo.message.SingleChatResponse;
-import org.apache.dubbo.config.annotation.Service;
 
 /**
  * @author will
  * @date 2021/12/8 17:20
  */
-@Service
 public class SingleReceivedServiceImpl implements SingleReceivedService {
 
     @Override
