@@ -35,7 +35,7 @@
         <nacos.version>2.0.2</nacos.version>
         <nacos.config.version>0.2.8</nacos.config.version>
         <protobuf.version>3.15.3</protobuf.version>
-        <jackson.version>2.13.2</jackson.version>
+        <jackson.version>2.13.2.1</jackson.version>
         <guava.version>30.0-jre</guava.version>
         <curator.version>5.1.0</curator.version>
         <redisson.version>3.15.6</redisson.version>
